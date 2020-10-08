@@ -1,21 +1,14 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import * as React from 'react';
+import HomeScreen from './screens/HomeScreen.js';
+import InputScreen from './screens/InputScreen.js';
+import {Provider, defaultTheme} from "@adobe/react-spectrum";
+// import { createStackNavigator } from '@react-navigation/stack'; this dont work on snack 
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
+    <Provider theme={defaultTheme}>
+      <InputScreen />
+    </Provider>
+    )
+  //  <HomeScreen />
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});

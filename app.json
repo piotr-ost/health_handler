@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "health_handler_app",
-    "slug": "health_handler_app",
+    "name": "health_handler",
+    "slug": "snack-279ec919-ceec-4ba8-a6b0-4b172669d030",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -21,6 +21,7 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "description": "asdf"
   }
 }
