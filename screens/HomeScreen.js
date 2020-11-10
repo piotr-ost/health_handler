@@ -1,6 +1,5 @@
 import React from 'react';
 import {View, Image, StyleSheet, Button} from 'react-native';
-import GreenButton from '../components/Button.js';
 
 const HomeScreen = () => {
   return (
@@ -8,9 +7,10 @@ const HomeScreen = () => {
       <Image source={require('../assets/logo.png')} style={styles.main_logo} />
       <Image source={require('../assets/logo_text.png')} style={styles.logo_text} />
       <View style={styles.button_box}>
-        <GreenButton title="Start"/>
+        <Button title="Start"/>
       </View>
-    <Button title="Terms of service" color="#676767" style={styles.terms_of_service}></Button>
+    <Button title="Terms of service" color="#676767"
+            style={styles.terms_of_service}></Button>
     </View>
   );
 }
