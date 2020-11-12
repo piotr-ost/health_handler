@@ -3,6 +3,8 @@ import {View, Text, Image, Button, StyleSheet} from 'react-native';
 import {Divider, Icon} from 'react-native-elements';
 import axios from 'axios';
 
+
+
 const ReturnButton = ({onPress}) => {
   return (
     <Icon onPress={onPress} type="font-awesome"
@@ -38,35 +40,38 @@ const ShoppingListButton = ({recipes}) => {
               onPress={shoppingAction} color="green" />
   )
 }
-const Meal = ({id, imageType, title, readyInMinutes, servings}) => {
+const Meal = ({id, imageType, title, readyInMinutes, servings, mealType}) => {
   const size = '240x150';
   const uri = `https://spoonacular.com/recipeImages/${id}-${size}.${imageType}`;
   return ( id && title ?
-    <View>
-      <Text>{title}</Text>
-      <Divider style={styles.grayDivider}/>
-      <View>
-        <Image style={{width: 100, height: 100}} source={{uri: uri}} />
+    <View style={{width: 330, height: 60, flex: 1, flexDirection: 'column'}}>
+      <View style={{display: 'flex', flexDirection: 'row',
+        justifyContent: 'space-between', alignItems: 'center'}}>
+        <Image style={{width: 50, height: 50, borderRadius: 50}} source={{uri: uri}} />
+        <View>
+          <Text style={{fontSize: 11}}>{mealType}</Text>
+          <Text style={{width: 250, height: 40}}>{title}</Text>
+        </View>
+        <View>
+          <Icon onPress={() => {}} type="font-awesome" name="question-mark" size={15}/>
+          <Icon onPress={() => {}} type="font-awesome" name="exchange" size={15}/>
+        </View>
       </View>
-      <Text>ready in: {readyInMinutes}</Text>
-      <Text>serves for: {servings}</Text>
+      <Divider style={styles.grayDivider}/>
     </View> : null
-  );
+);
 }
 
 const MealsDay = ({dayName, meals, nutrients}) => {
+  const mealTypes = ['BREAKFAST', 'LUNCH', 'DINNER']
   return (
     <View>
       <Text style={{fontSize: 25, textTransform: 'capitalize'}}>{dayName}</Text>
-      <ul>
-        <li>Calories: {nutrients.calories}</li>
-        <li>Protein: {nutrients.protein}</li>
-        <li>Fat: {nutrients.fat}</li>
-        <li>Carbohydrates: {nutrients.carbohydrates}</li>
-      </ul>
-      {meals.map(({id, imageType, title, readyInMinutes, servings}) =>
+      <Divider style={styles.greenDivider}/>
+      {meals.map(({id, imageType, title, readyInMinutes, servings}, index) =>
         <Meal imageType={imageType} title={title} readyInMinutes={readyInMinutes}
-              servings={servings} key={id} id={id} />
+              servings={servings} key={id} id={id} mealType={mealTypes[index]}/>
+
       )}
       <Meal />
     </View>
@@ -90,8 +95,9 @@ const MealPlanScreen = () => {
         console.log(err);
       }
     }
-    //fetchData();
+    fetchData();
   }, []);
+
 
   return (
     <View style={styles.screen}>
@@ -120,7 +126,7 @@ const styles = StyleSheet.create({
   screen: {display: 'flex', flexDirection: 'column'},
   mealImg: {},
   header: {
-    width: 300, height: 60, display: 'flex',
+    width: 300, height: 45, display: 'flex',
     flexDirection: 'row',
     justifyContent: "space-between",
     alignItems: 'center', margin: 10
@@ -128,7 +134,7 @@ const styles = StyleSheet.create({
   heading: {fontSize: 30},
   mealLabel: {},
   greenDivider: {width: 330, height: 2, backgroundColor: 'green'},
-  grayDivider: {width: 330, height: 2, backgroundColor: 'gray'}
+  grayDivider: {width: 330, height: 1, backgroundColor: 'gray'}
 });
 
 export default MealPlanScreen;
