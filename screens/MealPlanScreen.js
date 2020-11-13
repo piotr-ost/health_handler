@@ -1,15 +1,15 @@
 import React, {useState, useEffect} from 'react';
-import {View, Text, Image, Button, StyleSheet} from 'react-native';
-import {Divider, Icon} from 'react-native-elements';
+import {View, Text, Image, StyleSheet} from 'react-native';
+import {Icon} from 'react-native-elements';
+import {GreenDivider, GrayDivider} from '../components/Dividers.js'
 import axios from 'axios';
-
 
 
 const ReturnButton = ({onPress}) => {
   return (
     <Icon onPress={onPress} type="font-awesome"
           name="arrow-left" color="green" />
-  )
+  );
 }
 
 const ShoppingListButton = ({recipes}) => {
@@ -20,7 +20,7 @@ const ShoppingListButton = ({recipes}) => {
     recipes.forEach((id) => {
       try {
         // const apiKey = '?apiKey=556d5c003785468ab5aa696a128a3d3a';
-        const apiKey = '?apiKey=5bb1646af40448c4bd763b79205bc198'
+        const apiKey = '?apiKey=5bb1646af40448c4bd763b79205bc198';
         const url = `https://api.spoonacular.com/recipes/${id}/information`;
         console.log(url);
         const res = axios.get(url + apiKey);
@@ -30,7 +30,6 @@ const ShoppingListButton = ({recipes}) => {
       } catch (err) {
         console.log(err);
       }
-
     });
   }
   return (recipes.length === 7*3 ?
@@ -38,9 +37,10 @@ const ShoppingListButton = ({recipes}) => {
             onPress={shoppingAction} color="green" />
       : <Icon type="font-awesome" name="shopping-cart"
               onPress={shoppingAction} color="green" />
-  )
+  );
 }
-const Meal = ({id, imageType, title, readyInMinutes, servings, mealType}) => {
+
+const Meal = ({id, imageType, title, mealType}) => {
   const size = '240x150';
   const uri = `https://spoonacular.com/recipeImages/${id}-${size}.${imageType}`;
   return ( id && title ?
@@ -57,17 +57,17 @@ const Meal = ({id, imageType, title, readyInMinutes, servings, mealType}) => {
           <Icon onPress={() => {}} type="font-awesome" name="exchange" size={15}/>
         </View>
       </View>
-      <Divider style={styles.grayDivider}/>
+      <GrayDivider />
     </View> : null
 );
 }
 
-const MealsDay = ({dayName, meals, nutrients}) => {
+const MealsDay = ({dayName, meals}) => {
   const mealTypes = ['BREAKFAST', 'LUNCH', 'DINNER']
   return (
     <View>
       <Text style={{fontSize: 25, textTransform: 'capitalize'}}>{dayName}</Text>
-      <Divider style={styles.greenDivider}/>
+      <GreenDivider />
       {meals.map(({id, imageType, title, readyInMinutes, servings}, index) =>
         <Meal imageType={imageType} title={title} readyInMinutes={readyInMinutes}
               servings={servings} key={id} id={id} mealType={mealTypes[index]}/>
@@ -95,7 +95,7 @@ const MealPlanScreen = () => {
         console.log(err);
       }
     }
-    fetchData();
+    fetchData().then();
   }, []);
 
 
@@ -103,10 +103,10 @@ const MealPlanScreen = () => {
     <View style={styles.screen}>
       <View style={styles.header}>
         <ReturnButton onPress={() => {}} />
-        <Text style={styles.heading}>Meal Plan</Text>
+        <Text style={styles.headerText}>Meal Plan</Text>
         <ShoppingListButton recipes={recipes}/>
       </View>
-      <Divider style={{width:330, height: 3, backgroundColor: '#848484'}}/>
+      <GrayDivider />
       <View>
         {data.week ?
           Object.values(data.week).map(({meals, nutrients}, index) => {
@@ -131,10 +131,8 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: 'center', margin: 10
   },
-  heading: {fontSize: 30},
+  headerText: {fontFamily: 'Kumbh Sans', fontSize: 30, lineHeight: 30},
   mealLabel: {},
-  greenDivider: {width: 330, height: 2, backgroundColor: 'green'},
-  grayDivider: {width: 330, height: 1, backgroundColor: 'gray'}
 });
 
 export default MealPlanScreen;

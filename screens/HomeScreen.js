@@ -7,10 +7,10 @@ const HomeScreen = () => {
       <Image source={require('../assets/logo.png')} style={styles.main_logo} />
       <Image source={require('../assets/logo_text.png')} style={styles.logo_text} />
       <View style={styles.button_box}>
-        <Button title="Start"/>
+        <Button onPress={() => {}} title="Start"/>
       </View>
-    <Button title="Terms of service" color="#676767"
-            style={styles.terms_of_service}></Button>
+    <Button onPress={() => {}} title="Terms of service"
+            color="#676767" style={styles.terms_of_service}></Button>
     </View>
   );
 }
