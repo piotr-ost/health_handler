@@ -4,6 +4,7 @@ import {GrayDivider, GreenDivider} from "../components/Dividers";
 import {Icon, CheckBox} from "react-native-elements";
 import {Button} from 'react-native';  // for now
 
+// iphone X dims
 const SCREEN_WIDTH = 375
 const SCREEN_HEIGHT = 812
 const GREEN = '#6FBF44'
@@ -12,7 +13,7 @@ const DropdownIcon = () => {
   return <Icon type="font-awesome" name="caret-down" color={GREEN} />;
 }
 
-const Dropdown = ({text, onPress, type}) => {
+const Dropdown = ({text, onPress}) => {
   return (
     <TouchableOpacity
       style={{
@@ -38,7 +39,7 @@ const UnitSelector = ({measured}) => {
   const roundLeft = {borderBottomLeftRadius: 5, borderTopLeftRadius: 5}
   const roundRight = {borderBottomRightRadius: 5, borderTopRightRadius: 5}
   return (
-    <View style={{display: 'flex', marginBottom: 15, flexDirection: 'row',
+    <View style={{display: 'flex', marginBottom: 30, flexDirection: 'row',
       justifyContent: 'space-between', marginTop: 10}}>
       <TouchableOpacity disabled={clicked} style={[{flex: 1}, roundLeft, clicked ?
         {backgroundColor: GREEN}
@@ -88,12 +89,12 @@ const InputScreen = () => {
        <GrayDivider />
        <SavedPlansDropdown />
        <View style={styles.flexRow}>
-         <Text>Create a new meal plan</Text>
+         <Text>Create a new meal plan:</Text>
        </View>
        <GreenDivider />
        <View>
          <Image source={require('../assets/undraw_cooking_lyxy 1.png')}
-                style={{width: 153, height: 158, marginBottom: 20, alignSelf: 'center'}} />
+                style={styles.img} />
        </View>
       <Dropdown onPress={() => {}} text="Select a supermarket..." type="wide" />
       <View style={{display: 'flex', flexDirection: 'row', justifyContent: "space-between"}}>
@@ -101,31 +102,41 @@ const InputScreen = () => {
           <Dropdown onPress={() => {}} text="Age"></Dropdown>
           <Dropdown onPress={() => {}} text="Height"></Dropdown>
           <UnitSelector measured="height" />
-          <CheckBox checked={userData.vegetarian} title="Vegetarian"
-                    checkedColor={GREEN} onPress={() => setUserData(
-                      {...userData, vegetarian: !userData.vegetarian})} />
-          <CheckBox checked={userData.nutFree} title="Nut free"
-                    checkedColor={GREEN} onPress={() => setUserData(
-            {...userData, nutFree: !userData.nutFree})} />
-          <CheckBox checked={userData.halal} title="Halal"
-                    checkedColor={GREEN} onPress={() => setUserData(
-            {...userData, halal: !userData.halal})} />
-          <Button onPress={() => {}} title="Weight loss"
-                 color={GREEN} style={styles.button} />
+          <View>
+            <CheckBox checked={userData.vegetarian} title="Vegetarian"
+                      checkedColor={GREEN} onPress={() => setUserData(
+              {...userData, vegetarian: !userData.vegetarian})} />
+            <CheckBox checked={userData.nutFree} title="Nut free"
+                      checkedColor={GREEN} onPress={() => setUserData(
+              {...userData, nutFree: !userData.nutFree})} />
+            <CheckBox checked={userData.halal} title="Halal"
+                      checkedColor={GREEN} onPress={() => setUserData(
+              {...userData, halal: !userData.halal})} />
+          </View>
         </View>
         <View style={styles.column}>
           <Dropdown onPress={() => {}} text="Gender"></Dropdown>
           <Dropdown onPress={() => {}} text="Weight"></Dropdown>
           <UnitSelector measured="weight" />
-          <CheckBox checked={userData.vegan} title="Vegan"
-                    checkedColor={GREEN} onPress={() => setUserData(
-            {...userData, vegan: !userData.vegan})} />
-          <CheckBox checked={userData.lactoseFree} title="Nut free"
-                    checkedColor={GREEN} onPress={() => setUserData(
-            {...userData, lactoseFree: !userData.lactoseFree})} />
-          <CheckBox checked={userData.fishAllergy} title="No fish"
-                    checkedColor={GREEN} onPress={() => setUserData(
-            {...userData, fishAllergy: !userData.fishAllergy})} />
+          <View>
+            <CheckBox checked={userData.vegan} title="Vegan"
+                      checkedColor={GREEN} onPress={() => setUserData(
+              {...userData, vegan: !userData.vegan})} />
+            <CheckBox checked={userData.lactoseFree} title="Nut free"
+                      checkedColor={GREEN} onPress={() => setUserData(
+              {...userData, lactoseFree: !userData.lactoseFree})} />
+            <CheckBox checked={userData.fishAllergy} title="No fish"
+                      checkedColor={GREEN} onPress={() => setUserData(
+              {...userData, fishAllergy: !userData.fishAllergy})} />
+          </View>
+        </View>
+      </View>
+      <View style={styles.buttonsContainer}>
+        <View style={styles.button}>
+          <Button onPress={() => {}} title="Weight loss"
+                  color={GREEN} style={styles.button} />
+        </View>
+        <View style={styles.button}>
           <Button onPress={() => {}} title="Weight gain"
                   color={GREEN} style={styles.button} />
         </View>
@@ -136,19 +147,21 @@ const InputScreen = () => {
 
 const styles = StyleSheet.create({
   screen: {display: 'flex', width: SCREEN_WIDTH, height: SCREEN_HEIGHT,
-    justifyContent: 'flex-start', alignContent: 'space-around',
-    padding: 27, borderWidth: 1, borderColor: 'gray'},
+    justifyContent: 'flex-start', alignContent: 'space-between',
+    paddingHorizontal: 27, paddingTop: 10, borderWidth: 1, borderColor: 'gray'},
   header: {display: 'flex', flexDirection: 'row', justifyContent: 'space-between',
     height: 60, alignItems: 'center'},
   headerText: {fontFamily: 'Kumbh Sans', fontStyle: 'normal', fontSize: 30,
     lineHeight: 30, fontWeight: 'normal'},
-  unitSelector: {},
+  img: {width: 120, height: 120, marginTop: 10, marginBottom: 10, alignSelf: 'center'},
   smallLogo: {width: 43, height: 36},
   flexRow: {display: 'flex', flexDirection: 'row',
     justifyContent: 'space-between', height: 40,
     alignItems: 'center'},
-  button: {height: 43, textColor: 'white'},
-  column: {width: 150, justifyContent: 'space-between'}
+  button: {height: 38, width: 140, textColor: 'white'},
+  buttonsContainer: {display: 'flex', flexDirection: 'row',
+    justifyContent: 'space-between', marginTop: 33},
+  column: {width: 150, justifyContent: 'space-between'},
 })
 
 // TODO
