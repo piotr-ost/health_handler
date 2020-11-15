@@ -1,20 +1,17 @@
 import React, {useState, useEffect} from 'react';
 import {View, Text, Image, StyleSheet} from 'react-native';
 import {Icon} from 'react-native-elements';
-import {GreenDivider, GrayDivider} from '../components/Dividers.js'
+import {GreenDivider, GrayDivider} from '../components/Dividers.js';
+import {ReturnButton} from '../components/Buttons.js';
 import axios from 'axios';
 
-
-const ReturnButton = ({onPress}) => {
-  return (
-    <Icon onPress={onPress} type="font-awesome"
-          name="arrow-left" color="green" />
-  );
-}
+const SCREEN_WIDTH = 375
+const SCREEN_HEIGHT = 812
+const GREEN = '#6FBF44'
 
 const ShoppingListButton = ({recipes}) => {
   // todo get the products using an api call
-  // todo make the other python api to get the products prices
+  // todo make the other python api to  the products prices
   const [recipesData, setRecipesData] = useState([]);
   const shoppingAction = () => {
     recipes.forEach((id) => {
@@ -34,9 +31,9 @@ const ShoppingListButton = ({recipes}) => {
   }
   return (recipes.length === 7*3 ?
       <Icon type="font-awesome" name="shopping-cart"
-            onPress={shoppingAction} color="green" />
+            onPress={() => shoppingAction()} color={GREEN} />
       : <Icon type="font-awesome" name="shopping-cart"
-              onPress={shoppingAction} color="green" />
+              onPress={() => shoppingAction()} color={GREEN} />
   );
 }
 
@@ -44,7 +41,7 @@ const Meal = ({id, imageType, title, mealType}) => {
   const size = '240x150';
   const uri = `https://spoonacular.com/recipeImages/${id}-${size}.${imageType}`;
   return ( id && title ?
-    <View style={{width: 330, height: 60, flex: 1, flexDirection: 'column'}}>
+    <View style={{height: 60, flex: 1, flexDirection: 'column'}}>
       <View style={{display: 'flex', flexDirection: 'row',
         justifyContent: 'space-between', alignItems: 'center'}}>
         <Image style={{width: 50, height: 50, borderRadius: 50}} source={{uri: uri}} />
@@ -53,11 +50,13 @@ const Meal = ({id, imageType, title, mealType}) => {
           <Text style={{width: 250, height: 40}}>{title}</Text>
         </View>
         <View>
-          <Icon onPress={() => {}} type="font-awesome" name="question-mark" size={15}/>
-          <Icon onPress={() => {}} type="font-awesome" name="exchange" size={15}/>
+          <Icon onPress={() => {}} type="font-awesome" name="question"
+                color={GREEN} size={15}/>
+          <Icon onPress={() => {}} type="font-awesome" name="exchange"
+                color={GREEN} size={15}/>
         </View>
       </View>
-      <GrayDivider />
+      <GreenDivider />
     </View> : null
 );
 }
@@ -67,11 +66,10 @@ const MealsDay = ({dayName, meals}) => {
   return (
     <View>
       <Text style={{fontSize: 25, textTransform: 'capitalize'}}>{dayName}</Text>
-      <GreenDivider />
+      <GrayDivider />
       {meals.map(({id, imageType, title, readyInMinutes, servings}, index) =>
         <Meal imageType={imageType} title={title} readyInMinutes={readyInMinutes}
               servings={servings} key={id} id={id} mealType={mealTypes[index]}/>
-
       )}
       <Meal />
     </View>
@@ -95,7 +93,7 @@ const MealPlanScreen = () => {
         console.log(err);
       }
     }
-    fetchData().then();
+    fetchData();
   }, []);
 
 
@@ -123,11 +121,12 @@ const MealPlanScreen = () => {
 }
 
 const styles = StyleSheet.create({
-  screen: {display: 'flex', flexDirection: 'column'},
+  screen: {display: 'flex', flexDirection: 'column', width: SCREEN_WIDTH,
+    height: SCREEN_HEIGHT, borderWidth: 1, borderColor: 'black',
+    paddingVertical: 10, paddingHorizontal: 27},
   mealImg: {},
   header: {
-    width: 300, height: 45, display: 'flex',
-    flexDirection: 'row',
+    height: 45, display: 'flex', flexDirection: 'row',
     justifyContent: "space-between",
     alignItems: 'center', margin: 10
   },
