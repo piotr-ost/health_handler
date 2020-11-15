@@ -1,62 +1,50 @@
 import React from 'react';
-import {View, Image, StyleSheet, Button} from 'react-native';
+import {View, Image, StyleSheet, TouchableOpacity, Text} from 'react-native';
 
-const HomeScreen = () => {
+const HomeScreen = ({navigation}) => {
   return (
     <View style={styles.container}>
-      <Image source={require('../assets/logo.png')} style={styles.main_logo} />
-      <Image source={require('../assets/logo_text.png')} style={styles.logo_text} />
-      <View style={styles.button_box}>
-        <Button onPress={() => {}} title="Start"/>
+      <Image source={require('../assets/logo.png')} style={styles.mainLogo} />
+      <Image source={require('../assets/logo_text.png')} style={styles.logoText} />
+      <View >
+        <TouchableOpacity style={styles.button}
+                          onPress={() => navigation.navigate('InputScreen')}>
+          <Text style={{color: 'white', fontStyle: 'KumbhSans-Regular',
+            fontSize: 20}}>Start</Text>
+        </TouchableOpacity>
       </View>
-    <Button onPress={() => {}} title="Terms of service"
-            color="#676767" style={styles.terms_of_service}></Button>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: 150,
+    marginTop: 200,
+    width: 375,
+    height: 812,
     flex: 1,
     backgroundColor: '#FFFFFF',
     padding: 8,
     alignItems: 'center'
   },
-  main_logo: {
+  mainLogo: {
     display: 'flex',
     width: 200,
     height: 168,
     alignSelf: 'center',
     paddingBottom: 100
   },
-  logo_text: {
+  logoText: {
     width: 166,
     height: 82,
     marginTop: 30,
     alignSelf: 'center'
   },
-  button_box: {
-    backgroundColor: 'transparent',
-    width: 200,
-    height: 50,
-    borderRadius: 12,
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 3
-    },
-    shadowOpacity: 0.3,
-    shadowRadius: 4.5,
-    elevation: 7,
-    marginTop: 75
-  },
-  terms_of_service: {
-    position: 'absolute',
-    fontFamily: "Kumbh Sans",
-    fontStyle: 'normal',
-    fontSize: 14,
-    bottom: 0
+  button: {
+    width: 200, height: 50, borderRadius: 12, shadowColor: '#000',
+    shadowOffset: {width: 0, height: 3}, shadowOpacity: 0.3,
+    shadowRadius: 4.5, elevation: 7, marginTop: 120, alignItems: 'center',
+    justifyContent: 'center', display: 'flex', backgroundColor: '#4EB849',
   }
 });
 

@@ -72,7 +72,7 @@ const SavedPlansDropdown = () => {
   );
 }
 
-const InputScreen = () => {
+const InputScreen = ({navigation}) => {
   const [userData, setUserData] = useState({
     vegetarian: false,
     vegan: false,
@@ -134,8 +134,8 @@ const InputScreen = () => {
       </View>
       <View style={styles.buttonsContainer}>
         <View style={styles.button}>
-          <Button onPress={() => {}} title="Create plan"
-                  color={GREEN} style={styles.button} />
+          <Button onPress={() => navigation.navigate("MealPlanScreen")}
+                  title="Create plan" color={GREEN} style={styles.button} />
         </View>
       </View>
     </View>
@@ -145,7 +145,7 @@ const InputScreen = () => {
 const styles = StyleSheet.create({
   screen: {display: 'flex', width: SCREEN_WIDTH, height: SCREEN_HEIGHT,
     justifyContent: 'flex-start', alignContent: 'space-between',
-    paddingHorizontal: 27, paddingTop: 10, borderWidth: 1, borderColor: 'gray'},
+    paddingHorizontal: 27, paddingTop: 10},
   header: {display: 'flex', flexDirection: 'row', justifyContent: 'space-between',
     height: 60, alignItems: 'center'},
   headerText: {fontStyle: 'KumbhSans-Regular', fontSize: 30,

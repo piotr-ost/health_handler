@@ -1,7 +1,40 @@
 import React, {useEffect, useState} from 'react';
-import {View, Text, Image} from 'react-native';
-import axios from 'axios';
+import {View, Text, Button, StyleSheet} from 'react-native';
+import {ReturnButton} from "../components/Buttons";
+import {Icon} from 'react-native-elements';
+import {GrayDivider} from "../components/Dividers";
+// import axios from 'axios';
 
 const Product = () => {}
 
-const ShoppingListScreen = () => {}
+const ShoppingListScreen = ({navigation}) => {
+  return (
+    <View style={styles.screen}>
+      <View>
+        <View style={styles.header}>
+          <ReturnButton onPress={() => navigation.navigate('MealPlanScreen')}/>
+          <Text style={[styles.text, {fontSize: 30}]}>Shopping list</Text>
+          <Icon onPress={() => {}} type='font-awesome' name='floppy-o' color='#4EB849'/>
+        </View>
+        <GrayDivider />
+      </View>
+      <Text style={{alignSelf: 'center'}}># TODO</Text>
+      <Button title="Weekly Consumption" color='#4EB849'
+              onPress={() => navigation.navigate("ConsumptionScreen")}/>
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  screen: {display: 'flex', flexDirection: 'column', width: 375,
+    height: 812, paddingVertical: 10, paddingHorizontal: 27,
+    justifyContent: 'space-between'},
+  header: {
+    height: 45, display: 'flex', flexDirection: 'row',
+    justifyContent: "space-between",
+    alignItems: 'center', margin: 10
+  },
+  text: {fontStyle: 'KumbhSans-Regular'}
+});
+
+export default ShoppingListScreen;

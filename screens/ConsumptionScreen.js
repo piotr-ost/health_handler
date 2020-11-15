@@ -20,12 +20,12 @@ const InfoEntry = ({label, value}) => {
   )
 }
 
-const ConsumptionScreen = () => {
+const ConsumptionScreen = ({navigation}) => {
   return (
     <View style={styles.screen}>
       <View>
         <View style={styles.header}>
-          <ReturnButton onPress={() => {}}/>
+          <ReturnButton onPress={() => navigation.navigate("ShoppingListScreen")}/>
           <Text style={{fontSize: 24}}>Weekly consumption</Text>
           <Text></Text>
         </View>

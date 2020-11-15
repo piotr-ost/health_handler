@@ -10,7 +10,7 @@ const SCREEN_WIDTH = 375
 const SCREEN_HEIGHT = 812
 const GREEN = '#6FBF44'
 
-const ShoppingListButton = ({recipes}) => {
+const ShoppingListButton = ({recipes, onPress}) => {
   // todo get the products using an api call
   // todo make the other python api to  the products prices
   const [recipesData, setRecipesData] = useState([]);
@@ -32,9 +32,9 @@ const ShoppingListButton = ({recipes}) => {
   }
   return (recipes.length === 7*3 ?
       <Icon type="font-awesome" name="shopping-cart"
-            onPress={() => shoppingAction()} color={GREEN} />
+            onPress={onPress} color={GREEN} />
       : <Icon type="font-awesome" name="shopping-cart"
-              onPress={() => shoppingAction()} color={GREEN} />
+              onPress={onPress} color={GREEN} />
   );
 }
 
@@ -64,7 +64,8 @@ const Meal = ({id, imageType, title, mealType}) => {
 }
 
 const MealsDay = ({dayName, meals}) => {
-  const mealTypes = ['BREAKFAST', 'LUNCH', 'DINNER']
+  const [expanded, setExpanded] = useState(false);
+  const mealTypes = ['BREAKFAST', 'LUNCH', 'DINNER'];
   return (
     <View>
       <View style={{display: 'flex', flexDirection: 'row',
@@ -87,10 +88,10 @@ const MealsDay = ({dayName, meals}) => {
   );
 }
 
-const MealPlanScreen = () => {
+const MealPlanScreen = ({navigation}) => {
   const base = 'https://api.spoonacular.com/mealplanner/generate';
-  // const apiKey = '?apiKey=556d5c003785468ab5aa696a128a3d3a';
-  const apiKey = '?apiKey=5bb1646af40448c4bd763b79205bc198'
+  const apiKey = '?apiKey=556d5c003785468ab5aa696a128a3d3a';
+  //const apiKey = '?apiKey=5bb1646af40448c4bd763b79205bc198'
   const [data, setData] = useState([]);
   const recipes = [];
 
@@ -104,16 +105,17 @@ const MealPlanScreen = () => {
         console.log(err);
       }
     }
-    fetchData();
+    !data.length ? fetchData() : null;
   }, []);
 
 
   return (
     <View style={styles.screen}>
       <View style={styles.header}>
-        <ReturnButton onPress={() => {}} />
+        <ReturnButton onPress={() => navigation.navigate('InputScreen')} />
         <Text style={[styles.text, {fontSize: 30}]}>Meal Plan</Text>
-        <ShoppingListButton recipes={recipes}/>
+        <ShoppingListButton onPress={() => navigation.navigate('ShoppingListScreen')}
+                            recipes={recipes}/>
       </View>
       <GrayDivider />
       <View style={{marginTop: 20}}>
@@ -133,15 +135,13 @@ const MealPlanScreen = () => {
 
 const styles = StyleSheet.create({
   screen: {display: 'flex', flexDirection: 'column', width: SCREEN_WIDTH,
-    height: SCREEN_HEIGHT, borderWidth: 1, borderColor: 'black',
-    paddingVertical: 10, paddingHorizontal: 27},
-  mealImg: {},
+    height: SCREEN_HEIGHT, paddingVertical: 10, paddingHorizontal: 27,
+    backgroundColor: 'white'},
   header: {
     height: 45, display: 'flex', flexDirection: 'row',
     justifyContent: "space-between",
     alignItems: 'center', margin: 10
   },
-  mealLabel: {},
   text: {fontStyle: 'KumbhSans-Regular'}
 });
 
