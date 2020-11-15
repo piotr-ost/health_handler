@@ -10,7 +10,7 @@ const SCREEN_HEIGHT = 812
 const GREEN = '#6FBF44'
 // TODO not sure how to make above global so will copy paste for now
 
-const DropdownIcon = () => {
+export const DropdownIcon = () => {
   return <Icon type="font-awesome" name="caret-down" color={GREEN} />;
 }
 
@@ -23,7 +23,7 @@ const Dropdown = ({text, onPress}) => {
         borderColor: GREEN, borderWidth: 1, height: 35, marginTop: 20
       }}
       onPress={onPress}>
-      <Text>{text}</Text>
+      <Text style={styles.text}>{text}</Text>
       <DropdownIcon />
     </TouchableOpacity>
   );
@@ -134,11 +134,7 @@ const InputScreen = () => {
       </View>
       <View style={styles.buttonsContainer}>
         <View style={styles.button}>
-          <Button onPress={() => {}} title="Weight loss"
-                  color={GREEN} style={styles.button} />
-        </View>
-        <View style={styles.button}>
-          <Button onPress={() => {}} title="Weight gain"
+          <Button onPress={() => {}} title="Create plan"
                   color={GREEN} style={styles.button} />
         </View>
       </View>
@@ -152,16 +148,16 @@ const styles = StyleSheet.create({
     paddingHorizontal: 27, paddingTop: 10, borderWidth: 1, borderColor: 'gray'},
   header: {display: 'flex', flexDirection: 'row', justifyContent: 'space-between',
     height: 60, alignItems: 'center'},
-  headerText: {fontFamily: 'Kumbh Sans', fontStyle: 'normal', fontSize: 30,
+  headerText: {fontStyle: 'KumbhSans-Regular', fontSize: 30,
     lineHeight: 30, fontWeight: 'normal'},
+  text: {fontStyle: 'KumbhSans-Regular'},
   img: {width: 120, height: 120, marginTop: 10, marginBottom: 10, alignSelf: 'center'},
   smallLogo: {width: 43, height: 36},
   flexRow: {display: 'flex', flexDirection: 'row',
     justifyContent: 'space-between', height: 40,
     alignItems: 'center'},
-  button: {height: 38, width: 140, textColor: 'white'},
-  buttonsContainer: {display: 'flex', flexDirection: 'row',
-    justifyContent: 'space-between', marginTop: 33},
+  button: {height: 50, width: 250, textColor: 'white'},
+  buttonsContainer: {marginTop: 33, alignSelf: 'center'},
   column: {width: 150, justifyContent: 'space-between'},
 })
 

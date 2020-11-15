@@ -1,8 +1,9 @@
 import React, {useState, useEffect} from 'react';
 import {View, Text, Image, StyleSheet} from 'react-native';
 import {Icon} from 'react-native-elements';
-import {GreenDivider, GrayDivider} from '../components/Dividers.js';
+import {GreenDivider, GrayDivider, ThinGrayDivider} from '../components/Dividers.js';
 import {ReturnButton} from '../components/Buttons.js';
+import {DropdownIcon} from "./InputScreen";
 import axios from 'axios';
 
 const SCREEN_WIDTH = 375
@@ -43,20 +44,21 @@ const Meal = ({id, imageType, title, mealType}) => {
   return ( id && title ?
     <View style={{height: 60, flex: 1, flexDirection: 'column'}}>
       <View style={{display: 'flex', flexDirection: 'row',
-        justifyContent: 'space-between', alignItems: 'center'}}>
-        <Image style={{width: 50, height: 50, borderRadius: 50}} source={{uri: uri}} />
+        justifyContent: 'space-between', alignItems: 'center', paddingBottom: 6}}>
+        <Image style={{width: 50, height: 50, borderRadius: 50, marginRight: 8}}
+               source={{uri: uri}} />
         <View>
-          <Text style={{fontSize: 11}}>{mealType}</Text>
-          <Text style={{width: 250, height: 40}}>{title}</Text>
+          <Text style={[styles.text, {fontSize: 11, color: GREEN}]}>{mealType}</Text>
+          <Text style={{width: 250, height: 40, fontSize: 16}}>{title}</Text>
         </View>
-        <View>
+        <View style={{height: 40, display: 'flex', justifyContent: 'space-between'}}>
           <Icon onPress={() => {}} type="font-awesome" name="question"
                 color={GREEN} size={15}/>
           <Icon onPress={() => {}} type="font-awesome" name="exchange"
                 color={GREEN} size={15}/>
         </View>
       </View>
-      <GreenDivider />
+      <ThinGrayDivider />
     </View> : null
 );
 }
@@ -65,13 +67,22 @@ const MealsDay = ({dayName, meals}) => {
   const mealTypes = ['BREAKFAST', 'LUNCH', 'DINNER']
   return (
     <View>
-      <Text style={{fontSize: 25, textTransform: 'capitalize'}}>{dayName}</Text>
-      <GrayDivider />
-      {meals.map(({id, imageType, title, readyInMinutes, servings}, index) =>
-        <Meal imageType={imageType} title={title} readyInMinutes={readyInMinutes}
-              servings={servings} key={id} id={id} mealType={mealTypes[index]}/>
-      )}
-      <Meal />
+      <View style={{display: 'flex', flexDirection: 'row',
+        justifyContent: 'space-between', alignItems: 'center'}}>
+        <Text style={[styles.text, {fontSize: 16, textTransform: 'capitalize',
+          marginVertical: 10}]}>
+          {dayName}
+        </Text>
+        <DropdownIcon />
+      </View>
+      <GreenDivider/>
+      <View style={{marginVertical: 15}}>
+        {meals.map(({id, imageType, title, readyInMinutes, servings}, index) =>
+          <Meal imageType={imageType} title={title} readyInMinutes={readyInMinutes}
+                servings={servings} key={id} id={id} mealType={mealTypes[index]}/>
+        )}
+        <Meal />
+      </View>
     </View>
   );
 }
@@ -101,11 +112,11 @@ const MealPlanScreen = () => {
     <View style={styles.screen}>
       <View style={styles.header}>
         <ReturnButton onPress={() => {}} />
-        <Text style={styles.headerText}>Meal Plan</Text>
+        <Text style={[styles.text, {fontSize: 30}]}>Meal Plan</Text>
         <ShoppingListButton recipes={recipes}/>
       </View>
       <GrayDivider />
-      <View>
+      <View style={{marginTop: 20}}>
         {data.week ?
           Object.values(data.week).map(({meals, nutrients}, index) => {
             meals.forEach((meal) => recipes.push(meal.id))
@@ -113,7 +124,7 @@ const MealPlanScreen = () => {
               <MealsDay dayName={Object.keys(data.week)[index]}  meals={meals}
                         nutrients={nutrients} key={index}/>
             );
-          }) : <Text>loading...</Text>
+          }) : <Text style={styles.text}>loading...</Text>
         }
       </View>
     </View>
@@ -130,8 +141,8 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: 'center', margin: 10
   },
-  headerText: {fontFamily: 'Kumbh Sans', fontSize: 30, lineHeight: 30},
   mealLabel: {},
+  text: {fontStyle: 'KumbhSans-Regular'}
 });
 
 export default MealPlanScreen;

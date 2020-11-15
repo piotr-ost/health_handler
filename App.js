@@ -8,8 +8,8 @@ import ConsumptionScreen from "./screens/ConsumptionScreen";
 export default function App() {
   return (
     // <MealPlanScreen />
-    <ConsumptionScreen />
+    // <ConsumptionScreen />
     // <HomeScreen />
-    // <InputScreen />
+     <InputScreen />
   )
 }
