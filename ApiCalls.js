@@ -21,8 +21,8 @@ const getLastMonday = () => {
 }
 
 const getUserPlan = () => {
-  // let date = getLastMonday()
-  let date = new Date(1689500800)
+  /** @returns user plan for the most recent week assuming that its always starting on monday **/
+  let date = getLastMonday()
   date = date.toISOString().split('T')[0]
   const url = `${urlBase}/mealplanner/${user.username}/week/${date}?hash=${user.hash}${apiKey}`
   axios.get(url)
@@ -34,19 +34,19 @@ const getUserPlan = () => {
 // todo function to give date of the given starting week?
 // start that
 
-const addToUserPlan = () => {
+const addToUserPlan = (date, slot, position) => {
   const url = `${urlBase}/mealplanner/${user.username}/items?hash=${user.hash}${apiKey}`
-  axios.post(url, { "date": 1689500800 , "slot": 2, "position": 0,
+  axios.post(url, { "date": date, "slot": slot, "position": position,
     "type": "INGREDIENTS", "value": { "ingredients": [{"name": "1 banana"}]}})
     .then((res) => {console.log(res.data); return res.data})
     .catch((err) => console.log(err))
     .then(() => console.log(url))
 }
 
-console.log(addToUserPlan())
+let currentTime = new Date()
+let currentDate = `${currentTime.getFullYear()}-${currentTime.getMonth()}-${currentTime.getDate() + 1}`
+const date = new Date(currentDate).getTime() / 1000
+// then add for every other day
+
+console.log(addToUserPlan(date, 3, 2))
 console.log(getUserPlan())
-
-// todo add request that would enable to generate the meal plan but for a user
-// waiting for a reply from david
-
-// fuck this api
