@@ -1,35 +1,21 @@
-import React, {useState, useEffect} from 'react';
-import {View, Text, Image, StyleSheet} from 'react-native';
+import React, {useState, useEffect, useRef} from 'react';
+import {View, Text, Image,
+  StyleSheet, Animated, TouchableOpacity} from 'react-native';
 import {Icon} from 'react-native-elements';
 import {GreenDivider, GrayDivider, ThinGrayDivider} from '../components/Dividers.js';
 import {ReturnButton} from '../components/Buttons.js';
 import {DropdownIcon} from "./InputScreen";
 import axios from 'axios';
 
-const SCREEN_WIDTH = 375
-const SCREEN_HEIGHT = 812
-const GREEN = '#6FBF44'
+const user = {
+  "username":"api-52495-ec283c8e-e354-41d1-ae07-0ca4d098c8dd",
+  "hash":"a0e87d57d77da830a56dce0af315e1eec9b7309e"
+};
+const SCREEN_WIDTH = 375;
+const SCREEN_HEIGHT = 812;
+const GREEN = '#6FBF44';
 
 const ShoppingListButton = ({recipes, onPress}) => {
-  // todo get the products using an api call
-  // todo make the other python api to  the products prices
-  const [recipesData, setRecipesData] = useState([]);
-  const shoppingAction = () => {
-    recipes.forEach((id) => {
-      try {
-        // const apiKey = '?apiKey=556d5c003785468ab5aa696a128a3d3a';
-        const apiKey = '?apiKey=5bb1646af40448c4bd763b79205bc198';
-        const url = `https://api.spoonacular.com/recipes/${id}/information`;
-        console.log(url);
-        const res = axios.get(url + apiKey);
-        setRecipesData([...recipesData, res.data]);
-        console.log(res.data);
-        // todo test this, out of requests for today
-      } catch (err) {
-        console.log(err);
-      }
-    });
-  }
   return (recipes.length === 7*3 ?
       <Icon type="font-awesome" name="shopping-cart"
             onPress={onPress} color={GREEN} />
@@ -64,18 +50,18 @@ const Meal = ({id, imageType, title, mealType}) => {
 }
 
 const MealsDay = ({dayName, meals}) => {
-  const [expanded, setExpanded] = useState(false);
+  const value = useRef(new Animated.Value(0))
   const mealTypes = ['BREAKFAST', 'LUNCH', 'DINNER'];
   return (
     <View>
-      <View style={{display: 'flex', flexDirection: 'row',
-        justifyContent: 'space-between', alignItems: 'center'}}>
+      <TouchableOpacity style={{display: 'flex', flexDirection: 'row',
+        justifyContent: 'space-between', alignItems: 'center'}} onPress={() => {}}>
         <Text style={[styles.text, {fontSize: 16, textTransform: 'capitalize',
           marginVertical: 10}]}>
           {dayName}
         </Text>
         <DropdownIcon />
-      </View>
+      </TouchableOpacity>
       <GreenDivider/>
       <View style={{marginVertical: 15}}>
         {meals.map(({id, imageType, title, readyInMinutes, servings}, index) =>
@@ -132,7 +118,7 @@ const MealPlanScreen = ({navigation}) => {
     </View>
   );
 }
-
+// TODO add activity indicator above
 const styles = StyleSheet.create({
   screen: {display: 'flex', flexDirection: 'column', width: SCREEN_WIDTH,
     height: SCREEN_HEIGHT, paddingVertical: 10, paddingHorizontal: 27,

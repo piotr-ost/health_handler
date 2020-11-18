@@ -6,7 +6,7 @@ import ConsumptionScreen from "./screens/ConsumptionScreen";
 import ShoppingListScreen from "./screens/ShoppingListScreen";
 import {createStackNavigator} from '@react-navigation/stack';
 import {NavigationContainer, DefaultTheme} from "@react-navigation/native";
-
+import TestScreen from './TestScreen.js'
 const Stack = createStackNavigator();
 
 const Theme = {
@@ -29,9 +29,7 @@ export default function App() {
                       options={{headerShown: false}} />
       </Stack.Navigator>
     </NavigationContainer>
-    // <MealPlanScreen />
-    // <ConsumptionScreen />
-    // <HomeScreen />
-    // <InputScreen />
-  )
+  );
 }
+
+// TODO use react dotenv to keep the api key secret

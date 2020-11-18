@@ -10,8 +10,8 @@ const SCREEN_HEIGHT = 812
 const GREEN = '#6FBF44'
 // TODO not sure how to make above global so will copy paste for now
 
-export const DropdownIcon = () => {
-  return <Icon type="font-awesome" name="caret-down" color={GREEN} />;
+export const DropdownIcon = ({onPress}) => {
+  return <Icon type="font-awesome" name="caret-down" color={GREEN} onPress={onPress} />;
 }
 
 const Dropdown = ({text, onPress}) => {
