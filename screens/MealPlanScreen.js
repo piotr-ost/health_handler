@@ -1,6 +1,6 @@
 import React, {useState, useEffect, useRef} from 'react';
-import {View, Text, Image,
-  StyleSheet, Animated, TouchableOpacity} from 'react-native';
+import {View, Text, Image, StyleSheet,
+  Animated, TouchableOpacity, ActivityIndicator} from 'react-native';
 import {Icon} from 'react-native-elements';
 import {GreenDivider, GrayDivider, ThinGrayDivider} from '../components/Dividers.js';
 import {ReturnButton} from '../components/Buttons.js';
@@ -78,22 +78,26 @@ const MealPlanScreen = ({navigation}) => {
   const base = 'https://api.spoonacular.com/mealplanner/generate';
   const apiKey = '?apiKey=556d5c003785468ab5aa696a128a3d3a';
   //const apiKey = '?apiKey=5bb1646af40448c4bd763b79205bc198'
-  const [data, setData] = useState([]);
+  const [mealPlan, setMealPlan] = useState([]);
+  let days = ['monday', 'tuesday', 'wednesday',
+    'thursday', 'friday', 'saturday', 'sunday']
   const recipes = [];
-
+  const dayToday = new Date().getDay() -1 // sunday is 0
+  days = [...days.slice(dayToday), ...days.slice(0, dayToday)]
   useEffect(() => {
     const fetchData = async () => {
       try {
         const res = await axios.get(base + apiKey);
         console.log('result:', res);
-        setData(res.data);
+        let meals = Object.values(res.data.week)
+        meals = [...meals.slice(dayToday), ...meals.slice(0, dayToday)]
+        setMealPlan(meals);
       } catch (err) {
         console.log(err);
       }
     }
-    !data.length ? fetchData() : null;
+    !mealPlan.length ? fetchData() : null;
   }, []);
-
 
   return (
     <View style={styles.screen}>
@@ -105,14 +109,14 @@ const MealPlanScreen = ({navigation}) => {
       </View>
       <GrayDivider />
       <View style={{marginTop: 20}}>
-        {data.week ?
-          Object.values(data.week).map(({meals, nutrients}, index) => {
+        {mealPlan ?
+          mealPlan.map(({meals, nutrients}, index) => {
             meals.forEach((meal) => recipes.push(meal.id))
             return (
-              <MealsDay dayName={Object.keys(data.week)[index]}  meals={meals}
+              <MealsDay dayName={days[index]}  meals={meals}
                         nutrients={nutrients} key={index}/>
             );
-          }) : <Text style={styles.text}>loading...</Text>
+          }) : <ActivityIndicator color={GREEN} />
         }
       </View>
     </View>

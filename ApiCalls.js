@@ -31,8 +31,19 @@ const getUserPlan = () => {
     .then(() => console.log(url))
 }
 
-// todo function to give date of the given starting week?
-// start that
+/*
+ the swiping functionality could be added using `https://api.spoonacular.com/recipes/{id}/similar`
+ we could get 5 similar recipes for each of the meals generated
+ and let the user choose the set of products for the meal
+
+ alright, so backend is:
+ 1) generate meal plan, make sure data of input screen is included
+ 2) once the user approves, take id's of the meals
+ 3) add each of the id's to the meal plan, here the dates have to be automatically determined
+ 4) then make another screen, current meal plan - this will retrieve the given meal plan for a user;
+  the meal plan cant be generated every time, there is also a limit of one meal plan per user
+  (can go around that np tho)
+*/
 
 const addToUserPlan = (date, slot, position) => {
   const url = `${urlBase}/mealplanner/${user.username}/items?hash=${user.hash}${apiKey}`
@@ -46,7 +57,6 @@ const addToUserPlan = (date, slot, position) => {
 let currentTime = new Date()
 let currentDate = `${currentTime.getFullYear()}-${currentTime.getMonth()}-${currentTime.getDate() + 1}`
 const date = new Date(currentDate).getTime() / 1000
-// then add for every other day
 
 console.log(addToUserPlan(date, 3, 2))
 console.log(getUserPlan())
