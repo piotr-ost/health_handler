@@ -134,7 +134,7 @@ const InputScreen = ({navigation}) => {
       </View>
       <View style={styles.buttonsContainer}>
         <View style={styles.button}>
-          <Button onPress={() => navigation.navigate("MealPlanScreen")}
+          <Button onPress={() => navigation.navigate("MealPlanScreen", {userData: userData})}
                   title="Create plan" color={GREEN} style={styles.button} />
         </View>
       </View>

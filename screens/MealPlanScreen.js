@@ -74,10 +74,33 @@ const MealsDay = ({dayName, meals}) => {
   );
 }
 
-const MealPlanScreen = ({navigation}) => {
+const getDiet = (userData) => {
+  if (userData.vegetarian)
+    if (userData.vegan)
+      return 'vegan'
+    else
+      return 'vegetarian'
+  return 'whole30'
+}
+
+const getExclude = (userData) => {
+  const exclude = []
+  if (userData.nutFree)
+    exclude.push('nuts')
+  if (userData.fishAllergy)
+    exclude.push('fish')
+  if (userData.lactoseFree)
+    exclude.push('milk')
+  return exclude
+}
+
+// user data could also include the calories goal,
+// which can be included when generating the meal
+
+const MealPlanScreen = ({route, navigation}) => {
   const base = 'https://api.spoonacular.com/mealplanner/generate';
-  const apiKey = '?apiKey=556d5c003785468ab5aa696a128a3d3a';
-  //const apiKey = '?apiKey=5bb1646af40448c4bd763b79205bc198'
+  // const apiKey = '?apiKey=556d5c003785468ab5aa696a128a3d3a';
+  const apiKey = '?apiKey=5bb1646af40448c4bd763b79205bc198'
   const [mealPlan, setMealPlan] = useState([]);
   let days = ['monday', 'tuesday', 'wednesday',
     'thursday', 'friday', 'saturday', 'sunday']
@@ -87,7 +110,13 @@ const MealPlanScreen = ({navigation}) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await axios.get(base + apiKey);
+        const {userData} = route.params
+        let diet = `&diet=${getDiet(userData)}`
+        let toExclude = getExclude(userData)
+        let exclude = ''
+        if (toExclude.length)
+          exclude = `&exclude=${toExclude}`
+        const res = await axios.get(base + apiKey + diet + exclude);
         console.log('result:', res);
         let meals = Object.values(res.data.week)
         meals = [...meals.slice(dayToday), ...meals.slice(0, dayToday)]
@@ -109,14 +138,17 @@ const MealPlanScreen = ({navigation}) => {
       </View>
       <GrayDivider />
       <View style={{marginTop: 20}}>
-        {mealPlan ?
+        {mealPlan.length ?
           mealPlan.map(({meals, nutrients}, index) => {
             meals.forEach((meal) => recipes.push(meal.id))
             return (
               <MealsDay dayName={days[index]}  meals={meals}
                         nutrients={nutrients} key={index}/>
             );
-          }) : <ActivityIndicator color={GREEN} />
+          }) : <View style={{display: 'flex', justifyContent: 'space-around', alignItems: 'center'}}>
+            <Text>Generating the meal plan...</Text>
+            <ActivityIndicator color={GREEN} style={{padding: 30}}/>
+        </View>
         }
       </View>
     </View>

@@ -36,6 +36,7 @@ const getUserPlan = () => {
  we could get 5 similar recipes for each of the meals generated
  and let the user choose the set of products for the meal
 
+ // todo swap the duplicate meals?
  alright, so backend is:
  1) generate meal plan, make sure data of input screen is included
  2) once the user approves, take id's of the meals
