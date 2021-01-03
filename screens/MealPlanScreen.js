@@ -6,6 +6,7 @@ import {GreenDivider, GrayDivider, ThinGrayDivider} from '../components/Dividers
 import {ReturnButton} from '../components/Buttons.js';
 import {DropdownIcon} from "./InputScreen";
 import axios from 'axios';
+import {johny, getUserMealPlanTemplates} from "../ApiCalls";
 
 const user = {
   "username":"api-52495-ec283c8e-e354-41d1-ae07-0ca4d098c8dd",
@@ -15,13 +16,9 @@ const SCREEN_WIDTH = 375;
 const SCREEN_HEIGHT = 812;
 const GREEN = '#6FBF44';
 
-const ShoppingListButton = ({recipes, onPress}) => {
-  return (recipes.length === 7*3 ?
-      <Icon type="font-awesome" name="shopping-cart"
-            onPress={onPress} color={GREEN} />
-      : <Icon type="font-awesome" name="shopping-cart"
-              onPress={onPress} color={GREEN} />
-  );
+const ShoppingListButton = ({onPress}) => {
+  return <Icon type="font-awesome" name="shopping-cart"
+               onPress={onPress} color={GREEN} />
 }
 
 const Meal = ({id, imageType, title, mealType}) => {
@@ -98,17 +95,17 @@ const getExclude = (userData) => {
 // which can be included when generating the meal
 
 const MealPlanScreen = ({route, navigation}) => {
-  const base = 'https://api.spoonacular.com/mealplanner/generate';
+  const base = 'https://api.spoonacular.com/mealplanner';
   // const apiKey = '?apiKey=556d5c003785468ab5aa696a128a3d3a';
   const apiKey = '?apiKey=5bb1646af40448c4bd763b79205bc198'
   const [mealPlan, setMealPlan] = useState([]);
   let days = ['monday', 'tuesday', 'wednesday',
     'thursday', 'friday', 'saturday', 'sunday']
-  const recipes = [];
+  const recipes = []
   const dayToday = new Date().getDay() -1 // sunday is 0
   days = [...days.slice(dayToday), ...days.slice(0, dayToday)]
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchDataRandom = async () => {
       try {
         const {userData} = route.params
         let diet = `&diet=${getDiet(userData)}`
@@ -116,7 +113,7 @@ const MealPlanScreen = ({route, navigation}) => {
         let exclude = ''
         if (toExclude.length)
           exclude = `&exclude=${toExclude}`
-        const res = await axios.get(base + apiKey + diet + exclude);
+        const res = await axios.get(base + '/generate' + apiKey + diet + exclude);
         console.log('result:', res);
         let meals = Object.values(res.data.week)
         meals = [...meals.slice(dayToday), ...meals.slice(0, dayToday)]
@@ -125,16 +122,39 @@ const MealPlanScreen = ({route, navigation}) => {
         console.log(err);
       }
     }
-    !mealPlan.length ? fetchData() : null;
+
+    const fetchDataJohny = async () => {
+      let id = 2807
+      const url = base + `/${johny.username}/templates/${id}` + apiKey + `&hash=${johny.hash}`
+      const res = await axios.get(url).catch((err) => console.log(err))
+      console.log(res.data)
+      let meals = Object.values(res.data.days)
+      meals = [...meals.slice(dayToday), ...meals.slice(0, dayToday)]
+      setMealPlan(meals)
+    }
+    !mealPlan.length ? fetchDataRandom() : null;
+    // !mealPlan.length ? fetchDataJohny() : null;
   }, []);
+
+  const approveMealPlan = (recipes, user = user) => {
+    let date = new Date()
+    date = `${date.getFullYear()}-${date.getMonth()}-${date.getDate() + 1}`
+    date = new Date(date).getTime() / 1000
+    let day = 86400
+    recipes.forEach((id, index) => {
+      let slot = index + 1 % 3
+      // addMealToUserPlan(user, date, slot, )
+      // the meal plans will actually be taken from the template so no need to feed every single id
+      // ill get back to work once the plans are there in a few days
+    })
+  }
 
   return (
     <View style={styles.screen}>
       <View style={styles.header}>
         <ReturnButton onPress={() => navigation.navigate('InputScreen')} />
         <Text style={[styles.text, {fontSize: 30}]}>Meal Plan</Text>
-        <ShoppingListButton onPress={() => navigation.navigate('ShoppingListScreen')}
-                            recipes={recipes}/>
+        <ShoppingListButton onPress={() => navigation.navigate('ShoppingListScreen')} />
       </View>
       <GrayDivider />
       <View style={{marginTop: 20}}>
@@ -145,7 +165,9 @@ const MealPlanScreen = ({route, navigation}) => {
               <MealsDay dayName={days[index]}  meals={meals}
                         nutrients={nutrients} key={index}/>
             );
-          }) : <View style={{display: 'flex', justifyContent: 'space-around', alignItems: 'center'}}>
+          }) : <View
+            style={{display: 'flex', justifyContent: 'space-around', alignItems: 'center'}}
+          >
             <Text>Generating the meal plan...</Text>
             <ActivityIndicator color={GREEN} style={{padding: 30}}/>
         </View>
@@ -154,7 +176,7 @@ const MealPlanScreen = ({route, navigation}) => {
     </View>
   );
 }
-// TODO add activity indicator above
+
 const styles = StyleSheet.create({
   screen: {display: 'flex', flexDirection: 'column', width: SCREEN_WIDTH,
     height: SCREEN_HEIGHT, paddingVertical: 10, paddingHorizontal: 27,

@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {View, Text, Image, StyleSheet, TouchableOpacity} from 'react-native';
 import {GrayDivider, GreenDivider} from "../components/Dividers";
-import {Icon, CheckBox} from "react-native-elements";
+import {Icon, CheckBox, Slider} from "react-native-elements";
 import {Button} from 'react-native';  // for now
 
 // iphone X dims
@@ -29,37 +29,6 @@ const Dropdown = ({text, onPress}) => {
   );
 }
 
-const UnitSelector = ({measured}) => {
-  const [clicked, setClicked] = useState(false);
-  let metric, imperial;
-  if (measured === 'height') {
-    [metric, imperial] = ['Cm', 'Ft'];
-  } else {
-    [metric, imperial] = ['Kg', 'lbs'];
-  }
-  const roundLeft = {borderBottomLeftRadius: 5, borderTopLeftRadius: 5}
-  const roundRight = {borderBottomRightRadius: 5, borderTopRightRadius: 5}
-  return (
-    <View style={{display: 'flex', marginBottom: 30, flexDirection: 'row',
-      justifyContent: 'space-between', marginTop: 10}}>
-      <TouchableOpacity disabled={clicked} style={[{flex: 1}, roundLeft, clicked ?
-        {backgroundColor: GREEN}
-        : {backgroundColor: 'white', borderColor: GREEN, borderWidth: 1}]
-      } onPress={() => setClicked(!clicked)}>
-        <Text style={[{alignSelf: 'center'}, clicked ?
-          {color: 'white'} : {color: GREEN}]}>{metric}</Text>
-      </TouchableOpacity>
-      <TouchableOpacity disabled={!clicked} style={[{flex: 1}, roundRight, clicked ?
-        {backgroundColor: 'white', borderColor: GREEN, borderWidth: 1}
-        : {backgroundColor: GREEN}]
-      } onPress={() => setClicked(!clicked)}>
-        <Text style={[{alignSelf: 'center'}, clicked ?
-          {color: GREEN} : {color: 'white'}]}>{imperial}</Text>
-      </TouchableOpacity>
-    </View>
-    );
-}
-
 const SavedPlansDropdown = () => {
   return (
     <View>
@@ -72,6 +41,58 @@ const SavedPlansDropdown = () => {
   );
 }
 
+const PriceSlider = ({value, onValueChange}) => {
+  return (
+  <View>
+    <Slider
+      value={value}
+      minimumValue={1}
+      maximumValue={20}
+      step={0.05}
+      onValueChange={onValueChange}
+      thumbStyle={{height: 20, width: 20, backgroundColor: GREEN}}
+      trackStyle={{backgroundColor: 'transparent'}}
+    />
+     {/* todo add icons */}
+    <Text style={{alignSelf: 'center'}}>{value.toFixed(2)}$/meal</Text>
+  </View>
+  )
+}
+
+const TimeSlider = ({value, onValueChange}) => {
+  return (
+    <View>
+      <Slider
+        value={value}
+        minimumValue={15}
+        maximumValue={100}
+        step={1}
+        onValueChange={onValueChange}
+        thumbStyle={{height: 20, width: 20, backgroundColor: GREEN}}
+        trackStyle={{backgroundColor: 'transparent'}}
+      />
+      <Text style={{alignSelf: 'center'}}>{value}min</Text>
+    </View>
+  )
+}
+
+const CaloriesSlider = ({value, onValueChange}) => {
+  return (
+    <View>
+      <Slider
+        value={value}
+        minimumValue={1500}
+        maximumValue={4000}
+        step={50}
+        onValueChange={onValueChange}
+        thumbStyle={{height: 20, width: 20, backgroundColor: GREEN}}
+        trackStyle={{backgroundColor: 'transparent'}}
+      />
+      <Text style={{alignSelf: 'center'}}>{value}kcal</Text>
+    </View>
+  )
+}
+
 const InputScreen = ({navigation}) => {
   const [userData, setUserData] = useState({
     vegetarian: false,
@@ -81,6 +102,9 @@ const InputScreen = ({navigation}) => {
     lactoseFree: false,
     fishAllergy: false
   });
+  const [price, setPrice] = useState(10)
+  const [time, setTime] = useState(120)
+  const [calories, setCalories] = useState( 2300)
   return (
     <View style={styles.screen}>
        <View style={styles.header}>
@@ -98,44 +122,46 @@ const InputScreen = ({navigation}) => {
                 style={styles.img} />
        </View>
       <Dropdown onPress={() => {}} text="Select a supermarket..." type="wide" />
-      <View style={{display: 'flex', flexDirection: 'row', justifyContent: "space-between"}}>
-        <View style={styles.column}>
-          <Dropdown onPress={() => {}} text="Age"></Dropdown>
-          <Dropdown onPress={() => {}} text="Height"></Dropdown>
-          <UnitSelector measured="height" />
-          <View>
-            <CheckBox checked={userData.vegetarian} title="Vegetarian"
-                      checkedColor={GREEN} onPress={() => setUserData(
-              {...userData, vegetarian: !userData.vegetarian})} />
-            <CheckBox checked={userData.nutFree} title="Nut free"
-                      checkedColor={GREEN} onPress={() => setUserData(
-              {...userData, nutFree: !userData.nutFree})} />
-            <CheckBox checked={userData.halal} title="Halal"
-                      checkedColor={GREEN} onPress={() => setUserData(
-              {...userData, halal: !userData.halal})} />
-          </View>
+      <View style={{display: 'flex', flexDirection: 'column', justifyContent: "space-between"}}>
+        <View style={{padding: 10}}>
+          <PriceSlider value={price} onValueChange={(value) => setPrice(value)}/>
+          <TimeSlider value={time} onValueChange={(value) => setTime(value)} />
+          <CaloriesSlider value={calories} onValueChange={(value) => setCalories(value)}/>
         </View>
-        <View style={styles.column}>
-          <Dropdown onPress={() => {}} text="Gender"></Dropdown>
-          <Dropdown onPress={() => {}} text="Weight"></Dropdown>
-          <UnitSelector measured="weight" />
-          <View>
-            <CheckBox checked={userData.vegan} title="Vegan"
-                      checkedColor={GREEN} onPress={() => setUserData(
-              {...userData, vegan: !userData.vegan})} />
-            <CheckBox checked={userData.lactoseFree} title="Nut free"
-                      checkedColor={GREEN} onPress={() => setUserData(
-              {...userData, lactoseFree: !userData.lactoseFree})} />
-            <CheckBox checked={userData.fishAllergy} title="No fish"
-                      checkedColor={GREEN} onPress={() => setUserData(
-              {...userData, fishAllergy: !userData.fishAllergy})} />
+        <View style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-between'}}>
+          <View style={styles.column}>
+            <View>
+              <CheckBox checked={userData.vegetarian} title="Vegetarian"
+                        checkedColor={GREEN} onPress={() => setUserData(
+                {...userData, vegetarian: !userData.vegetarian})} />
+              <CheckBox checked={userData.nutFree} title="Nut free"
+                        checkedColor={GREEN} onPress={() => setUserData(
+                {...userData, nutFree: !userData.nutFree})} />
+              <CheckBox checked={userData.halal} title="Halal"
+                        checkedColor={GREEN} onPress={() => setUserData(
+                {...userData, halal: !userData.halal})} />
+            </View>
+          </View>
+          <View style={styles.column}>
+            <View>
+              <CheckBox checked={userData.vegan} title="Vegan"
+                        checkedColor={GREEN} onPress={() => setUserData(
+                {...userData, vegan: !userData.vegan})} />
+              <CheckBox checked={userData.lactoseFree} title="Nut free"
+                        checkedColor={GREEN} onPress={() => setUserData(
+                {...userData, lactoseFree: !userData.lactoseFree})} />
+              <CheckBox checked={userData.fishAllergy} title="No fish"
+                        checkedColor={GREEN} onPress={() => setUserData(
+                {...userData, fishAllergy: !userData.fishAllergy})} />
+            </View>
           </View>
         </View>
       </View>
       <View style={styles.buttonsContainer}>
         <View style={styles.button}>
-          <Button onPress={() => navigation.navigate("MealPlanScreen", {userData: userData})}
-                  title="Create plan" color={GREEN} style={styles.button} />
+          <Button onPress={() => navigation.navigate("MealPlanScreen", {
+            userData: userData, price: price, time: time, calories: calories})
+          } title="Create plan" color={GREEN} style={styles.button} />
         </View>
       </View>
     </View>
@@ -164,6 +190,6 @@ const styles = StyleSheet.create({
 // TODO
 //  add text styling to all text
 //  add dropdown menu items
-//  integrate api
+//  integrate api to sliders
 
 export default InputScreen;
