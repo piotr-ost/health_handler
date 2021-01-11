@@ -25,24 +25,35 @@ const ShoppingListButton = ({onPress}) => {
                onPress={onPress} color={GREEN} />
 }
 
-const Meal = ({id, imageType, title, mealType}) => {
-  const size = '240x150';
-  const uri = `https://spoonacular.com/recipeImages/${id}-${size}.${imageType}`;
+const Meal = ({id, imageType, title, mealType, amount, unit, type_, image}) => {
+  let uri
+  if (type_ === 'INGREDIENTS') {
+    uri = image.replace('100x100', '250x250');
+    console.log(id, title, mealType, amount, unit)
+  }
+  else if (type_ === 'RECIPE')
+    uri = `http://spoonacular.com/recipeImages/${id}-240x150.${imageType}`
+  else if (type_ === 'PRODUCT')
+    uri = `http:///spoonacular.com/productImages/${id}-312x231.${imageType}`
+  console.log(uri)
   return ( id && title ?
     <View style={{flex: 1, flexDirection: 'column'}}>
       <View style={{display: 'flex', flexDirection: 'row',
         justifyContent: 'space-between', alignItems: 'center', paddingBottom: 6}}>
         <Image style={{width: 50, height: 50, borderRadius: 50, marginRight: 8}}
-               source={{uri: uri}} />
+               source={uri ? {uri: uri} : {}} />
         <View>
           <Text style={[styles.text, {fontSize: 11, color: GREEN}]}>{mealType}</Text>
-          <Text style={{width: 250, fontSize: 16}}>{title}</Text>
+          {amount ?
+            <Text style={{width: 250, fontSize: 16}}>{title}: {amount} {unit}</Text>
+            : <Text style={{width: 250, fontSize: 16}}>{title}</Text>
+          }
         </View>
         <View style={{display: 'flex', justifyContent: 'space-between'}}>
           <Icon onPress={() => {}} type="font-awesome" name="question"
-                color={GREEN} size={15}/>
-          <Icon onPress={() => {}} type="font-awesome" name="exchange"
-                color={GREEN} size={15}/>
+                color={GREEN} size={15} style={{marginRight: 5}}/>
+          {/*<Icon onPress={() => {}} type="font-awesome" name="exchange"*/}
+          {/*      color={GREEN} size={15}/>*/}
         </View>
       </View>
       <ThinGrayDivider />
@@ -50,9 +61,14 @@ const Meal = ({id, imageType, title, mealType}) => {
 );
 }
 
-const MealsDay = ({dayName, meals}) => {
-  const value = useRef(new Animated.Value(0))
-  const mealTypes = ['BREAKFAST', 'LUNCH', 'DINNER'];
+const MealsDay = ({dayName, items}) => {
+  function* mealGen() {
+    const mealTypes = ['BREAKFAST', 'LUNCH', 'DINNER']
+    while (true)
+      for (let meal of mealTypes)
+        yield meal
+  }
+  let gen = mealGen()
   return (
     <View>
       <TouchableOpacity style={{display: 'flex', flexDirection: 'row',
@@ -65,10 +81,23 @@ const MealsDay = ({dayName, meals}) => {
       </TouchableOpacity>
       <GreenDivider/>
       <View style={{marginVertical: 15}}>
-        {meals.map(({id, imageType, title, readyInMinutes, servings}, index) =>
-          <Meal imageType={imageType} title={title} readyInMinutes={readyInMinutes}
-                servings={servings} key={id} id={id} mealType={mealTypes[index]}/>
-        )}
+        {items.map(({type, value, id}) => {
+          // TODO the meal plan has to be up for the whole week basically up until the user changes,
+          //  it so this has to be done some way
+          if (type === 'RECIPE') {
+            return <Meal imageType={value.imageType} title={value.title} key={id}
+                         id={value.id} mealType={gen.next().value} type_={type}/>
+          } else if (type === 'INGREDIENTS') {
+            let ingredient = value.ingredients[0]
+            console.log(ingredient)
+            return <Meal title={ingredient.name} key={id} mealType={'SNACK'} type_={type} id={id}
+                         amount={ingredient.amount} unit={ingredient.unit} image={ingredient.image}
+            />
+          } else if (type === 'PRODUCT') {
+            return <Meal title={value.title} id={value.id} key={id} mealType={'SNACK'}
+                         imageType={value.imageType} type_={type} />
+          }
+        })}
         <Meal />
       </View>
     </View>
@@ -103,9 +132,7 @@ const MealPlanScreen = ({route, navigation}) => {
   // const apiKey = '?apiKey=556d5c003785468ab5aa696a128a3d3a';
   const apiKey = '?apiKey=5bb1646af40448c4bd763b79205bc198'
   const [mealPlan, setMealPlan] = useState([]);
-  const [mealPlan_, setMealPlan_] = useState([]);
   let days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday']
-  const recipes = []
   const dayToday = new Date().getDay() -1 // sunday is 0
   days = [...days.slice(dayToday), ...days.slice(0, dayToday)]
   useEffect(() => {
@@ -126,8 +153,8 @@ const MealPlanScreen = ({route, navigation}) => {
         console.log(err);
       }
     }
-    // setMealPlan(data)
-     !mealPlan.length ? fetchDataRandom() : null;
+    setMealPlan(data)
+    // !mealPlan.length ? fetchDataRandom() : null;
     // !mealPlan.length ? fetchDataJohny().then(r => {
     //   setMealPlan_(r);
     // }) : null;
@@ -143,18 +170,13 @@ const MealPlanScreen = ({route, navigation}) => {
       <GrayDivider />
       <View style={{marginTop: 20}}>
         {mealPlan.length ?
-          mealPlan.map(({meals, nutrients}, index) => {
-            meals.forEach((meal) => recipes.push(meal.id))
-            return (
-              <MealsDay dayName={days[index]}  meals={meals}
-                        nutrients={nutrients} key={index}/>
-            );
-          }) : <View
-            style={{display: 'flex', justifyContent: 'space-around', alignItems: 'center'}}
-          >
+          mealPlan.map(({items}, index) => {
+            return <MealsDay dayName={days[index]} items={items} key={days[index]}/>
+          }) :
+          <View style={{display: 'flex', justifyContent: 'space-around', alignItems: 'center'}}>
             <Text>Generating the meal plan...</Text>
             <ActivityIndicator color={GREEN} style={{padding: 30}}/>
-        </View>
+          </View>
         }
       </View>
     </View>

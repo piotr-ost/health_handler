@@ -1,6 +1,6 @@
-// placeholder data
+// placeholder data for MealPlanScreen.js
 
-const data = [
+export const data = [
   {
     "nutritionSummary": {
       "nutrients": [
@@ -1320,5 +1320,3 @@ const data = [
     ]
   }
 ]
-
-module.exports = data
