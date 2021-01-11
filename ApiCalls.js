@@ -83,6 +83,24 @@ const getPublicTemplates = () => {
     .then(() => console.log(url))
 }
 
-getUserMealPlanTemplates(johny.username, johny.hash)
-// getPublicTemplates()
-// getUserMealPlanTemplates(user.username, user.hash)
+export const fetchDataJohny = async () => {
+  const base = 'https://api.spoonacular.com/mealplanner';
+  // const apiKey = '?apiKey=556d5c003785468ab5aa696a128a3d3a';
+  const apiKey = '?apiKey=5bb1646af40448c4bd763b79205bc198'
+  const dayToday = new Date().getDay() -1 // sunday is 0
+  let id = 2807
+  const url = base + `/${johny.username}/templates/${id}` + apiKey + `&hash=${johny.hash}`
+  const res = await axios.get(url).catch((err) => console.log(err))
+  console.log(res.data)
+  let meals = Object.values(res.data.days)
+  meals = [...meals.slice(dayToday), ...meals.slice(0, dayToday)]
+  return meals
+}
+
+
+if (require.main === module) {
+  getUserMealPlanTemplates(johny.username, johny.hash)
+  fetchDataJohny().then(r => console.log(r))
+  // getPublicTemplates()
+  // getUserMealPlanTemplates(user.username, user.hash)
+}

@@ -1,12 +1,16 @@
 import React, {useState, useEffect, useRef} from 'react';
-import {View, Text, Image, StyleSheet,
-  Animated, TouchableOpacity, ActivityIndicator} from 'react-native';
+import {
+  View, Text, Image, StyleSheet, Animated, TouchableOpacity, ActivityIndicator
+} from 'react-native';
 import {Icon} from 'react-native-elements';
 import {GreenDivider, GrayDivider, ThinGrayDivider} from '../components/Dividers.js';
+
 import {ReturnButton} from '../components/Buttons.js';
 import {DropdownIcon} from "./InputScreen";
+
 import axios from 'axios';
-import {johny, getUserMealPlanTemplates} from "../ApiCalls";
+import {fetchDataJohny} from '../ApiCalls'
+import {data} from './data'
 
 const user = {
   "username":"api-52495-ec283c8e-e354-41d1-ae07-0ca4d098c8dd",
@@ -25,16 +29,16 @@ const Meal = ({id, imageType, title, mealType}) => {
   const size = '240x150';
   const uri = `https://spoonacular.com/recipeImages/${id}-${size}.${imageType}`;
   return ( id && title ?
-    <View style={{height: 60, flex: 1, flexDirection: 'column'}}>
+    <View style={{flex: 1, flexDirection: 'column'}}>
       <View style={{display: 'flex', flexDirection: 'row',
         justifyContent: 'space-between', alignItems: 'center', paddingBottom: 6}}>
         <Image style={{width: 50, height: 50, borderRadius: 50, marginRight: 8}}
                source={{uri: uri}} />
         <View>
           <Text style={[styles.text, {fontSize: 11, color: GREEN}]}>{mealType}</Text>
-          <Text style={{width: 250, height: 40, fontSize: 16}}>{title}</Text>
+          <Text style={{width: 250, fontSize: 16}}>{title}</Text>
         </View>
-        <View style={{height: 40, display: 'flex', justifyContent: 'space-between'}}>
+        <View style={{display: 'flex', justifyContent: 'space-between'}}>
           <Icon onPress={() => {}} type="font-awesome" name="question"
                 color={GREEN} size={15}/>
           <Icon onPress={() => {}} type="font-awesome" name="exchange"
@@ -99,8 +103,8 @@ const MealPlanScreen = ({route, navigation}) => {
   // const apiKey = '?apiKey=556d5c003785468ab5aa696a128a3d3a';
   const apiKey = '?apiKey=5bb1646af40448c4bd763b79205bc198'
   const [mealPlan, setMealPlan] = useState([]);
-  let days = ['monday', 'tuesday', 'wednesday',
-    'thursday', 'friday', 'saturday', 'sunday']
+  const [mealPlan_, setMealPlan_] = useState([]);
+  let days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday']
   const recipes = []
   const dayToday = new Date().getDay() -1 // sunday is 0
   days = [...days.slice(dayToday), ...days.slice(0, dayToday)]
@@ -122,32 +126,12 @@ const MealPlanScreen = ({route, navigation}) => {
         console.log(err);
       }
     }
-
-    const fetchDataJohny = async () => {
-      let id = 2807
-      const url = base + `/${johny.username}/templates/${id}` + apiKey + `&hash=${johny.hash}`
-      const res = await axios.get(url).catch((err) => console.log(err))
-      console.log(res.data)
-      let meals = Object.values(res.data.days)
-      meals = [...meals.slice(dayToday), ...meals.slice(0, dayToday)]
-      setMealPlan(meals)
-    }
-    !mealPlan.length ? fetchDataRandom() : null;
-    // !mealPlan.length ? fetchDataJohny() : null;
+    // setMealPlan(data)
+     !mealPlan.length ? fetchDataRandom() : null;
+    // !mealPlan.length ? fetchDataJohny().then(r => {
+    //   setMealPlan_(r);
+    // }) : null;
   }, []);
-
-  const approveMealPlan = (recipes, user = user) => {
-    let date = new Date()
-    date = `${date.getFullYear()}-${date.getMonth()}-${date.getDate() + 1}`
-    date = new Date(date).getTime() / 1000
-    let day = 86400
-    recipes.forEach((id, index) => {
-      let slot = index + 1 % 3
-      // addMealToUserPlan(user, date, slot, )
-      // the meal plans will actually be taken from the template so no need to feed every single id
-      // ill get back to work once the plans are there in a few days
-    })
-  }
 
   return (
     <View style={styles.screen}>
