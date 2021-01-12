@@ -8,7 +8,6 @@ import {Button} from 'react-native';  // for now
 const SCREEN_WIDTH = 375
 const SCREEN_HEIGHT = 812
 const GREEN = '#6FBF44'
-// TODO not sure how to make above global so will copy paste for now
 
 export const DropdownIcon = ({onPress}) => {
   return <Icon type="font-awesome" name="caret-down" color={GREEN} onPress={onPress} />;
@@ -186,10 +185,5 @@ const styles = StyleSheet.create({
   buttonsContainer: {marginTop: 33, alignSelf: 'center'},
   column: {width: 150, justifyContent: 'space-between'},
 })
-
-// TODO
-//  add text styling to all text
-//  add dropdown menu items
-//  integrate api to sliders
 
 export default InputScreen;

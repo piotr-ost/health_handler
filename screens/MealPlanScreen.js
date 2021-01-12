@@ -10,7 +10,6 @@ import {DropdownIcon} from "./InputScreen";
 
 import axios from 'axios';
 import {fetchDataJohny} from '../ApiCalls'
-import {data} from './data'
 
 const user = {
   "username":"api-52495-ec283c8e-e354-41d1-ae07-0ca4d098c8dd",
@@ -82,8 +81,6 @@ const MealsDay = ({dayName, items}) => {
       <GreenDivider/>
       <View style={{marginVertical: 15}}>
         {items.map(({type, value, id}) => {
-          // TODO the meal plan has to be up for the whole week basically up until the user changes,
-          //  it so this has to be done some way
           if (type === 'RECIPE') {
             return <Meal imageType={value.imageType} title={value.title} key={id}
                          id={value.id} mealType={gen.next().value} type_={type}/>
@@ -124,9 +121,6 @@ const getExclude = (userData) => {
   return exclude
 }
 
-// user data could also include the calories goal,
-// which can be included when generating the meal
-
 const MealPlanScreen = ({route, navigation}) => {
   const base = 'https://api.spoonacular.com/mealplanner';
   // const apiKey = '?apiKey=556d5c003785468ab5aa696a128a3d3a';
@@ -153,11 +147,8 @@ const MealPlanScreen = ({route, navigation}) => {
         console.log(err);
       }
     }
-    setMealPlan(data)
     // !mealPlan.length ? fetchDataRandom() : null;
-    // !mealPlan.length ? fetchDataJohny().then(r => {
-    //   setMealPlan_(r);
-    // }) : null;
+    !mealPlan.length ? fetchDataJohny().then(r => setMealPlan(r)) : null;
   }, []);
 
   return (
