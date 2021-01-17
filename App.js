@@ -17,16 +17,16 @@ export default function App() {
   return (
     <NavigationContainer theme={Theme}>
       <Stack.Navigator>
-        <Stack.Screen name="HomeScreen" component={HomeScreen}
-                      options={{headerShown: false}} />
-        <Stack.Screen name="InputScreen" component={InputScreen}
-                      options={{headerShown: false}} />
+        {/*<Stack.Screen name="HomeScreen" component={HomeScreen}*/}
+        {/*              options={{headerShown: false}} />*/}
+        {/*<Stack.Screen name="InputScreen" component={InputScreen}*/}
+        {/*              options={{headerShown: false}} />*/}
         <Stack.Screen name="MealPlanScreen" component={MealPlanScreen}
                       options={{headerShown: false}} />
-        <Stack.Screen name="ConsumptionScreen" component={ConsumptionScreen}
-                      options={{headerShown: false}} />
-        <Stack.Screen name="ShoppingListScreen" component={ShoppingListScreen}
-                      options={{headerShown: false}} />
+        {/*<Stack.Screen name="ConsumptionScreen" component={ConsumptionScreen}*/}
+        {/*              options={{headerShown: false}} />*/}
+        {/*<Stack.Screen name="ShoppingListScreen" component={ShoppingListScreen}*/}
+        {/*              options={{headerShown: false}} />*/}
       </Stack.Navigator>
     </NavigationContainer>
   );
