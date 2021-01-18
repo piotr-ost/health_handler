@@ -1,6 +1,6 @@
 // placeholder data for MealPlanScreen.js
 
-export const data = [
+export const mealData = [
   {
     "nutritionSummary": {
       "nutrients": [

@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, Image, StyleSheet, TouchableOpacity} from 'react-native';
+import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import {ReturnButton} from "../components/Buttons.js";
 import {GrayDivider, GreenDivider} from "../components/Dividers.js";
 import {Icon} from "react-native-elements";
@@ -7,7 +7,7 @@ import {Icon} from "react-native-elements";
 const SCREEN_WIDTH = 375;
 const SCREEN_HEIGHT = 812
 const GREEN = '#6FBF44'
-// TODO add custom font to be used for all of the screens
+
 const placeholderData = {calories: '1780kcal', protein: '80g', vitamins: '100%'}
 
 const InfoEntry = ({label, value}) => {

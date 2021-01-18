@@ -8,20 +8,23 @@ import axios from 'axios'
  * @param id number: recipe id
  * @returns Object: detailed preparation steps with utensils included
  */
-const getRecipeDetailedSteps = async (id) => {
+export const getRecipeDetailedSteps = async (id) => {
   const apiKey = 'apiKey=5bb1646af40448c4bd763b79205bc198'
   const base = 'https://api.spoonacular.com'
   const url = base + '/recipes/' + id + '/analyzedInstructions?' + apiKey
-  const res =  await axios.get(url)
-  // console.log(res.data)
-  return res.data
+  try {
+    const res =  await axios.get(url)
+    return res.data
+  } catch (e) {
+    console.log(e)
+  }
 }
 
 /**
  * @param id number: recipe id
  * @returns Object recipe general information and extended ingredients
  */
-const getRecipeInformation = (id) => {
+export const getRecipeInformation = (id) => {
   const apiKey = 'apiKey=5bb1646af40448c4bd763b79205bc198'
   const base = 'https://api.spoonacular.com'
   const url = base + '/recipes/' + id + '/information?' + apiKey

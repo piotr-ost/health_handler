@@ -52,7 +52,6 @@ const PriceSlider = ({value, onValueChange}) => {
       thumbStyle={{height: 20, width: 20, backgroundColor: GREEN}}
       trackStyle={{backgroundColor: 'transparent'}}
     />
-     {/* todo add icons */}
     <Text style={{alignSelf: 'center'}}>{value.toFixed(2)}$/meal</Text>
   </View>
   )

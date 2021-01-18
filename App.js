@@ -4,6 +4,7 @@ import HomeScreen from './screens/HomeScreen.js';
 import MealPlanScreen from './screens/MealPlanScreen.js';
 import ConsumptionScreen from "./screens/ConsumptionScreen";
 import ShoppingListScreen from "./screens/ShoppingListScreen";
+import RecipeDetailsScreen from './screens/RecipeDetailsScreen'
 import {createStackNavigator} from '@react-navigation/stack';
 import {NavigationContainer, DefaultTheme} from "@react-navigation/native";
 import TestScreen from './TestScreen.js'
@@ -23,6 +24,8 @@ export default function App() {
         {/*              options={{headerShown: false}} />*/}
         <Stack.Screen name="MealPlanScreen" component={MealPlanScreen}
                       options={{headerShown: false}} />
+        <Stack.Screen name="RecipeDetailsScreen" component={RecipeDetailsScreen}
+                      options={{headerShown: false}}/>
         {/*<Stack.Screen name="ConsumptionScreen" component={ConsumptionScreen}*/}
         {/*              options={{headerShown: false}} />*/}
         {/*<Stack.Screen name="ShoppingListScreen" component={ShoppingListScreen}*/}
@@ -48,4 +51,8 @@ export default function App() {
     - make global colors, dimensions etc; make sure that those scale right on any device dims
     - the meal plan has to be up for the whole week basically up until the user changes, it so this
      has to be done some way, realm, async storage or smh, not sure
+    - add custom font to be used for all of the screens
+    - add icons to the sliders
+    - make the dropdown bit work using react animations
+    - add metric/us to the RecipeDetailsScreen, add width / height scaling using expo dimensions
 */

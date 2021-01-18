@@ -4,12 +4,11 @@ import {
 } from 'react-native';
 import {Icon} from 'react-native-elements';
 import {GreenDivider, GrayDivider, ThinGrayDivider} from '../components/Dividers.js';
-
 import {ReturnButton} from '../components/Buttons.js';
 import {DropdownIcon} from "./InputScreen";
-
-import axios from 'axios';
+import axios from 'axios'
 import {fetchDataJohny} from '../ApiCalls'
+import {mealData} from './data'
 
 const user = {
   "username":"api-52495-ec283c8e-e354-41d1-ae07-0ca4d098c8dd",
@@ -24,12 +23,10 @@ const ShoppingListButton = ({onPress}) => {
                onPress={onPress} color={GREEN} />
 }
 
-const Meal = ({id, imageType, title, mealType, amount, unit, type_, image}) => {
+const Meal = ({navigation, id, imageType, title, mealType, amount, unit, type_, image}) => {
   let uri
-  if (type_ === 'INGREDIENTS') {
-    uri = image.replace('100x100', '250x250');
-    console.log(id, title, mealType, amount, unit)
-  }
+  if (type_ === 'INGREDIENTS')
+    uri = image.replace('100x100', '250x250')
   else if (type_ === 'RECIPE')
     uri = `http://spoonacular.com/recipeImages/${id}-240x150.${imageType}`
   else if (type_ === 'PRODUCT')
@@ -49,8 +46,13 @@ const Meal = ({id, imageType, title, mealType, amount, unit, type_, image}) => {
           }
         </View>
         <View style={{display: 'flex', justifyContent: 'space-between'}}>
-          <Icon onPress={() => {}} type="font-awesome" name="question"
-                color={GREEN} size={15} style={{marginRight: 5}}/>
+          {navigation &&
+          <Icon onPress={() => {navigation.navigate('RecipeDetailsScreen', {
+            id: id,
+            uri: uri,
+            title: title
+          })}} type="font-awesome" name="question" color={GREEN} size={15} style={{marginRight: 5}}/>
+          }
           {/*<Icon onPress={() => {}} type="font-awesome" name="exchange"*/}
           {/*      color={GREEN} size={15}/>*/}
         </View>
@@ -60,7 +62,7 @@ const Meal = ({id, imageType, title, mealType, amount, unit, type_, image}) => {
 );
 }
 
-const MealsDay = ({dayName, items}) => {
+const MealsDay = ({navigation, dayName, items}) => {
   function* mealGen() {
     const mealTypes = ['BREAKFAST', 'LUNCH', 'DINNER']
     while (true)
@@ -82,8 +84,8 @@ const MealsDay = ({dayName, items}) => {
       <View style={{marginVertical: 15}}>
         {items.map(({type, value, id}) => {
           if (type === 'RECIPE') {
-            return <Meal imageType={value.imageType} title={value.title} key={id}
-                         id={value.id} mealType={gen.next().value} type_={type}/>
+            return <Meal imageType={value.imageType} title={value.title} key={id} navigation={navigation}
+                         id={value.id} mealType={gen.next().value} type_={type} />
           } else if (type === 'INGREDIENTS') {
             let ingredient = value.ingredients[0]
             console.log(ingredient)
@@ -122,33 +124,16 @@ const getExclude = (userData) => {
 }
 
 const MealPlanScreen = ({route, navigation}) => {
-  const base = 'https://api.spoonacular.com/mealplanner';
   // const apiKey = '?apiKey=556d5c003785468ab5aa696a128a3d3a';
   const apiKey = '?apiKey=5bb1646af40448c4bd763b79205bc198'
   const [mealPlan, setMealPlan] = useState([]);
   let days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday']
   const dayToday = new Date().getDay() -1 // sunday is 0
   days = [...days.slice(dayToday), ...days.slice(0, dayToday)]
+  route.params  // to access parameters passed in navigation.navigate()
   useEffect(() => {
-    const fetchDataRandom = async () => {
-      try {
-        const {userData} = route.params
-        let diet = `&diet=${getDiet(userData)}`
-        let toExclude = getExclude(userData)
-        let exclude = ''
-        if (toExclude.length)
-          exclude = `&exclude=${toExclude}`
-        const res = await axios.get(base + '/generate' + apiKey + diet + exclude);
-        console.log('result:', res);
-        let meals = Object.values(res.data.week)
-        meals = [...meals.slice(dayToday), ...meals.slice(0, dayToday)]
-        setMealPlan(meals);
-      } catch (err) {
-        console.log(err);
-      }
-    }
-    // !mealPlan.length ? fetchDataRandom() : null;
-    !mealPlan.length ? fetchDataJohny().then(r => setMealPlan(r)) : null;
+    setMealPlan(mealData)
+    // !mealPlan.length ? fetchDataJohny().then(r => setMealPlan(r)) : null;
   }, []);
 
   return (
@@ -162,7 +147,7 @@ const MealPlanScreen = ({route, navigation}) => {
       <View style={{marginTop: 20}}>
         {mealPlan.length ?
           mealPlan.map(({items}, index) => {
-            return <MealsDay dayName={days[index]} items={items} key={days[index]}/>
+            return <MealsDay navigation={navigation} dayName={days[index]} items={items} key={days[index]}/>
           }) :
           <View style={{display: 'flex', justifyContent: 'space-around', alignItems: 'center'}}>
             <Text>Generating the meal plan...</Text>
@@ -174,7 +159,7 @@ const MealPlanScreen = ({route, navigation}) => {
   );
 }
 
-const styles = StyleSheet.create({
+export const styles = StyleSheet.create({
   screen: {display: 'flex', flexDirection: 'column', width: SCREEN_WIDTH,
     height: SCREEN_HEIGHT, paddingVertical: 10, paddingHorizontal: 27,
     backgroundColor: 'white'},
