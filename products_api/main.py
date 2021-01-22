@@ -1,3 +1,5 @@
+
+
 import pandas as pd
 import time
 import requests
@@ -84,6 +86,7 @@ def insert_from_links_sainsburys(driver: webdriver,
         price = prices[0]
         price_per_unit = 'undefined'
         if len(prices) > 1:
+            # work with this more
             price_per_unit = prices[0]
             price = prices[1]
         # nutritional values
@@ -100,24 +103,13 @@ def insert_from_links_sainsburys(driver: webdriver,
                     store="Sainsbury's",
                     price_per_unit=price_per_unit,
                     price=price,
-                    energy=rows[1].text.split()[0],
-                    fat=rows[2].text.split()[1],
-                    saturates=rows[3].text.split()[1],
-                    carbohydrate=rows[4].text.split()[1],
-                    sugars=rows[5].text.split()[1],
-                    fibre=rows[6].text.split()[1],
-                    protein=rows[7].text.split()[1],
-                    salt=rows[8].text.split()[1],
+                    amount=amount
                 )
                 print(f'saving {product.name}')
                 product.save()
         except IndexError:
             skipped.append(name)
             print(f'skipped {name}')
-
-
-def parse_nutrients(text: str) -> dict:
-    pass
 
 
 if __name__ == '__main__':
