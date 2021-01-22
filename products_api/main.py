@@ -15,7 +15,7 @@ from products.models import Product
 
 logging.basicConfig(filename='debug.log', level=logging.INFO,
                     format='%(asctime)s %(levelname)s %(message)s',
-                    datefmt='%m/%d/%Y %I:$M%:%S')
+                    datefmt='%m/%d/%Y %I:%M:%S')
 logging.getLogger().addHandler(logging.StreamHandler())
 
 
@@ -55,7 +55,7 @@ class Scraper:
         timeout = time.time() + self.timeout
         while not on_next_page and time.time() < timeout:
             try:
-                next_btn = driver.find_element_by_class_name('next')
+                next_btn = self.driver.find_element_by_class_name('next')
                 next_btn.click()
                 clicked = True
                 on_next_page = True
@@ -67,22 +67,41 @@ class Scraper:
             if clicked:
                 try:
                     next_btn.click()
-                except self.click_exceptions:
+                except exceptions.StaleElementReferenceException:
                     on_next_page = True
         return on_next_page
 
     def insert_products_from_page(self):
         gv = self.driver.find_element_by_class_name('productLister')
-        products = gv.find_elements_by_class_name('productInfo')
+        products = gv.find_elements_by_class_name('product')
         for product in products:
-            name, price, *_ = product.text.split('\n')
+            name, *_ = product.text.split('\n')
+            price = product.find_elements_by_class_name('pricing')[0].text
+            split = name.split(' ')
+            if split[-1] == 'Loose' or any([i for i in split[-1]
+                                            if i.isdigit()]):
+                amount = split.pop(-1)
+            else:
+                amount = ''
+            name = ' '.join(split)
+            price, *_ = price.split(' ')
+            price, unit = price.split('/')
+            price_num = ''.join([i for i in price
+                                 if i.isdigit() or i == '.' or i == ','])
+            curr = ''.join(set([i for i in price]) - set([i for i in price_num]))
+            price = float(price_num)
             try:
-                img_url = product.find_elements_by_tag_name('img')[0]
-            except IndexError:
+                img = product.find_elements_by_tag_name('img')[0]
+                img_url = img.get_attribute('src')
+                assert 'jpeg' in img_url or 'jpg' in img_url or 'png' in img_url
+            except (IndexError, AssertionError):
                 logging.error(f'no image found for product: {name}')
-            self.model(name=name, store='sainsburys', amount=amount,
-                       price=price, unit=unit).save()
-            logging.info(f'saving entry: {name} {amount} {price} {unit} {img_url}')
+                img_url = ''
+            self.model(store='sainsburys', name=name, img_url=img_url,
+                       price=price, currency=curr, amount=amount,
+                       unit=unit).save()
+            logging.info(f'saving product: {name}\
+                \n{img_url}\n{price}{curr} {amount}{unit}')
 
     def scrape(self):
         self.go_on_sainsburys()
@@ -103,7 +122,7 @@ class Scraper:
             '/meat-fish/meatandfish-essentials',
             '/dairy-eggs-and-chilled/dairy-and-chilled-essentials',
             '/bakery/bakery-essentials',
-            'food-cupboard/food-cupboard-essentials',
+            '/food-cupboard/food-cupboard-essentials',
             '/frozen/frozen-essentials',
             False
         ]:
@@ -121,10 +140,9 @@ class Scraper:
                     self.links.append(i.get_attribute("href"))
 
 if __name__ == '__main__':
-    # Scraper().scrape()
-    ...
+    Scraper().scrape()
+
 
 # todo
-#  - on page you can get price/one_unit_of_product and price/unit
-#  - definitely regex-get the amount from the name as it will be crucial for
-#  getting sainsburys list from spoonacular list
+# fix parentheses sometimes in product names
+# fix bug that pound sign causes logging error
