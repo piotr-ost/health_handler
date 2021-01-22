@@ -11,3 +11,9 @@ web-build/
 
 # macOS
 .DS_Store
+*.idea
+__pycache__/
+*.pyc
+*~
+.ipynb_checkpoints/
+
