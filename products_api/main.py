@@ -2,17 +2,21 @@ import time
 import requests
 import pickle
 import os
+import logging
 
-from django import setup as setup
-os.environ['DJANGO_SETTINGS_MODULE'] = 'products_api.settings'
-setup()
-
-from products.models import Product
-
-from decimal import Decimal
 from selenium import webdriver
 from selenium.common import exceptions
 from webdriver_manager.chrome import ChromeDriverManager
+
+from django import setup
+os.environ['DJANGO_SETTINGS_MODULE'] = 'products_api.settings'
+setup()
+from products.models import Product
+
+logging.basicConfig(filename='debug.log', level=logging.INFO,
+                    format='%(asctime)s %(levelname)s %(message)s',
+                    datefmt='%m/%d/%Y %I:$M%:%S')
+logging.getLogger().addHandler(logging.StreamHandler())
 
 
 class Scraper:
@@ -68,21 +72,17 @@ class Scraper:
         return on_next_page
 
     def insert_products_from_page(self):
-        gv = self.driver.find_element_by_class_name('productLister gridView')
-        # todo
-        self.model(name=name, store=store, amount=amount,
-                   price=price, unit=unit).save()
-
-    def get_product_links(self) -> None:
-        """
-        Retrieves and appends all the links from the current page
-        page that the driver is on to the links list.
-        """
-        for i in self.driver.find_elements_by_tag_name("a"):
-            link = i.get_attribute("href")
-            if link:
-                if 'product' in link and 'details' in link:
-                    self.links.append(i.get_attribute("href"))
+        gv = self.driver.find_element_by_class_name('productLister')
+        products = gv.find_elements_by_class_name('productInfo')
+        for product in products:
+            name, price, *_ = product.text.split('\n')
+            try:
+                img_url = product.find_elements_by_tag_name('img')[0]
+            except IndexError:
+                logging.error(f'no image found for product: {name}')
+            self.model(name=name, store='sainsburys', amount=amount,
+                       price=price, unit=unit).save()
+            logging.info(f'saving entry: {name} {amount} {price} {unit} {img_url}')
 
     def scrape(self):
         self.go_on_sainsburys()
@@ -98,10 +98,33 @@ class Scraper:
 
     @staticmethod
     def _category_generator():
-        for category in ['/fruit-veg', '/meat-fish', '/dairy-eggs-and-chilled',
-                         '/bakery', 'food-cupboard', '/frozen', False]:
+        for category in [
+            '/fruit-veg/fruitandveg-essentials',
+            '/meat-fish/meatandfish-essentials',
+            '/dairy-eggs-and-chilled/dairy-and-chilled-essentials',
+            '/bakery/bakery-essentials',
+            'food-cupboard/food-cupboard-essentials',
+            '/frozen/frozen-essentials',
+            False
+        ]:
             yield category
 
+    def get_product_links(self) -> None:
+        """
+        Retrieves and appends all the links from the current page
+        page that the driver is on to the links list.
+        """
+        for i in self.driver.find_elements_by_tag_name("a"):
+            link = i.get_attribute("href")
+            if link:
+                if 'product' in link and 'details' in link:
+                    self.links.append(i.get_attribute("href"))
 
 if __name__ == '__main__':
-    Scraper().scrape()
+    # Scraper().scrape()
+    ...
+
+# todo
+#  - on page you can get price/one_unit_of_product and price/unit
+#  - definitely regex-get the amount from the name as it will be crucial for
+#  getting sainsburys list from spoonacular list
