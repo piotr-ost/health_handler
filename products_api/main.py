@@ -43,7 +43,7 @@ class Scraper:
                 xpath = '//*[@id="onetrust-accept-btn-handler"]'
                 self.driver.find_element_by_xpath(xpath).click()
                 cookies_accepted = True
-            except (self.click_exceptions, exceptions.NoSuchElementException):
+            except (*self.click_exceptions, exceptions.NoSuchElementException):
                 time.sleep(1)
                 continue
 
@@ -80,7 +80,7 @@ class Scraper:
             split = name.split(' ')
             if split[-1] == 'Loose' or any([i for i in split[-1]
                                             if i.isdigit()]):
-                amount = split.pop(-1)
+                amount = split[-1]
             else:
                 amount = ''
             name = ' '.join(split)
@@ -89,11 +89,16 @@ class Scraper:
             price_num = ''.join([i for i in price
                                  if i.isdigit() or i == '.' or i == ','])
             curr = ''.join(set([i for i in price]) - set([i for i in price_num]))
+            if curr == '£':
+                curr = 'GBP'
             price = float(price_num)
             try:
-                img = product.find_elements_by_tag_name('img')[0]
-                img_url = img.get_attribute('src')
+                imgs = product.find_elements_by_tag_name('img')
+                img_url = imgs[0].get_attribute('src')
                 assert 'jpeg' in img_url or 'jpg' in img_url or 'png' in img_url
+                if 'special-offer' in img_url:
+                    img_url = imgs[1].get_attribute('src')
+                    assert 'jpeg' in img_url or 'jpg' in img_url or 'png' in img_url
             except (IndexError, AssertionError):
                 logging.error(f'no image found for product: {name}')
                 img_url = ''
@@ -141,8 +146,3 @@ class Scraper:
 
 if __name__ == '__main__':
     Scraper().scrape()
-
-
-# todo
-# fix parentheses sometimes in product names
-# fix bug that pound sign causes logging error
