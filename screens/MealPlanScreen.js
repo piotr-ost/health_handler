@@ -1,7 +1,7 @@
 import React, {useState, useEffect, useRef} from 'react';
 import {
-  View, Text, Image, StyleSheet, Animated, TouchableOpacity, ActivityIndicator
-} from 'react-native';
+  View, Text, Image, StyleSheet, Animated, TouchableOpacity,
+  ActivityIndicator, Dimensions} from 'react-native';
 import {Icon} from 'react-native-elements';
 import {GreenDivider, GrayDivider, ThinGrayDivider} from '../components/Dividers.js';
 import {ReturnButton} from '../components/Buttons.js';
@@ -14,8 +14,8 @@ const user = {
   "username":"api-52495-ec283c8e-e354-41d1-ae07-0ca4d098c8dd",
   "hash":"a0e87d57d77da830a56dce0af315e1eec9b7309e"
 };
-const SCREEN_WIDTH = 375;
-const SCREEN_HEIGHT = 812;
+const SCREEN_WIDTH = Dimensions.get('window').width
+const SCREEN_HEIGHT = Dimensions.get('window').height
 const GREEN = '#6FBF44';
 
 const ShoppingListButton = ({onPress}) => {

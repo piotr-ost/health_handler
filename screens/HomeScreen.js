@@ -1,5 +1,8 @@
 import React from 'react';
-import {View, Image, StyleSheet, TouchableOpacity, Text} from 'react-native';
+import {View, Image, StyleSheet, TouchableOpacity, Text, Dimensions} from 'react-native';
+
+const SCREEN_WIDTH = Dimensions.get('window').width
+const SCREEN_HEIGHT = Dimensions.get('window').height
 
 const HomeScreen = ({navigation}) => {
   return (
@@ -20,8 +23,8 @@ const HomeScreen = ({navigation}) => {
 const styles = StyleSheet.create({
   container: {
     marginTop: 200,
-    width: 375,
-    height: 812,
+    width: SCREEN_WIDTH,
+    height: SCREEN_HEIGHT,
     flex: 1,
     backgroundColor: '#FFFFFF',
     padding: 8,

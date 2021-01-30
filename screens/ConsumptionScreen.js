@@ -1,11 +1,11 @@
 import React from 'react';
-import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
+import {View, Text, StyleSheet, TouchableOpacity, Dimensions} from 'react-native';
 import {ReturnButton} from "../components/Buttons.js";
 import {GrayDivider, GreenDivider} from "../components/Dividers.js";
 import {Icon} from "react-native-elements";
 
-const SCREEN_WIDTH = 375;
-const SCREEN_HEIGHT = 812
+const SCREEN_WIDTH = Dimensions.get('window').width
+const SCREEN_HEIGHT = Dimensions.get('window').height
 const GREEN = '#6FBF44'
 
 const placeholderData = {calories: '1780kcal', protein: '80g', vitamins: '100%'}

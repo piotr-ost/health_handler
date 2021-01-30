@@ -1,9 +1,13 @@
 import React, {useEffect, useState} from 'react';
-import {View, Text, Button, StyleSheet} from 'react-native';
+import {View, Text, Button, StyleSheet, useWindowDimensions, Dimensions} from 'react-native';
 import {ReturnButton} from "../components/Buttons";
 import {Icon} from 'react-native-elements';
 import {GrayDivider} from "../components/Dividers";
 // import axios from 'axios';
+
+const SCREEN_WIDTH = Dimensions.get('window').width
+const SCREEN_HEIGHT = Dimensions.get('window').height
+const GREEN = '#6FBF44'
 
 const Product = () => {}
 
@@ -26,8 +30,8 @@ const ShoppingListScreen = ({navigation}) => {
 }
 
 const styles = StyleSheet.create({
-  screen: {display: 'flex', flexDirection: 'column', width: 375,
-    height: 812, paddingVertical: 10, paddingHorizontal: 27,
+  screen: {display: 'flex', flexDirection: 'column', width: SCREEN_WIDTH,
+    height: SCREEN_HEIGHT, paddingVertical: 10, paddingHorizontal: 27,
     justifyContent: 'space-between'},
   header: {
     height: 45, display: 'flex', flexDirection: 'row',

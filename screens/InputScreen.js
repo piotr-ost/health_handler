@@ -1,12 +1,12 @@
 import React, {useState} from 'react';
-import {View, Text, Image, StyleSheet, TouchableOpacity} from 'react-native';
+import {View, Text, Image, StyleSheet, TouchableOpacity, Dimensions} from 'react-native';
 import {GrayDivider, GreenDivider} from "../components/Dividers";
 import {Icon, CheckBox, Slider} from "react-native-elements";
 import {Button} from 'react-native';  // for now
 
 // iphone X dims
-const SCREEN_WIDTH = 375
-const SCREEN_HEIGHT = 812
+const SCREEN_WIDTH = Dimensions.get('window').width
+const SCREEN_HEIGHT = Dimensions.get('window').height
 const GREEN = '#6FBF44'
 
 export const DropdownIcon = ({onPress}) => {
