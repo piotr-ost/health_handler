@@ -1,6 +1,6 @@
-const axios = require('axios')
+// const axios = require('axios')
 // const apiKey = '?apiKey=556d5c003785468ab5aa696a128a3d3a'
-const apiKey = 'apiKey=5bb1646af40448c4bd763b79205bc198'
+export const apiKey = 'apiKey=5bb1646af40448c4bd763b79205bc198'
 const urlBase = 'https://api.spoonacular.com'
 
 const user = {

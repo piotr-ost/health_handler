@@ -14,6 +14,7 @@ const Theme = {
   ...DefaultTheme,
   colors: {...DefaultTheme.colors, background: '#FFFFFF'}
 }
+
 export default function App() {
   return (
     <NavigationContainer theme={Theme}>

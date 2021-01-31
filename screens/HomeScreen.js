@@ -1,19 +1,41 @@
 import React from 'react';
-import {View, Image, StyleSheet, TouchableOpacity, Text, Dimensions} from 'react-native';
+import {View, Image, StyleSheet, TouchableOpacity, Text, Dimensions} from 'react-native'
+import AsyncStorage from "@react-native-async-storage/async-storage"
+import axios from 'axios'
+import {apiKey} from '../ApiCalls'
+import {testUsername} from "expo-cli/build/credentials/test-fixtures/mocks-constants";
 
 const SCREEN_WIDTH = Dimensions.get('window').width
 const SCREEN_HEIGHT = Dimensions.get('window').height
 
 const HomeScreen = ({navigation}) => {
+  const handleClick = async () => {
+    try {
+      const userJson = await AsyncStorage.getItem('user')
+      if (userJson) {
+        const user = JSON.parse(userJson)
+        console.log('retrieved the guy', user)
+        navigation.navigate('InputScreen', {user: user})
+      } else {
+        const res = await axios.post(`https://api.spoonacular.com/users/connect?${apiKey}`, {})
+        const data = await res.data
+        const {username, hash} = data
+        let user = JSON.stringify({username: username, hash: hash})
+        await AsyncStorage.setItem('user', user)
+        console.log('new guy', user)
+        navigation.navigate('InputScreen', {user: user})
+      }
+    } catch (e) {
+      console.log(e)
+    }
+  }
   return (
     <View style={styles.container}>
       <Image source={require('../assets/logo.png')} style={styles.mainLogo} />
       <Image source={require('../assets/logo_text.png')} style={styles.logoText} />
-      <View >
-        <TouchableOpacity style={styles.button}
-                          onPress={() => navigation.navigate('InputScreen')}>
-          <Text style={{color: 'white', fontStyle: 'KumbhSans-Regular',
-            fontSize: 20}}>Start</Text>
+      <View>
+        <TouchableOpacity style={styles.button} onPress={handleClick}>
+          <Text style={{color: 'white', fontStyle: 'KumbhSans-Regular', fontSize: 20}}>Start</Text>
         </TouchableOpacity>
       </View>
     </View>
