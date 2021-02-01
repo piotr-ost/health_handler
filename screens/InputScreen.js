@@ -3,6 +3,9 @@ import {View, Text, Image, StyleSheet, TouchableOpacity, Dimensions} from 'react
 import {GrayDivider, GreenDivider} from "../components/Dividers";
 import {Icon, CheckBox, Slider} from "react-native-elements";
 import {Button} from 'react-native';  // for now
+import {apiKey, getDates} from '../ApiCalls'
+import AsyncStorage from '@react-native-async-storage/async-storage'
+import axios from 'axios'
 
 // iphone X dims
 const SCREEN_WIDTH = Dimensions.get('window').width
@@ -32,7 +35,7 @@ const SavedPlansDropdown = () => {
   return (
     <View>
       <View style={styles.flexRow}>
-        <Text>View saved meal plans</Text>
+        <Text>View existing meal plans</Text>
         <DropdownIcon />
       </View>
       <GreenDivider />
@@ -103,6 +106,7 @@ const InputScreen = ({navigation}) => {
   const [price, setPrice] = useState(10)
   const [time, setTime] = useState(120)
   const [calories, setCalories] = useState( 2300)
+  const [waiting, setWaiting] = useState(false)
   return (
     <View style={styles.screen}>
        <View style={styles.header}>
@@ -157,9 +161,31 @@ const InputScreen = ({navigation}) => {
       </View>
       <View style={styles.buttonsContainer}>
         <View style={styles.button}>
-          <Button onPress={() => navigation.navigate("MealPlanScreen", {
-            userData: userData, price: price, time: time, calories: calories})
-          } title="Create plan" color={GREEN} style={styles.button} />
+          <Button onPress={async () => {
+            setWaiting(true)
+            const dataFromThisScreen = {userData: userData, price: price, time: time, calories: calories}
+            const mealPlanTemplateId = 120  // for now
+            const startDate = Math.round(new Date().getTime() / 1000 + 100)
+            try {
+              const userJson = await AsyncStorage.getItem('user')
+              const user = JSON.parse(userJson)
+              if (user) {
+                const base = 'https://api.spoonacular.com/mealplanner/'
+                const res = await axios.post(
+                  base + `${user.username}/items?${apiKey}&hash=${user.hash}`,
+                  {"mealPlanTemplateId": mealPlanTemplateId, "startDate": startDate}
+                )
+                const data = await res.data
+                navigation.navigate("MealPlanScreen", {
+                  data: data
+                })
+                setWaiting(false)
+              }
+            } catch (e) {
+              console.log(e)
+            }
+          }
+          } title={!waiting ? "Create plan" : "Sending..."} color={GREEN} style={styles.button} />
         </View>
       </View>
     </View>
@@ -180,7 +206,7 @@ const styles = StyleSheet.create({
   flexRow: {display: 'flex', flexDirection: 'row',
     justifyContent: 'space-between', height: 40,
     alignItems: 'center'},
-  button: {height: 50, width: 250, textColor: 'white'},
+  button: {height: 50, width: 250},
   buttonsContainer: {marginTop: 33, alignSelf: 'center'},
   column: {width: 150, justifyContent: 'space-between'},
 })

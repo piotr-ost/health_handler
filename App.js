@@ -54,4 +54,6 @@ export default function App() {
     - add icons to the sliders
     - make the dropdown bit work using react animations
     - scrolling down has to go back
+    - use async storage for the input values as well as scrolling down saving state
+    - and the meal plan itself too in order for it not have to be re-generated
 */

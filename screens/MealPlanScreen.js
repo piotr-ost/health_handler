@@ -1,6 +1,6 @@
-import React, {useState, useEffect, useRef} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
-  View, Text, Image, StyleSheet, Animated, TouchableOpacity,
+  View, Text, Image, StyleSheet, TouchableOpacity,
   ActivityIndicator, Dimensions} from 'react-native';
 import {Icon} from 'react-native-elements';
 import {GreenDivider, GrayDivider, ThinGrayDivider} from '../components/Dividers.js';
@@ -85,19 +85,18 @@ const MealsDay = ({navigation, dayName, items}) => {
         {items.map(({type, value, id}) => {
           if (type === 'RECIPE') {
             return <Meal imageType={value.imageType} title={value.title} key={id} navigation={navigation}
-                         id={value.id} mealType={gen.next().value} type_={type} />
+                         id={value.id} mealType={gen.next().value} type_={type}/>
           } else if (type === 'INGREDIENTS') {
             let ingredient = value.ingredients[0]
             console.log(ingredient)
             return <Meal title={ingredient.name} key={id} mealType={'SNACK'} type_={type} id={id}
-                         amount={ingredient.amount} unit={ingredient.unit} image={ingredient.image}
-            />
+                         amount={ingredient.amount} unit={ingredient.unit} image={ingredient.image}/>
           } else if (type === 'PRODUCT') {
             return <Meal title={value.title} id={value.id} key={id} mealType={'SNACK'}
-                         imageType={value.imageType} type_={type} />
+                         imageType={value.imageType} type_={type}/>
           }
-        })}
-        <Meal />
+        })
+        }
       </View>
     </View>
   );
