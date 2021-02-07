@@ -1,0 +1,48 @@
+{
+  "aisles": [
+    {
+      "aisle": "Produce",
+      "items": [
+        {
+          "id": 600217,
+          "name": "lemon juice",
+          "measures": {
+            "original": {
+              "amount": 1.0,
+              "unit": "tablespoon"
+            },
+            "metric": {
+              "amount": 1.9,
+              "unit": "ml"
+            },
+            "us": {
+              "amount": 0.1,
+              "unit": "fl oz"
+            }
+          },
+          "usages": [
+            "<a href=\"https://spoonacular.com/recipes/mediterranean-pasta-salad-864561\" target=\"_blank\">Mediterranean Pasta Salad</a>"
+          ],
+          "pantryItem": false,
+          "aisle": "Produce",
+          "cost": 1.27,
+          "ingredientId": 9152
+        },
+        {
+          "id": 600219,
+          "name": "cucumbers",
+          "measures": {
+            "original": {
+              "amount": 4.0,
+              "unit": "ounces"
+            },
+            "metric": {
+              "amount": 28.4,
+              "unit": "g"
+            },
+            "us": {
+              "amount": 1.0,
+              "unit": "oz"
+            }
+          },
+          "usages": 

@@ -1,0 +1,1208 @@
+{
+  "aisles": [
+    {
+      "aisle": "Canned and Jarred",
+      "items": [
+        {
+          "id": 600537,
+          "name": "artichoke hearts",
+          "measures": {
+            "original": {
+              "amount": 14.0,
+              "unit": "ounces"
+            },
+            "metric": {
+              "amount": 79.4,
+              "unit": "g"
+            },
+            "us": {
+              "amount": 2.8,
+              "unit": "oz"
+            }
+          },
+          "usages": [
+            "<a href=\"https://spoonacular.com/recipes/slow-cooker-spinach-artichoke-parmesan-soup-1215041\" target=\"_blank\">Slow Cooker Spinach Artichoke Parmesan Soup</a>"
+          ],
+          "pantryItem": false,
+          "aisle": "Canned and Jarred",
+          "cost": 85.05,
+          "ingredientId": 93828
+        },
+        {
+          "id": 600539,
+          "name": "vegetable broth",
+          "measures": {
+            "original": {
+              "amount": 32.0,
+              "unit": "ounces"
+            },
+            "metric": {
+              "amount": 181.5,
+              "unit": "ml"
+            },
+            "us": {
+              "amount": 6.2,
+              "unit": "fl oz"
+            }
+          },
+          "usages": [
+            "<a href=\"https://spoonacular.com/recipes/slow-cooker-spinach-artichoke-parmesan-soup-1215041\" target=\"_blank\">Slow Cooker Spinach Artichoke Parmesan Soup</a>"
+          ],
+          "pantryItem": false,
+          "aisle": "Canned and Jarred",
+          "cost": 58.32,
+          "ingredientId": 6615
+        },
+        {
+          "id": 600541,
+          "name": "chicken stock",
+          "measures": {
+            "original": {
+              "amount": 4.75,
+              "unit": "cups"
+            },
+            "metric": {
+              "amount": 285.0,
+              "unit": "ml"
+            },
+            "us": {
+              "amount": 9.7,
+              "unit": "fl oz"
+            }
+          },
+          "usages": [
+            "<a href=\"https://spoonacular.com/recipes/adobo-seasoned-chicken-and-rice-1213565\" target=\"_blank\">Adobo Seasoned Chicken and Rice</a>"
+          ],
+          "pantryItem": false,
+          "aisle": "Canned and Jarred",
+          "cost": 91.61,
+          "ingredientId": 6172
+        },
+        {
+          "id": 600543,
+          "name": "olives",
+          "measures": {
+            "original": {
+              "amount": 0.75,
+              "unit": "cup"
+            },
+            "metric": {
+              "amount": 25.4,
+              "unit": "ml"
+            },
+            "us": {
+              "amount": 0.9,
+              "unit": "fl. oz"
+            }
+          },
+          "usages": [
+            "<a href=\"https://spoonacular.com/recipes/adobo-seasoned-chicken-and-rice-1213565\" target=\"_blank\">Adobo Seasoned Chicken and Rice</a>"
+          ],
+          "pantryItem": false,
+          "aisle": "Canned and Jarred",
+          "cost": 19.89,
+          "ingredientId": 9195
+        },
+        {
+          "id": 600545,
+          "name": "pimento stuffed olives",
+          "measures": {
+            "original": {
+              "amount": 0.75,
+              "unit": "cup"
+            },
+            "metric": {
+              "amount": 25.4,
+              "unit": "ml"
+            },
+            "us": {
+              "amount": 0.9,
+              "unit": "fl. oz"
+            }
+          },
+          "usages": [
+            "<a href=\"https://spoonacular.com/recipes/adobo-seasoned-chicken-and-rice-1213565\" target=\"_blank\">Adobo Seasoned Chicken and Rice</a>"
+          ],
+          "pantryItem": false,
+          "aisle": "Canned and Jarred",
+          "cost": 45.2,
+          "ingredientId": 1049195
+        }
+      ]
+    },
+    {
+      "aisle": "Produce",
+      "items": [
+        {
+          "id": 600547,
+          "name": "green bell pepper",
+          "measures": {
+            "original": {
+              "amount": 1.0,
+              "unit": "medium"
+            },
+            "metric": {
+              "amount": 1.0,
+              "unit": ""
+            },
+            "us": {
+              "amount": 1.0,
+              "unit": ""
+            }
+          },
+          "usages": [
+            "<a href=\"https://spoonacular.com/recipes/adobo-seasoned-chicken-and-rice-1213565\" target=\"_blank\">Adobo Seasoned Chicken and Rice</a>"
+          ],
+          "pantryItem": false,
+          "aisle": "Produce",
+          "cost": 36.49,
+          "ingredientId": 11333
+        },
+        {
+          "id": 600549,
+          "name": "lime juice",
+          "measures": {
+            "original": {
+              "amount": 1.0,
+              "unit": "tablespoon"
+            },
+            "metric": {
+              "amount": 3.8,
+              "unit": "ml"
+            },
+            "us": {
+              "amount": 0.2,
+              "unit": "fl oz"
+            }
+          },
+          "usages": [
+            "<a href=\"https://spoonacular.com/recipes/adobo-seasoned-chicken-and-rice-1213565\" target=\"_blank\">Adobo Seasoned Chicken and Rice</a>"
+          ],
+          "pantryItem": false,
+          "aisle": "Produce",
+          "cost": 3.18,
+          "ingredientId": 9160
+        },
+        {
+          "id": 600551,
+          "name": "tomato",
+          "measures": {
+            "original": {
+              "amount": 0.3333333333333333,
+              "unit": "cup"
+            },
+            "metric": {
+              "amount": 12.5,
+              "unit": "g"
+            },
+            "us": {
+              "amount": 0.5,
+              "unit": "oz"
+            }
+          },
+          "usages": [
+            "<a href=\"https://spoonacular.com/recipes/adobo-seasoned-chicken-and-rice-1213565\" target=\"_blank\">Adobo Seasoned Chicken and Rice</a>"
+          ],
+          "pantryItem": false,
+          "aisle": "Produce",
+          "cost": 3.64,
+          "ingredientId": 11529
+        },
+        {
+          "id": 600553,
+          "name": "garlic cloves",
+          "measures": {
+            "original": {
+              "amount": 2.0,
+              "unit": ""
+            },
+            "metric": {
+              "amount": 1.0,
+              "unit": ""
+            },
+            "us": {
+              "amount": 1.0,
+              "unit": ""
+            }
+          },
+          "usages": [
+            "<a href=\"https://spoonacular.com/recipes/slow-cooker-spinach-artichoke-parmesan-soup-1215041\" target=\"_blank\">Slow Cooker Spinach Artichoke Parmesan Soup</a>",
+            "<a href=\"https://spoonacular.com/recipes/adobo-seasoned-chicken-and-rice-1213565\" target=\"_blank\">Adobo Seasoned Chicken and Rice</a>"
+          ],
+          "pantryItem": false,
+          "aisle": "Produce",
+          "cost": 6.67,
+          "ingredientId": 11215
+        },
+        {
+          "id": 600555,
+          "name": "onion",
+          "measures": {
+            "original": {
+              "amount": 1.0,
+              "unit": "small"
+            },
+            "metric": {
+              "amount": 1.0,
+              "unit": ""
+            },
+            "us": {
+              "amount": 1.0,
+              "unit": ""
+            }
+          },
+          "usages": [
+            "<a href=\"https://spoonacular.com/recipes/slow-cooker-spinach-artichoke-parmesan-soup-1215041\" target=\"_blank\">Slow Cooker Spinach Artichoke Parmesan Soup</a>",
+            "<a href=\"https://spoonacular.com/recipes/adobo-seasoned-chicken-and-rice-1213565\" target=\"_blank\">Adobo Seasoned Chicken and Rice</a>"
+          ],
+          "pantryItem": false,
+          "aisle": "Produce",
+          "cost": 24.2,
+          "ingredientId": 11282
+        },
+        {
+          "id": 600557,
+          "name": "bay leaf",
+          "measures": {
+            "original": {
+              "amount": 1.0,
+              "unit": ""
+            },
+            "metric": {
+              "amount": 1.0,
+              "unit": ""
+            },
+            "us": {
+              "amount": 1.0,
+              "unit": ""
+            }
+          },
+          "usages": [
+            "<a href=\"https://spoonacular.com/recipes/adobo-seasoned-chicken-and-rice-1213565\" target=\"_blank\">Adobo Seasoned Chicken and Rice</a>"
+          ],
+          "pantryItem": false,
+          "aisle": "Produce",
+          "cost": 1.92,
+          "ingredientId": 2004
+        },
+        {
+          "id": 600559,
+          "name": "brussels sprouts",
+          "measures": {
+            "original": {
+              "amount": 3.0,
+              "unit": "cups"
+            },
+            "metric": {
+              "amount": 44.0,
+              "unit": "g"
+            },
+            "us": {
+              "amount": 1.6,
+              "unit": "oz"
+            }
+          },
+          "usages": [
+            "<a href=\"https://spoonacular.com/recipes/roasted-brussels-sprouts-cinnamon-butternut-squash-pecans-and-cranberries-1214993\" target=\"_blank\">Roasted Brussels Sprouts, Cinnamon Butternut Squash, Pecans, and Cranberries</a>"
+          ],
+          "pantryItem": false,
+          "aisle": "Produce",
+          "cost": 29.24,
+          "ingredientId": 11098
+        },
+        {
+          "id": 600561,
+          "name": "butternut squash",
+          "measures": {
+            "original": {
+              "amount": 1.5,
+              "unit": "pound"
+            },
+            "metric": {
+              "amount": 113.4,
+              "unit": "g"
+            },
+            "us": {
+              "amount": 4.0,
+              "unit": "oz"
+            }
+          },
+          "usages": [
+            "<a href=\"https://spoonacular.com/recipes/roasted-brussels-sprouts-cinnamon-butternut-squash-pecans-and-cranberries-1214993\" target=\"_blank\">Roasted Brussels Sprouts, Cinnamon Butternut Squash, Pecans, and Cranberries</a>"
+          ],
+          "pantryItem": false,
+          "aisle": "Produce",
+          "cost": 24.95,
+          "ingredientId": 11485
+        },
+        {
+          "id": 600563,
+          "name": "cilantro leaves",
+          "measures": {
+            "original": {
+              "amount": 1.0,
+              "unit": "leaves"
+            },
+            "metric": {
+              "amount": 1.0,
+              "unit": "leaves"
+            },
+            "us": {
+              "amount": 1.0,
+              "unit": "leaves"
+            }
+          },
+          "usages": [
+            "<a href=\"https://spoonacular.com/recipes/adobo-seasoned-chicken-and-rice-1213565\" target=\"_blank\">Adobo Seasoned Chicken and Rice</a>"
+          ],
+          "pantryItem": false,
+          "aisle": "Produce",
+          "cost": 0.83,
+          "ingredientId": 11165
+        },
+        {
+          "id": 600565,
+          "name": "flat leaf parsley",
+          "measures": {
+            "original": {
+              "amount": 1.0,
+              "unit": "leaf"
+            },
+            "metric": {
+              "amount": 1.0,
+              "unit": "leaf"
+            },
+            "us": {
+              "amount": 1.0,
+              "unit": "leaf"
+            }
+          },
+          "usages": [
+            "<a href=\"https://spoonacular.com/recipes/adobo-seasoned-chicken-and-rice-1213565\" target=\"_blank\">Adobo Seasoned Chicken and Rice</a>"
+          ],
+          "pantryItem": false,
+          "aisle": "Produce",
+          "cost": 0.99,
+          "ingredientId": 11297
+        },
+        {
+          "id": 600567,
+          "name": "peas",
+          "measures": {
+            "original": {
+              "amount": 1.0,
+              "unit": "cup"
+            },
+            "metric": {
+              "amount": 36.3,
+              "unit": "g"
+            },
+            "us": {
+              "amount": 1.3,
+              "unit": "oz"
+            }
+          },
+          "usages": [
+            "<a href=\"https://spoonacular.com/recipes/adobo-seasoned-chicken-and-rice-1213565\" target=\"_blank\">Adobo Seasoned Chicken and Rice</a>"
+          ],
+          "pantryItem": false,
+          "aisle": "Produce",
+          "cost": 14.24,
+          "ingredientId": 11304
+        },
+        {
+          "id": 600569,
+          "name": "oregano leaves",
+          "measures": {
+            "original": {
+              "amount": 1.0,
+              "unit": "leaves"
+            },
+            "metric": {
+              "amount": 1.0,
+              "unit": "leaves"
+            },
+            "us": {
+              "amount": 1.0,
+              "unit": "leaves"
+            }
+          },
+          "usages": [
+            "<a href=\"https://spoonacular.com/recipes/adobo-seasoned-chicken-and-rice-1213565\" target=\"_blank\">Adobo Seasoned Chicken and Rice</a>"
+          ],
+          "pantryItem": false,
+          "aisle": "Produce",
+          "cost": 1.3,
+          "ingredientId": 2027
+        },
+        {
+          "id": 600571,
+          "name": "red bell pepper",
+          "measures": {
+            "original": {
+              "amount": 1.0,
+              "unit": "medium"
+            },
+            "metric": {
+              "amount": 1.0,
+              "unit": ""
+            },
+            "us": {
+              "amount": 1.0,
+              "unit": ""
+            }
+          },
+          "usages": [
+            "<a href=\"https://spoonacular.com/recipes/adobo-seasoned-chicken-and-rice-1213565\" target=\"_blank\">Adobo Seasoned Chicken and Rice</a>"
+          ],
+          "pantryItem": false,
+          "aisle": "Produce",
+          "cost": 59.76,
+          "ingredientId": 11821
+        }
+      ]
+    },
+    {
+      "aisle": "Spices and Seasonings",
+      "items": [
+        {
+          "id": 600573,
+          "name": "red pepper flakes",
+          "measures": {
+            "original": {
+              "amount": 0.125,
+              "unit": "tsp"
+            },
+            "metric": {
+              "amount": 0.1,
+              "unit": "g"
+            },
+            "us": {
+              "amount": 0.1,
+              "unit": "oz"
+            }
+          },
+          "usages": [
+            "<a href=\"https://spoonacular.com/recipes/slow-cooker-spinach-artichoke-parmesan-soup-1215041\" target=\"_blank\">Slow Cooker Spinach Artichoke Parmesan Soup</a>"
+          ],
+          "pantryItem": false,
+          "aisle": "Spices and Seasonings",
+          "cost": 0.26,
+          "ingredientId": 1032009
+        },
+        {
+          "id": 600575,
+          "name": "ground cumin",
+          "measures": {
+            "original": {
+              "amount": 1.0,
+              "unit": "teaspoon"
+            },
+            "metric": {
+              "amount": 0.5,
+              "unit": "g"
+            },
+            "us": {
+              "amount": 0.1,
+              "unit": "oz"
+            }
+          },
+          "usages": [
+            "<a href=\"https://spoonacular.com/recipes/adobo-seasoned-chicken-and-rice-1213565\" target=\"_blank\">Adobo Seasoned Chicken and Rice</a>"
+          ],
+          "pantryItem": false,
+          "aisle": "Spices and Seasonings",
+          "cost": 3.3,
+          "ingredientId": 1002014
+        },
+        {
+          "id": 600577,
+          "name": "ground cinnamon",
+          "measures": {
+            "original": {
+              "amount": 0.5,
+              "unit": "teaspoon"
+            },
+            "metric": {
+              "amount": 0.2,
+              "unit": "g"
+            },
+            "us": {
+              "amount": 0.1,
+              "unit": "oz"
+            }
+          },
+          "usages": [
+            "<a href=\"https://spoonacular.com/recipes/roasted-brussels-sprouts-cinnamon-butternut-squash-pecans-and-cranberries-1214993\" target=\"_blank\">Roasted Brussels Sprouts, Cinnamon Butternut Squash, Pecans, and Cranberries</a>"
+          ],
+          "pantryItem": false,
+          "aisle": "Spices and Seasonings",
+          "cost": 0.68,
+          "ingredientId": 1012010
+        },
+        {
+          "id": 600579,
+          "name": "granulated onion",
+          "measures": {
+            "original": {
+              "amount": 2.0,
+              "unit": "teaspoons"
+            },
+            "metric": {
+              "amount": 1.0,
+              "unit": "ml"
+            },
+            "us": {
+              "amount": 0.1,
+              "unit": "fl. oz"
+            }
+          },
+          "usages": [
+            "<a href=\"https://spoonacular.com/recipes/adobo-seasoned-chicken-and-rice-1213565\" target=\"_blank\">Adobo Seasoned Chicken and Rice</a>"
+          ],
+          "pantryItem": false,
+          "aisle": "Spices and Seasonings",
+          "cost": 4.75,
+          "ingredientId": 1002026
+        },
+        {
+          "id": 600581,
+          "name": "granulated garlic",
+          "measures": {
+            "original": {
+              "amount": 2.0,
+              "unit": "teaspoons"
+            },
+            "metric": {
+              "amount": 1.5,
+              "unit": "g"
+            },
+            "us": {
+              "amount": 0.1,
+              "unit": "oz"
+            }
+          },
+          "usages": [
+            "<a href=\"https://spoonacular.com/recipes/adobo-seasoned-chicken-and-rice-1213565\" target=\"_blank\">Adobo Seasoned Chicken and Rice</a>"
+          ],
+          "pantryItem": false,
+          "aisle": "Spices and Seasonings",
+          "cost": 2.89,
+          "ingredientId": 1002020
+        },
+        {
+          "id": 600583,
+          "name": "paprika",
+          "measures": {
+            "original": {
+              "amount": 1.0,
+              "unit": "teaspoon"
+            },
+            "metric": {
+              "amount": 0.5,
+              "unit": "g"
+            },
+            "us": {
+              "amount": 0.1,
+              "unit": "oz"
+            }
+          },
+          "usages": [
+            "<a href=\"https://spoonacular.com/recipes/adobo-seasoned-chicken-and-rice-1213565\" target=\"_blank\">Adobo Seasoned Chicken and Rice</a>"
+          ],
+          "pantryItem": false,
+          "aisle": "Spices and Seasonings",
+          "cost": 2.52,
+          "ingredientId": 2028
+        },
+        {
+          "id": 600585,
+          "name": "ground turmeric",
+          "measures": {
+            "original": {
+              "amount": 2.0,
+              "unit": "teaspoons"
+            },
+            "metric": {
+              "amount": 1.0,
+              "unit": "g"
+            },
+            "us": {
+              "amount": 0.1,
+              "unit": "oz"
+            }
+          },
+          "usages": [
+            "<a href=\"https://spoonacular.com/recipes/adobo-seasoned-chicken-and-rice-1213565\" target=\"_blank\">Adobo Seasoned Chicken and Rice</a>"
+          ],
+          "pantryItem": false,
+          "aisle": "Spices and Seasonings",
+          "cost": 5.25,
+          "ingredientId": 2043
+        }
+      ]
+    },
+    {
+      "aisle": "Meat",
+      "items": [
+        {
+          "id": 600587,
+          "name": "chicken breasts",
+          "measures": {
+            "original": {
+              "amount": 4.0,
+              "unit": ""
+            },
+            "metric": {
+              "amount": 1.0,
+              "unit": ""
+            },
+            "us": {
+              "amount": 1.0,
+              "unit": ""
+            }
+          },
+          "usages": [
+            "<a href=\"https://spoonacular.com/recipes/adobo-seasoned-chicken-and-rice-1213565\" target=\"_blank\">Adobo Seasoned Chicken and Rice</a>"
+          ],
+          "pantryItem": false,
+          "aisle": "Meat",
+          "cost": 200.39,
+          "ingredientId": 5062
+        },
+        {
+          "id": 600589,
+          "name": "chicken thighs",
+          "measures": {
+            "original": {
+              "amount": 4.0,
+              "unit": ""
+            },
+            "metric": {
+              "amount": 1.0,
+              "unit": ""
+            },
+            "us": {
+              "amount": 1.0,
+              "unit": ""
+            }
+          },
+          "usages": [
+            "<a href=\"https://spoonacular.com/recipes/adobo-seasoned-chicken-and-rice-1213565\" target=\"_blank\">Adobo Seasoned Chicken and Rice</a>"
+          ],
+          "pantryItem": false,
+          "aisle": "Meat",
+          "cost": 87.64,
+          "ingredientId": 5091
+        }
+      ]
+    },
+    {
+      "aisle": "Cereal",
+      "items": [
+        {
+          "id": 600591,
+          "name": "maple syrup",
+          "measures": {
+            "original": {
+              "amount": 2.0,
+              "unit": "tablespoons"
+            },
+            "metric": {
+              "amount": 16.7,
+              "unit": "ml"
+            },
+            "us": {
+              "amount": 0.6,
+              "unit": "fl oz"
+            }
+          },
+          "usages": [
+            "<a href=\"https://spoonacular.com/recipes/roasted-brussels-sprouts-cinnamon-butternut-squash-pecans-and-cranberries-1214993\" target=\"_blank\">Roasted Brussels Sprouts, Cinnamon Butternut Squash, Pecans, and Cranberries</a>"
+          ],
+          "pantryItem": false,
+          "aisle": "Cereal",
+          "cost": 16.95,
+          "ingredientId": 19911
+        }
+      ]
+    },
+    {
+      "aisle": "Frozen",
+      "items": [
+        {
+          "id": 600593,
+          "name": "frozen spinach",
+          "measures": {
+            "original": {
+              "amount": 8.0,
+              "unit": "ounces"
+            },
+            "metric": {
+              "amount": 45.4,
+              "unit": "g"
+            },
+            "us": {
+              "amount": 1.6,
+              "unit": "oz"
+            }
+          },
+          "usages": [
+            "<a href=\"https://spoonacular.com/recipes/slow-cooker-spinach-artichoke-parmesan-soup-1215041\" target=\"_blank\">Slow Cooker Spinach Artichoke Parmesan Soup</a>"
+          ],
+          "pantryItem": false,
+          "aisle": "Frozen",
+          "cost": 30.78,
+          "ingredientId": 11463
+        },
+        {
+          "id": 600595,
+          "name": "pot stickers",
+          "measures": {
+            "original": {
+              "amount": 1.0,
+              "unit": "bag"
+            },
+            "metric": {
+              "amount": 1.0,
+              "unit": "bag"
+            },
+            "us": {
+              "amount": 1.0,
+              "unit": "bag"
+            }
+          },
+          "usages": [
+            "<a href=\"https://spoonacular.com/recipes/tjs-pork-pot-stickers-703259\" target=\"_blank\">TJ's Pork Pot Stickers</a>"
+          ],
+          "pantryItem": false,
+          "aisle": "Frozen",
+          "cost": 0.4,
+          "ingredientId": 99034
+        }
+      ]
+    },
+    {
+      "aisle": "Cheese",
+      "items": [
+        {
+          "id": 600597,
+          "name": "parmesan cheese",
+          "measures": {
+            "original": {
+              "amount": 0.25,
+              "unit": ""
+            },
+            "metric": {
+              "amount": 1.0,
+              "unit": ""
+            },
+            "us": {
+              "amount": 1.0,
+              "unit": ""
+            }
+          },
+          "usages": [
+            "<a href=\"https://spoonacular.com/recipes/slow-cooker-spinach-artichoke-parmesan-soup-1215041\" target=\"_blank\">Slow Cooker Spinach Artichoke Parmesan Soup</a>"
+          ],
+          "pantryItem": false,
+          "aisle": "Cheese",
+          "cost": 2.11,
+          "ingredientId": 1033
+        },
+        {
+          "id": 600599,
+          "name": "cream cheese",
+          "measures": {
+            "original": {
+              "amount": 4.0,
+              "unit": "ounces"
+            },
+            "metric": {
+              "amount": 22.7,
+              "unit": "g"
+            },
+            "us": {
+              "amount": 0.8,
+              "unit": "oz"
+            }
+          },
+          "usages": [
+            "<a href=\"https://spoonacular.com/recipes/slow-cooker-spinach-artichoke-parmesan-soup-1215041\" target=\"_blank\">Slow Cooker Spinach Artichoke Parmesan Soup</a>"
+          ],
+          "pantryItem": false,
+          "aisle": "Cheese",
+          "cost": 23.49,
+          "ingredientId": 1017
+        }
+      ]
+    },
+    {
+      "aisle": "Pantry Items",
+      "items": [
+        {
+          "id": 600601,
+          "name": "salt and pepper",
+          "measures": {
+            "original": {
+              "amount": 4.0,
+              "unit": "servings"
+            },
+            "metric": {
+              "amount": 4.0,
+              "unit": ""
+            },
+            "us": {
+              "amount": 4.0,
+              "unit": ""
+            }
+          },
+          "usages": [
+            "<a href=\"https://spoonacular.com/recipes/adobo-seasoned-chicken-and-rice-1213565\" target=\"_blank\">Adobo Seasoned Chicken and Rice</a>"
+          ],
+          "pantryItem": true,
+          "aisle": "Pantry Items",
+          "cost": 0.05,
+          "ingredientId": 1102047
+        },
+        {
+          "id": 600603,
+          "name": "olive oil",
+          "measures": {
+            "original": {
+              "amount": 2.0,
+              "unit": "tablespoons"
+            },
+            "metric": {
+              "amount": 32.0,
+              "unit": "ml"
+            },
+            "us": {
+              "amount": 1.1,
+              "unit": "fl oz"
+            }
+          },
+          "usages": [
+            "<a href=\"https://spoonacular.com/recipes/roasted-brussels-sprouts-cinnamon-butternut-squash-pecans-and-cranberries-1214993\" target=\"_blank\">Roasted Brussels Sprouts, Cinnamon Butternut Squash, Pecans, and Cranberries</a>",
+            "<a href=\"https://spoonacular.com/recipes/slow-cooker-spinach-artichoke-parmesan-soup-1215041\" target=\"_blank\">Slow Cooker Spinach Artichoke Parmesan Soup</a>",
+            "<a href=\"https://spoonacular.com/recipes/adobo-seasoned-chicken-and-rice-1213565\" target=\"_blank\">Adobo Seasoned Chicken and Rice</a>"
+          ],
+          "pantryItem": true,
+          "aisle": "Pantry Items",
+          "cost": 5.56,
+          "ingredientId": 4053
+        },
+        {
+          "id": 600605,
+          "name": "pepper",
+          "measures": {
+            "original": {
+              "amount": 0.25,
+              "unit": "tsp"
+            },
+            "metric": {
+              "amount": 1.1,
+              "unit": "g"
+            },
+            "us": {
+              "amount": 0.1,
+              "unit": "oz"
+            }
+          },
+          "usages": [
+            "<a href=\"https://spoonacular.com/recipes/slow-cooker-spinach-artichoke-parmesan-soup-1215041\" target=\"_blank\">Slow Cooker Spinach Artichoke Parmesan Soup</a>",
+            "<a href=\"https://spoonacular.com/recipes/adobo-seasoned-chicken-and-rice-1213565\" target=\"_blank\">Adobo Seasoned Chicken and Rice</a>"
+          ],
+          "pantryItem": true,
+          "aisle": "Pantry Items",
+          "cost": 0.3,
+          "ingredientId": 1002030
+        },
+        {
+          "id": 600607,
+          "name": "kosher salt",
+          "measures": {
+            "original": {
+              "amount": 2.0,
+              "unit": "tablespoons"
+            },
+            "metric": {
+              "amount": 9.0,
+              "unit": "g"
+            },
+            "us": {
+              "amount": 0.4,
+              "unit": "oz"
+            }
+          },
+          "usages": [
+            "<a href=\"https://spoonacular.com/recipes/adobo-seasoned-chicken-and-rice-1213565\" target=\"_blank\">Adobo Seasoned Chicken and Rice</a>"
+          ],
+          "pantryItem": true,
+          "aisle": "Pantry Items",
+          "cost": 0.96,
+          "ingredientId": 1082047
+        },
+        {
+          "id": 600609,
+          "name": "flour",
+          "measures": {
+            "original": {
+              "amount": 0.5,
+              "unit": "cup"
+            },
+            "metric": {
+              "amount": 12.5,
+              "unit": "g"
+            },
+            "us": {
+              "amount": 0.5,
+              "unit": "oz"
+            }
+          },
+          "usages": [
+            "<a href=\"https://spoonacular.com/recipes/slow-cooker-spinach-artichoke-parmesan-soup-1215041\" target=\"_blank\">Slow Cooker Spinach Artichoke Parmesan Soup</a>"
+          ],
+          "pantryItem": true,
+          "aisle": "Pantry Items",
+          "cost": 1.67,
+          "ingredientId": 20081
+        },
+        {
+          "id": 600611,
+          "name": "salt",
+          "measures": {
+            "original": {
+              "amount": 6.0,
+              "unit": "servings"
+            },
+            "metric": {
+              "amount": 6.0,
+              "unit": ""
+            },
+            "us": {
+              "amount": 6.0,
+              "unit": ""
+            }
+          },
+          "usages": [
+            "<a href=\"https://spoonacular.com/recipes/roasted-brussels-sprouts-cinnamon-butternut-squash-pecans-and-cranberries-1214993\" target=\"_blank\">Roasted Brussels Sprouts, Cinnamon Butternut Squash, Pecans, and Cranberries</a>",
+            "<a href=\"https://spoonacular.com/recipes/slow-cooker-spinach-artichoke-parmesan-soup-1215041\" target=\"_blank\">Slow Cooker Spinach Artichoke Parmesan Soup</a>"
+          ],
+          "pantryItem": true,
+          "aisle": "Pantry Items",
+          "cost": 0.05,
+          "ingredientId": 2047
+        }
+      ]
+    },
+    {
+      "aisle": "Bakery/Bread",
+      "items": [
+        {
+          "id": 600613,
+          "name": "naan",
+          "measures": {
+            "original": {
+              "amount": 3.0,
+              "unit": "pieces"
+            },
+            "metric": {
+              "amount": 3.0,
+              "unit": "pieces"
+            },
+            "us": {
+              "amount": 3.0,
+              "unit": "pieces"
+            }
+          },
+          "usages": [
+            "<a href=\"https://spoonacular.com/recipes/naan-704392\" target=\"_blank\">naan</a>"
+          ],
+          "pantryItem": false,
+          "aisle": "Bakery/Bread",
+          "cost": 150.57,
+          "ingredientId": 93723
+        },
+        {
+          "id": 600615,
+          "name": "crusty bread",
+          "measures": {
+            "original": {
+              "amount": 4.0,
+              "unit": "servings"
+            },
+            "metric": {
+              "amount": 4.0,
+              "unit": ""
+            },
+            "us": {
+              "amount": 4.0,
+              "unit": ""
+            }
+          },
+          "usages": [
+            "<a href=\"https://spoonacular.com/recipes/baguette-or-crusty-bread-704700\" target=\"_blank\">baguette or crusty bread</a>"
+          ],
+          "pantryItem": false,
+          "aisle": "Bakery/Bread",
+          "cost": 0.97,
+          "ingredientId": 10018029
+        }
+      ]
+    },
+    {
+      "aisle": "Pasta and Rice",
+      "items": [
+        {
+          "id": 600617,
+          "name": "rice",
+          "measures": {
+            "original": {
+              "amount": 3.0,
+              "unit": "cups"
+            },
+            "metric": {
+              "amount": 138.8,
+              "unit": "g"
+            },
+            "us": {
+              "amount": 4.9,
+              "unit": "oz"
+            }
+          },
+          "usages": [
+            "<a href=\"https://spoonacular.com/recipes/adobo-seasoned-chicken-and-rice-1213565\" target=\"_blank\">Adobo Seasoned Chicken and Rice</a>"
+          ],
+          "pantryItem": false,
+          "aisle": "Pasta and Rice",
+          "cost": 44.6,
+          "ingredientId": 20444
+        }
+      ]
+    },
+    {
+      "aisle": "Nuts",
+      "items": [
+        {
+          "id": 600619,
+          "name": "pecan",
+          "measures": {
+            "original": {
+              "amount": 2.0,
+              "unit": "cups"
+            },
+            "metric": {
+              "amount": 33.0,
+              "unit": "g"
+            },
+            "us": {
+              "amount": 1.2,
+              "unit": "oz"
+            }
+          },
+          "usages": [
+            "<a href=\"https://spoonacular.com/recipes/roasted-brussels-sprouts-cinnamon-butternut-squash-pecans-and-cranberries-1214993\" target=\"_blank\">Roasted Brussels Sprouts, Cinnamon Butternut Squash, Pecans, and Cranberries</a>"
+          ],
+          "pantryItem": false,
+          "aisle": "Nuts",
+          "cost": 102.54,
+          "ingredientId": 12142
+        }
+      ]
+    },
+    {
+      "aisle": "Milk, Eggs, Other Dairy",
+      "items": [
+        {
+          "id": 600621,
+          "name": "milk",
+          "measures": {
+            "original": {
+              "amount": 0.5,
+              "unit": "cup"
+            },
+            "metric": {
+              "amount": 24.5,
+              "unit": "ml"
+            },
+            "us": {
+              "amount": 0.9,
+              "unit": "fl oz"
+            }
+          },
+          "usages": [
+            "<a href=\"https://spoonacular.com/recipes/slow-cooker-spinach-artichoke-parmesan-soup-1215041\" target=\"_blank\">Slow Cooker Spinach Artichoke Parmesan Soup</a>"
+          ],
+          "pantryItem": false,
+          "aisle": "Milk, Eggs, Other Dairy",
+          "cost": 3.31,
+          "ingredientId": 1077
+        }
+      ]
+    },
+    {
+      "aisle": "Dried Fruits",
+      "items": [
+        {
+          "id": 600623,
+          "name": "dried cranberries",
+          "measures": {
+            "original": {
+              "amount": 1.0,
+              "unit": "cup"
+            },
+            "metric": {
+              "amount": 20.3,
+              "unit": "g"
+            },
+            "us": {
+              "amount": 0.8,
+              "unit": "oz"
+            }
+          },
+          "usages": [
+            "<a href=\"https://spoonacular.com/recipes/roasted-brussels-sprouts-cinnamon-butternut-squash-pecans-and-cranberries-1214993\" target=\"_blank\">Roasted Brussels Sprouts, Cinnamon Butternut Squash, Pecans, and Cranberries</a>"
+          ],
+          "pantryItem": false,
+          "aisle": "Dried Fruits",
+          "cost": 28.86,
+          "ingredientId": 9079
+        }
+      ]
+    },
+    {
+      "aisle": "Baking",
+      "items": [
+        {
+          "id": 600625,
+          "name": "evaporated milk",
+          "measures": {
+            "original": {
+              "amount": 0.5,
+              "unit": "cup"
+            },
+            "metric": {
+              "amount": 25.6,
+              "unit": "ml"
+            },
+            "us": {
+              "amount": 0.9,
+              "unit": "fl. oz"
+            }
+          },
+          "usages": [
+            "<a href=\"https://spoonacular.com/recipes/slow-cooker-spinach-artichoke-parmesan-soup-1215041\" target=\"_blank\">Slow Cooker Spinach Artichoke Parmesan Soup</a>"
+          ],
+          "pantryItem": false,
+          "aisle": "Baking",
+          "cost": 6.07,
+          "ingredientId": 1214
+        }
+      ]
+    }
+  ],
+  "cost": 1216.04,
+  "startDate": 1612656000,
+  "endDate": 1613260800
+}
