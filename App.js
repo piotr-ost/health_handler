@@ -56,4 +56,8 @@ export default function App() {
     - scrolling down has to go back
     - use async storage for the input values as well as scrolling down saving state
     - and the meal plan itself too in order for it not have to be re-generated
+    - retrieve the meal plan using get meal plan week for each given user, then no need to use async storage for that
+    - some of the templates dont work hence the problem with adding some of them
+    - finish the user thing
 */
+

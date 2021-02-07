@@ -6,14 +6,8 @@ import {Icon} from 'react-native-elements';
 import {GreenDivider, GrayDivider, ThinGrayDivider} from '../components/Dividers.js';
 import {ReturnButton} from '../components/Buttons.js';
 import {DropdownIcon} from "./InputScreen";
-import axios from 'axios'
-import {fetchDataJohny} from '../ApiCalls'
 import {mealData} from './data'
 
-const user = {
-  "username":"api-52495-ec283c8e-e354-41d1-ae07-0ca4d098c8dd",
-  "hash":"a0e87d57d77da830a56dce0af315e1eec9b7309e"
-};
 const SCREEN_WIDTH = Dimensions.get('window').width
 const SCREEN_HEIGHT = Dimensions.get('window').height
 const GREEN = '#6FBF44';
@@ -53,8 +47,6 @@ const Meal = ({navigation, id, imageType, title, mealType, amount, unit, type_, 
             title: title
           })}} type="font-awesome" name="question" color={GREEN} size={15} style={{marginRight: 5}}/>
           }
-          {/*<Icon onPress={() => {}} type="font-awesome" name="exchange"*/}
-          {/*      color={GREEN} size={15}/>*/}
         </View>
       </View>
       <ThinGrayDivider />
@@ -127,11 +119,12 @@ const MealPlanScreen = ({route, navigation}) => {
   const apiKey = '?apiKey=5bb1646af40448c4bd763b79205bc198'
   const [mealPlan, setMealPlan] = useState([]);
   let days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday']
-  const dayToday = new Date().getDay() -1 // sunday is 0
+  const dayToday = new Date().getDay() - 1 // sunday is 0
   days = [...days.slice(dayToday), ...days.slice(0, dayToday)]
-  route.params  // to access parameters passed in navigation.navigate()
+  const {data} = route.params  // to access parameters passed in navigation.navigate()
   useEffect(() => {
-    setMealPlan(mealData)
+    setMealPlan(data.days)
+    console.log(data)
     // !mealPlan.length ? fetchDataJohny().then(r => setMealPlan(r)) : null;
   }, []);
 
