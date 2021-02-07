@@ -1,12 +1,10 @@
-import React, {useState} from 'react';
-import {View, Text, Image, StyleSheet, TouchableOpacity, Dimensions} from 'react-native';
-import {GrayDivider, GreenDivider} from "../components/Dividers";
-import {Icon, CheckBox, Slider} from "react-native-elements";
+import React, {useState} from 'react'
+import {View, Text, Image, StyleSheet, TouchableOpacity, Dimensions} from 'react-native'
+import {GrayDivider, GreenDivider} from "../components/Dividers"
+import {Icon, CheckBox, Slider} from "react-native-elements"
 import {Button} from 'react-native';  // for now
-import {apiKey, getDates} from '../ApiCalls'
+import {addToUserPlan, getUserPlan} from '../ApiCalls'
 import AsyncStorage from '@react-native-async-storage/async-storage'
-import axios from 'axios'
-import {getUserPlan} from "../ApiCalls";
 
 // iphone X dims
 const SCREEN_WIDTH = Dimensions.get('window').width
@@ -165,19 +163,16 @@ const InputScreen = ({navigation}) => {
           <Button onPress={async () => {
             setWaiting(true)
             const dataFromThisScreen = {userData: userData, price: price, time: time, calories: calories}
-            const mealPlanTemplateId = 604
-            const startDate = Math.round(new Date().getTime() / 1000 + 100)
             try {
-              const userJson = await AsyncStorage.getItem('user')
+              const userJson = await AsyncStorage.getItem('user1')
               const user = JSON.parse(userJson)
               if (user) {
-                const base = 'https://api.spoonacular.com/mealplanner/'
-                const res = await axios.post(
-                  base + `${user.username}/items?${apiKey}&hash=${user.hash}`,
-                  {"mealPlanTemplateId": mealPlanTemplateId, "startDate": startDate}
-                )
-                console.log(res)
-                console.assert(res.data.status === 'success')
+                const {username, hash} = user
+                const addedToUserPlan = await AsyncStorage.getItem('addedToPlan')
+                if (!addedToUserPlan) {
+                  await addToUserPlan(username, hash)
+                  await AsyncStorage.setItem('addedToPlan', 'true')
+                }
                 getUserPlan(user.username, user.hash)
                   .then(r => navigation.navigate("MealPlanScreen", {data: r.data}))
                   .catch(e => console.log(e))

@@ -2,7 +2,7 @@ import React from 'react';
 import {View, Image, StyleSheet, TouchableOpacity, Text, Dimensions} from 'react-native'
 import AsyncStorage from "@react-native-async-storage/async-storage"
 import axios from 'axios'
-import {apiKey} from '../ApiCalls'
+import {connectUser} from '../ApiCalls'
 import {testUsername} from "expo-cli/build/credentials/test-fixtures/mocks-constants";
 
 const SCREEN_WIDTH = Dimensions.get('window').width
@@ -11,17 +11,15 @@ const SCREEN_HEIGHT = Dimensions.get('window').height
 const HomeScreen = ({navigation}) => {
   const handleClick = async () => {
     try {
-      const userJson = await AsyncStorage.getItem('user')
+      const userJson = await AsyncStorage.getItem('user1')
       if (userJson) {
         const user = JSON.parse(userJson)
         console.log('retrieved the guy', user)
         navigation.navigate('InputScreen', {user: user})
       } else {
-        const res = await axios.post(`https://api.spoonacular.com/users/connect?${apiKey}`, {})
-        const data = await res.data
-        const {username, hash} = data
+        const [username, hash] = await connectUser()
         let user = JSON.stringify({username: username, hash: hash})
-        await AsyncStorage.setItem('user', user)
+        await AsyncStorage.setItem('user1', user)
         console.log('new guy', user)
         navigation.navigate('InputScreen', {user: user})
       }

@@ -124,8 +124,6 @@ const MealPlanScreen = ({route, navigation}) => {
   const {data} = route.params  // to access parameters passed in navigation.navigate()
   useEffect(() => {
     setMealPlan(data.days)
-    console.log(data)
-    // !mealPlan.length ? fetchDataJohny().then(r => setMealPlan(r)) : null;
   }, []);
 
   return (
