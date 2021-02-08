@@ -45,12 +45,14 @@ export const getPublicTemplates = () => {
 
 export const getDates = () => {
   let currentTime = new Date()
-  let currentMonth
-  currentTime.getMonth() + 1 < 9 ?
-  currentMonth = `0${currentTime.getMonth() + 1}`
-  : currentMonth = currentTime.getMonth() + 1
-  let currentDate = `${currentTime.getFullYear()}-${currentMonth}-${currentTime.getDate()}`
-  let dateInAWeek = `${currentTime.getFullYear()}-${currentMonth}-${currentTime.getDate() + 7}`
+  const currentMonth = currentTime.getMonth() + 1 < 10 ?
+    `0${currentTime.getMonth() + 1}` : currentTime.getMonth() + 1
+  let currentDay = currentTime.getDate() < 10 ?
+    `0${currentTime.getDate()}` : currentTime.getDate()
+  let dayInAWeek = currentTime.getDate() + 7 < 10 ?
+    `0${currentTime.getDate() + 7}` : currentTime.getDate() + 7
+  let currentDate = `${currentTime.getFullYear()}-${currentMonth}-${currentDay}`
+  let dateInAWeek = `${currentTime.getFullYear()}-${currentMonth}-${dayInAWeek}`
   return [currentDate, dateInAWeek]
 }
 
@@ -59,5 +61,5 @@ export const generateShoppingList = (username, hash) => {
   let [currentDate, dateInAWeek] = getDates()
   const apiKey = 'apiKey=5bb1646af40448c4bd763b79205bc198'
   const url = base + username + `/shopping-list/${currentDate}/${dateInAWeek}?hash=${hash}&${apiKey}`
-  axios.post(url).then(r => {console.log(r.data); r.data}).catch(e => console.log(e))
+  return axios.post(url)
 }

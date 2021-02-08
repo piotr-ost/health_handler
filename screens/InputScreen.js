@@ -162,7 +162,6 @@ const InputScreen = ({navigation}) => {
         <View style={styles.button}>
           <Button onPress={async () => {
             setWaiting(true)
-            const dataFromThisScreen = {userData: userData, price: price, time: time, calories: calories}
             try {
               const userJson = await AsyncStorage.getItem('user1')
               const user = JSON.parse(userJson)
@@ -173,8 +172,9 @@ const InputScreen = ({navigation}) => {
                   await addToUserPlan(username, hash)
                   await AsyncStorage.setItem('addedToPlan', 'true')
                 }
+                const dataFromThisScreen = {userData: userData, price: price, time: time, calories: calories, user: user}
                 getUserPlan(user.username, user.hash)
-                  .then(r => navigation.navigate("MealPlanScreen", {data: r.data}))
+                  .then(r => navigation.navigate("MealPlanScreen", {data: r.data, user: user}))
                   .catch(e => console.log(e))
                 setWaiting(false)
               }

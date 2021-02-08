@@ -24,8 +24,7 @@ const Meal = ({navigation, id, imageType, title, mealType, amount, unit, type_, 
   else if (type_ === 'RECIPE')
     uri = `http://spoonacular.com/recipeImages/${id}-240x150.${imageType}`
   else if (type_ === 'PRODUCT')
-    uri = `http:///spoonacular.com/productImages/${id}-312x231.${imageType}`
-  console.log(uri)
+    uri = `http://spoonacular.com/productImages/${id}-312x231.${imageType}`
   return ( id && title ?
     <View style={{flex: 1, flexDirection: 'column'}}>
       <View style={{display: 'flex', flexDirection: 'row',
@@ -115,27 +114,22 @@ const getExclude = (userData) => {
 }
 
 const MealPlanScreen = ({route, navigation}) => {
-  // const apiKey = '?apiKey=556d5c003785468ab5aa696a128a3d3a';
-  const apiKey = '?apiKey=5bb1646af40448c4bd763b79205bc198'
-  const [mealPlan, setMealPlan] = useState([]);
+  const [mealPlan, setMealPlan] = useState(false);
   let days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday']
   const dayToday = new Date().getDay() - 1 // sunday is 0
   days = [...days.slice(dayToday), ...days.slice(0, dayToday)]
-  const {data} = route.params  // to access parameters passed in navigation.navigate()
-  useEffect(() => {
-    setMealPlan(data.days)
-  }, []);
-
+  const {data, user} = route.params  // to access parameters passed in navigation.navigate()
+  useEffect(() => setMealPlan(data.days), []);
   return (
     <View style={styles.screen}>
       <View style={styles.header}>
         <ReturnButton onPress={() => navigation.navigate('InputScreen')} />
         <Text style={[styles.text, {fontSize: 30}]}>Meal Plan</Text>
-        <ShoppingListButton onPress={() => navigation.navigate('ShoppingListScreen')} />
+        <ShoppingListButton onPress={() => navigation.navigate('ShoppingListScreen', {user: user})} />
       </View>
       <GrayDivider />
       <View style={{marginTop: 20}}>
-        {mealPlan.length ?
+        {mealPlan ?
           mealPlan.map(({items}, index) => {
             return <MealsDay navigation={navigation} dayName={days[index]} items={items} key={days[index]}/>
           }) :
