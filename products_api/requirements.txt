@@ -1,0 +1,5 @@
+django-rest-framework
+jupyter
+pandas
+numpy
+requests
