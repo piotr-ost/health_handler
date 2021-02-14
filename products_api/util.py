@@ -2,9 +2,12 @@ from typing import Tuple
 
 
 def convert_amount(amount: str) -> Tuple[float, str]:
+    if amount == 'Loose':
+        amount = '1000g'
     amount = amount.replace('(', '').replace(')', '')
     amount = amount.replace('approx.', '')
-    unit =''.join([i for i in amount if not i.isdigit() and i != 'x'])
+    unit =''.join([i for i in amount 
+                   if not i.isdigit() and i != 'x' and i != '.'])
     amount = ''.join([i for i in amount 
                       if i.isdigit() or i == '.' or i == 'x'])
     if len(amount) > 2:
@@ -12,6 +15,9 @@ def convert_amount(amount: str) -> Tuple[float, str]:
     else:
         amount = amount.replace('x', '')
         unit = 'unit'
+    if unit == 'kg':
+        amount = float(amount)*1000
+        unit = 'g'
     return int(amount), unit
 
 
