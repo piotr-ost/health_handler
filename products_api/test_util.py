@@ -1,4 +1,12 @@
 import pytest
+import pickle
+
+
+@pytest.fixture()
+def table():
+    with open('table.pkl', 'rb') as f:
+        table = pickle.load(f)
+    return table 
 
 
 @pytest.mark.parametrize('amount, expected', [
@@ -19,3 +27,6 @@ def test_parse_price(price, currency, expected):
     from util import parse_currency
     assert parse_currency(price, currency) == expected
 
+
+def test_match_products(table):
+    pass 

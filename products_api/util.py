@@ -8,8 +8,8 @@ def convert_amount(amount: str) -> Tuple[float, str]:
         amount = '1000g'
     amount = amount.replace('(', '').replace(')', '')
     amount = amount.replace('approx.', '')
-    unit =''.join([i for i in amount 
-                   if not i.isdigit() and i != 'x' and i != '.'])
+    unit =''.join([i for i in amount if not i.isdigit() 
+                   and i != 'x' and i != '.' and i != '*'])
     amount = ''.join([i for i in amount 
                       if i.isdigit() or i == '.' or i == 'x'])
     split = [i for i in amount]
