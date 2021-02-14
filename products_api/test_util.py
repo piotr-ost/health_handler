@@ -3,8 +3,9 @@ import pytest
 
 @pytest.mark.parametrize('amount, expected', [
     ('4x41.5g', (166, 'g')), ('10x29.3g', (293, 'g')),
-    ('4x110ml', (440, 'ml')), ('800g', (800, 'g')), 
-    ('Loose', (1000, 'g')), ('(approx.1.7kg)', (1700, 'g')), ('x5', (5, 'unit'))
+    ('x12', (12, 'unit')), ('4x110ml', (440, 'ml')), ('800g', (800, 'g')),
+    ('', ('', 'unit')), ('Loose', (1000, 'g')), ('(approx.1.7kg)', (1700, 'g')),
+    ('x5', (5, 'unit')), ('1L', (1000, 'ml')), ('1.5L', (1500, 'ml')) 
 ])
 def test_convert_amount(amount, expected):
     from util import convert_amount
