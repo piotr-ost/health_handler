@@ -1,4 +1,6 @@
 import requests
+import math
+import numpy as np
 import pandas as pd
 import json
 
@@ -46,26 +48,34 @@ def get_shopping_list():
 
 
 def match_product(amount, unit, matches):
-   # first get the best quantity matching product
-   # if there is a couple, match with preferred price product
-   return matches[-1]
+    res = []
+    for match in matches.iloc:
+        if unit == match['unit']:
+            qty_needed = math.ceil(match['amount'] / amount)
+            res.append(qty_needed)
+    if any(res):
+        return matches.iloc[np.argmin(res)]
 
 
-if __name__ == '__main__':
+def main():
     shop_df = get_shop_df()
     shopping_list = get_shopping_list()
     items_df = get_items(shopping_list)
-
-    matches_df = pd.DataFrame()
+    matches_df_ = pd.DataFrame()
     for product in items_df.iloc:
-        regex = ''.join([f'(?=.*{i})' for i in product['name']])   
-        entries = shop_df['name'].str.contains(regex)    
+        regex = ''.join([f'(?=.*{i})' for i in product['name']])
+        entries = shop_df['name'].str.contains(regex)
         if entries.any():
             matches = shop_df[entries]
-            if matches.any():
+            if not matches.empty:
                 amount = product['amount']
                 unit = product['unit']
                 match = match_product(amount, unit, matches)
-                matches_df = matches_df.append(match)
+                matches_df_ = matches_df_.append(match)
         else:
             print(f"no such product: {' '.join(product['name'])}")
+    return matches_df_
+
+
+if __name__ == '__main__':
+    matches_df = main()
