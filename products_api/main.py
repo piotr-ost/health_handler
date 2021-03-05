@@ -6,6 +6,7 @@ import logging
 
 from selenium import webdriver
 from selenium.common import exceptions
+from selenium.webdriver.chrome.options import Options
 from webdriver_manager.chrome import ChromeDriverManager
 
 from django import setup
@@ -30,7 +31,10 @@ class Scraper:
     )
 
     def __init__(self):
-        self.driver = webdriver.Chrome(ChromeDriverManager().install())
+        options = Options()
+        options.add_argument('--headless')
+        self.driver = webdriver.Chrome(ChromeDriverManager().install(), 
+                                       options=options)
         self.links = []
         self.categories = self._category_generator()
 
@@ -69,6 +73,8 @@ class Scraper:
                     next_btn.click()
                 except exceptions.StaleElementReferenceException:
                     on_next_page = True
+                except exceptions.ElementClickInterceptedException:
+                    time.sleep(1)
         return on_next_page
 
     def insert_products_from_page(self):
@@ -120,7 +126,6 @@ class Scraper:
             while self.go_to_next_page():
                 self.insert_products_from_page()
 
-    https://www.sainsburys.co.uk/shop/gb/groceries
     @staticmethod
     def _category_generator():
         for category in [
