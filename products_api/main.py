@@ -120,15 +120,24 @@ class Scraper:
             while self.go_to_next_page():
                 self.insert_products_from_page()
 
+    https://www.sainsburys.co.uk/shop/gb/groceries
     @staticmethod
     def _category_generator():
         for category in [
             '/fruit-veg/fruitandveg-essentials',
             '/meat-fish/meatandfish-essentials',
-            '/dairy-eggs-and-chilled/dairy-and-chilled-essentials',
+            '/dairy-and-chilled-essentials',
             '/bakery/bakery-essentials',
             '/food-cupboard/food-cupboard-essentials',
             '/frozen/frozen-essentials',
+            '/food-cupboard/herbs-and-spices-all',
+            '/food-cupboard/nuts---seeds',
+            '/dairy-eggs-and-chilled/houmous-and-dips-',
+            '/dietary-and-lifestyle/plant-based-drinks?type=almond',
+            '/cooking-from-scratch-',
+            '/food-cupboard/cooking-sauces-all?facet=887',
+            '/drinks/small---on-the-go',
+            '/drinks/fizzy-drinks-bigger-multipacks',
             False
         ]:
             yield category

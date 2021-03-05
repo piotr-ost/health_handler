@@ -33,14 +33,17 @@ def get_items(shopping_list) -> pd.DataFrame:
     items_df['name'] = items_df['name'].map(str.split)
     to_drop = ['quick', 'canned', 'cooking', 'fat', 'ground', 'leaves',
                'pasta', 'purified', 'plain', 'cooked', 'full-fat', 'pieces',
-               'scrambled', 'frozen', 'creamy']
+               'scrambled', 'frozen', 'creamy', 'bell']
     items_df['name'] = [[j for j in i if j not in to_drop]
                         for i in items_df['name']]
     return items_df
 
 
 def get_shopping_list():
-    # TODO get this straight from spoonacular
+    # TODO
+    # get this straight from spoonacular
+    # cornstarch is cornflour
+    # we want milk not to fish out almond milk
     filepath = 'shopping_lists/shoppingList7.json'
     with open(filepath) as f:
         shopping_list = json.load(f)
