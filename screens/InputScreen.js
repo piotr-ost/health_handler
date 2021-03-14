@@ -40,8 +40,8 @@ const InputScreen = ({navigation}) => {
     fishAllergy: false
   });
   const [price, setPrice] = useState(10)
-  const [time, setTime] = useState(120)
-  const [calories, setCalories] = useState( 2300)
+  const [time, setTime] = useState(60)
+  const [calories, setCalories] = useState( 2500)
   const [waiting, setWaiting] = useState(false)
   const handleClick = async () => {
       setWaiting(true)

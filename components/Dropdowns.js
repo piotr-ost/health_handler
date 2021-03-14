@@ -1,5 +1,5 @@
 import React from "react";
-import { Text, TouchableOpacity } from "react-native";
+import { Text, TouchableOpacity, StyleSheet } from "react-native";
 import { Icon } from "react-native-elements";
 
 
@@ -11,13 +11,11 @@ export const DropdownIcon = ({ onPress }) => {
 
 export const Dropdowns = ({ text, onPress }) => {
     return (
-        <TouchableOpacity
-            style={styles.dropdown}
-            onPress={onPress}>
+        <TouchableOpacity style={styles.dropdown} onPress={onPress}>
             <Text>{text}</Text>
             <DropdownIcon />
         </TouchableOpacity>
-    );
+    )
 }
 
 const styles = StyleSheet.create({

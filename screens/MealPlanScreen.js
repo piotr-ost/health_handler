@@ -1,10 +1,11 @@
 import React, {useState, useEffect} from 'react'
 import { View, Text, Image, StyleSheet, TouchableOpacity, ActivityIndicator, Dimensions } from 'react-native'
 import { Icon } from 'react-native-elements'
+
 import { GreenDivider, GrayDivider, ThinGrayDivider } from '../components/Dividers.js'
 import { ReturnButton } from '../components/Buttons.js'
 import { DropdownIcon } from '../components/Dropdowns'
-import { mealData } from './data'
+
 
 const SCREEN_WIDTH = Dimensions.get('window').width
 const SCREEN_HEIGHT = Dimensions.get('window').height

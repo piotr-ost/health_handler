@@ -17,7 +17,7 @@ export const Slider = ({ value, minValue, maxValue, step, onValueChange, unit })
                 thumbStyle={{ height: 20, width: 20, backgroundColor: GREEN }}
                 trackStyle={{ backgroundColor: 'transparent' }}
             />
-            <Text style={{ alignSelf: 'center' }}>{value}{unit}</Text>
+            <Text style={{ alignSelf: 'center' }}>{value} {unit}</Text>
         </View>
     )
 }
