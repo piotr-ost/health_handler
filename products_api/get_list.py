@@ -44,7 +44,7 @@ def get_shopping_list():
     # get this straight from spoonacular
     # cornstarch is cornflour
     # we want milk not to fish out almond milk
-    filepath = 'shopping_lists/shoppingList7.json'
+    filepath = 'shopping_lists/shoppingList2.json'
     with open(filepath) as f:
         shopping_list = json.load(f)
     return shopping_list

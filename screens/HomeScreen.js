@@ -1,9 +1,7 @@
-import React from 'react';
-import {View, Image, StyleSheet, TouchableOpacity, Text, Dimensions} from 'react-native'
+import React from 'react'
+import { View, Image, StyleSheet, TouchableOpacity, Text, Dimensions } from 'react-native'
 import AsyncStorage from "@react-native-async-storage/async-storage"
-import axios from 'axios'
-import {connectUser} from '../ApiCalls'
-import {testUsername} from "expo-cli/build/credentials/test-fixtures/mocks-constants";
+import { connectUser } from '../ApiCalls'
 
 const SCREEN_WIDTH = Dimensions.get('window').width
 const SCREEN_HEIGHT = Dimensions.get('window').height
@@ -33,7 +31,7 @@ const HomeScreen = ({navigation}) => {
       <Image source={require('../assets/logo_text.png')} style={styles.logoText} />
       <View>
         <TouchableOpacity style={styles.button} onPress={handleClick}>
-          <Text style={{color: 'white', fontStyle: 'KumbhSans-Regular', fontSize: 20}}>Start</Text>
+          <Text style={{color: 'white', fontSize: 20}}>Start</Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -64,11 +62,23 @@ const styles = StyleSheet.create({
     alignSelf: 'center'
   },
   button: {
-    width: 200, height: 50, borderRadius: 12, shadowColor: '#000',
-    shadowOffset: {width: 0, height: 3}, shadowOpacity: 0.3,
-    shadowRadius: 4.5, elevation: 7, marginTop: 120, alignItems: 'center',
-    justifyContent: 'center', display: 'flex', backgroundColor: '#4EB849',
+    width: 200,
+    height: 50,
+    borderRadius: 12,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 3
+    },
+    shadowOpacity: 0.3,
+    shadowRadius: 4.5,
+    elevation: 7,
+    marginTop: 120,
+    alignItems: 'center',
+    justifyContent: 'center',
+    display: 'flex',
+    backgroundColor: '#4EB849'
   }
-});
+})
 
-export default HomeScreen;
+export default HomeScreen

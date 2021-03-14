@@ -1,23 +1,20 @@
-import React, {useState, useEffect} from 'react';
-import {
-  View, Text, Image, StyleSheet, TouchableOpacity,
-  ActivityIndicator, Dimensions} from 'react-native';
-import {Icon} from 'react-native-elements';
-import {GreenDivider, GrayDivider, ThinGrayDivider} from '../components/Dividers.js';
-import {ReturnButton} from '../components/Buttons.js';
-import {DropdownIcon} from "./InputScreen";
-import {mealData} from './data'
+import React, {useState, useEffect} from 'react'
+import { View, Text, Image, StyleSheet, TouchableOpacity, ActivityIndicator, Dimensions } from 'react-native'
+import { Icon } from 'react-native-elements'
+import { GreenDivider, GrayDivider, ThinGrayDivider } from '../components/Dividers.js'
+import { ReturnButton } from '../components/Buttons.js'
+import { DropdownIcon } from '../components/Dropdowns'
+import { mealData } from './data'
 
 const SCREEN_WIDTH = Dimensions.get('window').width
 const SCREEN_HEIGHT = Dimensions.get('window').height
 const GREEN = '#6FBF44';
 
-const ShoppingListButton = ({onPress}) => {
-  return <Icon type="font-awesome" name="shopping-cart"
-               onPress={onPress} color={GREEN} />
+const ShoppingListButton = ({ onPress }) => {
+  return <Icon type="font-awesome" name="shopping-cart" onPress={onPress} color={GREEN} />
 }
 
-const Meal = ({navigation, id, imageType, title, mealType, amount, unit, type_, image}) => {
+const Meal = ({ navigation, id, imageType, title, mealType, amount, unit, type_, image }) => {
   let uri
   if (type_ === 'INGREDIENTS')
     uri = image.replace('100x100', '250x250')
@@ -152,7 +149,7 @@ export const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: 'center', margin: 10
   },
-  text: {fontStyle: 'KumbhSans-Regular'}
+  text: {}
 });
 
 export default MealPlanScreen;

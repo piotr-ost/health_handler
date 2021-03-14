@@ -33,7 +33,7 @@ class Scraper:
     def __init__(self):
         options = Options()
         options.add_argument('--headless')
-        self.driver = webdriver.Chrome(ChromeDriverManager().install(), 
+        self.driver = webdriver.Chrome(ChromeDriverManager().install(),
                                        options=options)
         self.links = []
         self.categories = self._category_generator()

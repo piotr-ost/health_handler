@@ -78,7 +78,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: 'center', margin: 10
   },
-  text: {fontStyle: 'KumbhSans-Regular'}
+  text: {}
 });
 
 export default ShoppingListScreen;
