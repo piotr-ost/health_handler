@@ -1,20 +1,37 @@
 import React from "react";
-import { Text, TouchableOpacity, StyleSheet } from "react-native";
-import { Icon } from "react-native-elements";
+import {Text, TouchableOpacity, StyleSheet, View} from "react-native";
+import {Icon} from "react-native-elements";
+import {GreenDivider} from "./Dividers";
+import {GREEN} from '../common.style'
 
-
-const GREEN = '#6FBF44'
-
-export const DropdownIcon = ({ onPress }) => {
-    return <Icon type="font-awesome" name="caret-down" color={GREEN} onPress={onPress} />;
+export const DropdownIcon = ({onPress}) => {
+    return <Icon type="font-awesome" name="caret-down" color={GREEN} onPress={onPress}/>;
 }
 
-export const Dropdowns = ({ text, onPress }) => {
+export const Dropdown = ({text, onPress}) => {
     return (
         <TouchableOpacity style={styles.dropdown} onPress={onPress}>
             <Text>{text}</Text>
-            <DropdownIcon />
+            <DropdownIcon/>
         </TouchableOpacity>
+    )
+}
+
+export const DropdownSection = () => {
+    return (
+        <View>
+            <Dropdown
+                text={'View existing meal plans'}
+                onPress={() => {}}
+            />
+            <View style={[styles.flexRow, {height: 40}]}>
+            </View>
+            <Dropdown
+                onPress={() => {}}
+                text="Select a supermarket..."
+                type="wide"
+            />
+        </View>
     )
 }
 
