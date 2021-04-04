@@ -7,7 +7,7 @@ import {DropdownSection} from "../components/Dropdowns"
 import {HealthHandlerHeader} from '../components/Headers'
 import {addToUserPlan, getUserPlan} from '../ApiCalls'
 import AsyncStorage from '@react-native-async-storage/async-storage'
-import common from '../common.style'
+import common, {GREEN} from '../common.style'
 
 
 const InputScreen = ({navigation}) => {
@@ -95,7 +95,7 @@ const InputScreen = ({navigation}) => {
                             <CheckBox
                                 checked={userData.vegetarian}
                                 title="Vegetarian"
-                                checkedColor={common.GREEN}
+                                checkedColor={GREEN}
                                 onPress={() => setUserData({
                                     ...userData,
                                     vegetarian: !userData.vegetarian
@@ -104,7 +104,7 @@ const InputScreen = ({navigation}) => {
                             <CheckBox
                                 checked={userData.nutFree}
                                 title="Nut free"
-                                checkedColor={common.GREEN}
+                                checkedColor={GREEN}
                                 onPress={() => setUserData({
                                     ...userData,
                                     nutFree: !userData.nutFree
@@ -113,7 +113,7 @@ const InputScreen = ({navigation}) => {
                             <CheckBox
                                 checked={userData.halal}
                                 title="Halal"
-                                checkedColor={common.GREEN}
+                                checkedColor={GREEN}
                                 onPress={() => setUserData({
                                     ...userData,
                                     halal: !userData.halal
@@ -126,7 +126,7 @@ const InputScreen = ({navigation}) => {
                             <CheckBox
                                 checked={userData.vegan}
                                 title="Vegan"
-                                checkedColor={common.GREEN}
+                                checkedColor={GREEN}
                                 onPress={() => setUserData({
                                     ...userData,
                                     vegan: !userData.vegan
@@ -135,7 +135,7 @@ const InputScreen = ({navigation}) => {
                             <CheckBox
                                 checked={userData.lactoseFree}
                                 title="Nut free"
-                                checkedColor={common.GREEN}
+                                checkedColor={GREEN}
                                 onPress={() => setUserData({
                                     ...userData,
                                     lactoseFree: !userData.lactoseFree
@@ -144,7 +144,7 @@ const InputScreen = ({navigation}) => {
                             <CheckBox
                                 checked={userData.fishAllergy}
                                 title="No fish"
-                                checkedColor={common.GREEN}
+                                checkedColor={GREEN}
                                 onPress={() => setUserData({
                                     ...userData,
                                     fishAllergy: !userData.fishAllergy
@@ -164,4 +164,4 @@ const InputScreen = ({navigation}) => {
     )
 }
 
-export default InputScreen;
+export default InputScreen

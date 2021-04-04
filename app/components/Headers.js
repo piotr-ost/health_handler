@@ -3,6 +3,7 @@ import {Image, Text, View, StyleSheet} from "react-native"
 import {GrayDivider} from "./Dividers"
 import {ReturnButton, ShoppingListButton} from "./Buttons";
 import common from '../common.style'
+import {Icon} from "react-native-elements";
 
 export const HealthHandlerHeader = () => {
     return (
@@ -38,6 +39,40 @@ export const RecipeHeader = ({navigation}) => {
                 <View />
             </View>
             <GrayDivider/>
+        </View>
+    )
+}
+
+export const ShoppingListHeader = ({navigation}) => {
+    return  (
+        <View>
+            <View style={common.header}>
+                <ReturnButton
+                    navigation={navigation}
+                    onPress={() => navigation.navigate('MealPlanScreen')}
+                />
+                <Text style={{fontSize: 30}}>Shopping list</Text>
+                <Icon
+                    onPress={() => {}}
+                    type='font-awesome'
+                    name='floppy-o'
+                    color='#4EB849'
+                />
+            </View>
+            <GrayDivider/>
+        </View>
+    )
+}
+
+export const ConsumptionHeader = ({navigation}) => {
+    return (
+        <View>
+            <View style={common.header}>
+                <ReturnButton onPress={() => navigation.navigate("ShoppingListScreen")}/>
+                <Text style={{fontSize: 24}}>Weekly consumption</Text>
+                <Text />
+            </View>
+            <GrayDivider />
         </View>
     )
 }
