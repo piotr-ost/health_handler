@@ -4,7 +4,7 @@ import HomeScreen from './screens/HomeScreen'
 import MealPlanScreen from './screens/MealPlanScreen'
 import ConsumptionScreen from './screens/ConsumptionScreen'
 import ShoppingListScreen from './screens/ShoppingListScreen'
-import RecipeDetailsScreen from './screens/RecipeDetailsScreen'
+import RecipeScreen from './screens/RecipeScreen'
 import {createStackNavigator} from '@react-navigation/stack'
 import {NavigationContainer, DefaultTheme} from '@react-navigation/native'
 
@@ -36,7 +36,7 @@ export default function App() {
                 />
                 <Stack.Screen
                     name="RecipeDetailsScreen"
-                    component={RecipeDetailsScreen}
+                    component={RecipeScreen}
                     options={{headerShown: false}}
                 />
                 <Stack.Screen

@@ -29,6 +29,19 @@ export const MealPlanHeader = ({navigation, user}) => {
     )
 }
 
+export const RecipeHeader = ({navigation}) => {
+    return (
+        <View>
+            <View style={common.header}>
+                <ReturnButton onPress={() => {navigation.goBack()}} />
+                <Text>Recipe</Text>
+                <View />
+            </View>
+            <GrayDivider/>
+        </View>
+    )
+}
+
 const styles = StyleSheet.create({
     smallLogo: {
         width: 43,

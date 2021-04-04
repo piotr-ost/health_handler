@@ -13,3 +13,12 @@ export const MealPlanSpinner = () => {
         </View>
     )
 }
+
+export const RecipeDetailsSpinner = () => {
+    return (
+        <View style={{display: 'flex', justifyContent: 'space-around', alignItems: 'center'}}>
+            <Text>Fetching the recipe...</Text>
+            <ActivityIndicator color={GREEN} style={{padding: 30}}/>
+        </View>
+    )
+}
