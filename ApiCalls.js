@@ -63,3 +63,9 @@ export const generateShoppingList = (username, hash) => {
   const url = base + username + `/shopping-list/${currentDate}/${dateInAWeek}?hash=${hash}&${apiKey}`
   return axios.post(url)
 }
+
+export const convertShoppingList = (shoppingList) => {
+    const url = 'http://13.59.62.126:8010/get_shopping_list'
+    return axios.post(url, shoppingList)
+}
+

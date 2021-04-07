@@ -8,6 +8,7 @@ import {HealthHandlerHeader} from '../components/Headers'
 import {addToUserPlan, getUserPlan} from '../ApiCalls'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import common, {GREEN} from '../common.style'
+import lodash from 'lodash'
 
 
 const InputScreen = ({navigation}) => {
@@ -31,26 +32,24 @@ const InputScreen = ({navigation}) => {
             const user = JSON.parse(userJson)
             if (user) {
                 const {username, hash} = user
-                const addedToUserPlan = await AsyncStorage.getItem('addedToPlan')
-                if (!addedToUserPlan) {
-                    let out = await addToUserPlan(username, hash)
-                    console.log(out.data)
-                    await AsyncStorage.setItem('addedToPlan', 'true')
-                }
                 getUserPlan(user.username, user.hash)
                     .then(r => {
-                        navigation.navigate("MealPlanScreen", {
-                            data: r.data,
-                            user: user,
-                            userInput: {
-                                userData: userData,
-                                price: price,
-                                time: time,
-                                calories: calories,
-                            }
-                        })
-                        setWaiting(false)
-                        console.log(r.data)
+                        if (lodash.some(r.data.days)) {
+                            navigation.navigate("MealPlanScreen", {
+                                data: r.data,
+                                user: user,
+                                userInput: {
+                                    userData: userData,
+                                    price: price,
+                                    time: time,
+                                    calories: calories,
+                                }
+                            })
+                            setWaiting(false)
+                        } else {
+                            addToUserPlan(username, hash)
+                            handleClick()
+                        }
                     })
                     .catch(e => console.log(e))
             }
@@ -70,7 +69,7 @@ const InputScreen = ({navigation}) => {
                         maxValue={20}
                         step={0.05}
                         onValueChange={(value) => setPrice(value)}
-                        unit={'$/meal'}
+                        unit={'£/meal'}
                     />
                     <Slider
                         value={time}

@@ -1,0 +1,27 @@
+{
+  "amount": {
+    "42": 100,
+    "299": 480,
+    "1183": 100
+  },
+  "img_url": {
+    "42": "https://assets.sainsburys-groceries.co.uk/gol/7176881/image.jpg",
+    "299": "https://assets.sainsburys-groceries.co.uk/gol/6029731/image.jpg",
+    "1183": "https://assets.sainsburys-groceries.co.uk/gol/7620874/image.jpg"
+  },
+  "name": {
+    "42": "sainsbury's baby leaf spinach 100g",
+    "299": "sainsbury's british roast boneless chicken breasts x4 480g",
+    "1183": "sainsbury's fairtrade peanuts & raisins 100g"
+  },
+  "price": {
+    "42": 100,
+    "299": 575,
+    "1183": 90
+  },
+  "unit": {
+    "42": "g",
+    "299": "g",
+    "1183": "g"
+  }
+}
