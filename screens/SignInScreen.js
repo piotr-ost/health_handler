@@ -14,7 +14,7 @@ const SignInScreen = ({ navigation }) => {
   return (
     <View style={styles.screen}>
       <View style={styles.loginContainer}>
-        <View>
+        <View style={{marginTop: 100}}>
           <SmallLogo />
           <Text style={common.headingMain}>
             Welcome!
@@ -23,7 +23,7 @@ const SignInScreen = ({ navigation }) => {
             Sign in to continue.
           </Text>
         </View>
-        <View>
+        <View style={{marginTop: 55}}>
           <TextField 
             label={'Email'} 
             value={email} 
@@ -35,9 +35,18 @@ const SignInScreen = ({ navigation }) => {
             onChange={setPassword} 
             secureTextEntry={true} 
           />
+          <Text 
+            style={{
+              textAlign: 'right', fontFamily: 'PoppinsRegular', 
+              fontSize: 13, lineHeight: 19, marginBottom: 30
+            }}
+          >
+            Forgot Password?
+          </Text>
           <GreenButton text={'Login'} onPress={() => {}} />
         </View>
-        <View>
+      </View>
+        <View style={{position: 'absolute', bottom: '6%', alignSelf: 'center'}}>
           <Text style={common.text}>
             New to Health Handler? {'\t'}
             <Text 
@@ -48,14 +57,14 @@ const SignInScreen = ({ navigation }) => {
             </Text>
           </Text>
         </View>
-      </View>
     </View>
   )
 }
 
 const styles = StyleSheet.create({
   screen: {
-    ...common.screen
+    ...common.screen,
+    paddingHorizontal: 40
   },
 })
 
