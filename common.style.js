@@ -30,6 +30,23 @@ export default StyleSheet.create({
         display: 'flex',
         justifyContent: 'space-between'
     },
+    headingMain: {
+        fontFamily: 'PoppinsRegular',
+        fontSize: 25,
+        lineHeight: 37,
+        color: '#212121'
+    },
+    text: {
+        fontFamily: 'PoppinsLight',
+        fontSize: 18,
+        lineHeight: 27,
+        color: '#212121'
+    },
+    center: {
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center'
+    }
 })
 
 export const GREEN = '#6FBF44'

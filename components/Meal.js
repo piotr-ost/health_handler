@@ -25,19 +25,20 @@ export const Meal = ({navigation, id, imageType, title, mealType, amount, unit, 
                     }
                 </View>
                 <View style={common.flexRow}>
-                    {navigation &&
-                    <Icon
-                        onPress={() => navigation.navigate('RecipeDetailsScreen', {
-                            id: id,
-                            uri: uri,
-                            title: title
-                        })}
+                    {
+                        navigation ?
+                            <Icon
+                                onPress={() => navigation.navigate('RecipeDetailsScreen', {
+                                    id: id,
+                                    uri: uri,
+                                    title: title
+                                })}
                         type="font-awesome"
                         name="question"
                         color={GREEN}
                         size={15}
                         style={{marginRight: 5}}
-                    />
+                    /> : <View />
                     }
                 </View>
             </View>
@@ -58,7 +59,7 @@ const styles = StyleSheet.create({
         marginRight: 8
     },
     text: {
-        color: common.GREEN,
+        color: GREEN,
         fontSize: 11
     },
 })

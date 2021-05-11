@@ -133,7 +133,7 @@ const InputScreen = ({navigation}) => {
                             />
                             <CheckBox
                                 checked={userData.lactoseFree}
-                                title="Nut free"
+                                title="No lactose"
                                 checkedColor={GREEN}
                                 onPress={() => setUserData({
                                     ...userData,

@@ -2,11 +2,11 @@ import React from 'react'
 import InputScreen from './screens/InputScreen'
 import HomeScreen from './screens/HomeScreen'
 import MealPlanScreen from './screens/MealPlanScreen'
-import ConsumptionScreen from './screens/ConsumptionScreen'
 import ShoppingListScreen from './screens/ShoppingListScreen'
 import RecipeScreen from './screens/RecipeScreen'
-import {createStackNavigator} from '@react-navigation/stack'
-import {NavigationContainer, DefaultTheme} from '@react-navigation/native'
+import { createStackNavigator } from '@react-navigation/stack'
+import { NavigationContainer, DefaultTheme } from '@react-navigation/native'
+import { useFonts } from 'expo-font'
 
 const Stack = createStackNavigator()
 
@@ -16,6 +16,11 @@ const Theme = {
 }
 
 export default function App() {
+    useFonts({
+        PoppinsRegular: require('./assets/fonts/Poppins-Regular.ttf'),
+        PoppinsLight: require('./assets/fonts/Poppins-Light.ttf'),
+        PoppinsBold: require('./assets/fonts/Poppins-Bold.ttf')
+    })
     return (
         <NavigationContainer theme={Theme}>
             <Stack.Navigator>
@@ -37,11 +42,6 @@ export default function App() {
                 <Stack.Screen
                     name="RecipeDetailsScreen"
                     component={RecipeScreen}
-                    options={{headerShown: false}}
-                />
-                <Stack.Screen
-                    name="ConsumptionScreen"
-                    component={ConsumptionScreen}
                     options={{headerShown: false}}
                 />
                 <Stack.Screen

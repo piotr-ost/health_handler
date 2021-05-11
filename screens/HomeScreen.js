@@ -1,68 +1,61 @@
-import React from 'react'
-import {View, Image, StyleSheet} from 'react-native'
-import {MainButton} from '../components/Buttons'
-import {connectUser} from '../ApiCalls'
-import AsyncStorage from "@react-native-async-storage/async-storage"
+import React, { useRef, useEffect, useState } from 'react'
+import { Animated, View, Image, StyleSheet, Text } from 'react-native'
+import { Sainsburys } from '../components/SupermarketCards'
+import SmallLogo from '../components/SmallLogo'
 import common from '../common.style'
 
 
-const HomeScreen = ({navigation}) => {
-    const handleClick = async () => {
-        try {
-            const userJson = await AsyncStorage.getItem('user1')
-            if (userJson) {
-                const user = JSON.parse(userJson)
-                console.log('retrieved the guy', user)
-                navigation.navigate('InputScreen', {user: user})
-            } else {
-                const [username, hash] = await connectUser()
-                let user = JSON.stringify({
-                    username: username,
-                    hash: hash
-                })
-                await AsyncStorage.setItem('user1', user)
-                console.log('new guy', user)
-                navigation.navigate('InputScreen', {user: user})
-            }
-        } catch (e) {
-            console.log(e)
-        }
-    }
+const HomeScreen = ({ route, navigation }) => {
+  const fadeAnimation = useRef(new Animated.Value(1)).current
+  const [ready, setReady] = useState(false)
 
-    return (
-        <View style={styles.screen}>
-            <View />
-            <View>
-                <Image
-                    source={require('../assets/logo.png')}
-                    style={styles.mainLogo}
-                />
-                <Image
-                    source={require('../assets/logo_text.png')}
-                    style={styles.logoText}
-                />
-            </View>
-            <MainButton text={'Start'} onPress={handleClick}/>
-            <View />
-        </View>
-    );
+  useEffect(() => {
+    setTimeout(() => {
+      Animated.timing(fadeAnimation, {
+        toValue: 0,
+        duration: 1000,
+        useNativeDriver: true
+      }).start()
+    }, 2000)
+    setTimeout(() => {
+      setReady(true)
+    }, 4000)
+  }, [])
+
+  return (
+    <View style={styles.screen}>
+      {
+        ready
+          ? <StartView navigation={navigation} />
+          : <Animated.View style={{opacity: fadeAnimation}}>
+            <Image source={require('../assets/logo.png')} />
+          </Animated.View>
+      }
+    </View>
+  )
+}
+
+const StartView = ({ navigation }) => {
+  return (
+    <View>
+      <SmallLogo />
+      <Text style={[common.headingMain, {marginTop: 30}]}>
+        Let's get started!
+      </Text>
+      <Text style={[common.text, {marginTop: 5}]}>
+        Select your preferred supermarket
+      </Text>
+      <Sainsburys navigation={navigation} />
+    </View>
+  )
 }
 
 const styles = StyleSheet.create({
-    screen: {
-        ...common.screen,
-        alignItems: 'center',
-        justifyContent: 'space-around'
-    },
-    mainLogo: {
-        width: 200,
-        height: 168,
-    },
-    logoText: {
-        width: 166,
-        height: 82,
-        marginTop: 30,
-    },
+  screen: {
+    ...common.screen,
+    alignItems: 'center',
+    justifyContent: 'space-around'
+  },
 })
 
 export default HomeScreen

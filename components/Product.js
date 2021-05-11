@@ -5,7 +5,6 @@ import {GreenDivider} from "./Dividers";
 
 export const Product = ({name, imgUrl, amount, unit, price}) => {
     let mainText = name.charAt(0).toUpperCase() + name.slice(1)
-
     return (
         <View>
             <View style={{flexDirection: 'row'}}>

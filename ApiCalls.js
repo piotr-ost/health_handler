@@ -18,7 +18,7 @@ export const getUserPlan = (username, hash) => {
 }
 
 export const addToUserPlan = async (username, hash) => {
-  const mealPlanTemplateId = 604
+  const mealPlanTemplateId = 607
   const base = 'https://api.spoonacular.com/mealplanner/'
   const startDate = Math.round(new Date().getTime() / 1000 + 100)
   return await axios.post(
