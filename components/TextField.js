@@ -2,7 +2,7 @@ import React from 'react'
 import { TextInput, View, Text, StyleSheet } from 'react-native'
 import common from '../common.style'
 
-export default ({ label, value, onChange, secureTextEntry }) => {
+export default ({ label, value, onChange, secure, capitalize, correct, type }) => {
   return (
     <View>
       <Text style={styles.label}>
@@ -12,7 +12,10 @@ export default ({ label, value, onChange, secureTextEntry }) => {
         style={styles.input}
         value={value}
         onChangeText={onChange}
-        secureTextEntry={secureTextEntry}
+        secureTextEntry={secure}
+        autoCapitalize={capitalize}
+        autoCorrect={correct}
+        autoCompleteType={type}
       />
     </View>
   )

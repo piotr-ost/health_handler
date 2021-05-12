@@ -6,6 +6,7 @@ import ShoppingListScreen from './screens/ShoppingListScreen'
 import RecipeScreen from './screens/RecipeScreen'
 import StartScreen from './screens/StartScreen'
 import SignInScreen from './screens/SignInScreen'
+import SignUpScreen from './screens/SignUpScreen'
 import { createStackNavigator } from '@react-navigation/stack'
 import { NavigationContainer, DefaultTheme } from '@react-navigation/native'
 import { useFonts } from 'expo-font'
@@ -35,6 +36,11 @@ export default function App() {
           name="SignInScreen"
           component={SignInScreen}
           options={{headerShown: false, gestureEnabled: false}}
+        />
+        <Stack.Screen
+          name="SignUpScreen"
+          component={SignUpScreen}
+          options={{headerShown: false}}
         />
         <Stack.Screen 
           name="StartScreen"

@@ -8,27 +8,31 @@ import common from '../common.style'
 
 
 const SignInScreen = ({ navigation }) => {
+  const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-
+  const [passwordConfirm, setPasswordConfirm] = useState('')
   return (
     <View style={styles.screen}>
       <View style={styles.loginContainer}>
         <View style={{marginTop: 100}}>
           <SmallLogo />
           <Text style={common.headingMain}>
-            Welcome!
-          </Text>
-          <Text style={[common.text, {marginTop: 5}]}>
-            Sign in to continue
+            Create an account
           </Text>
         </View>
         <View style={{marginTop: 55}}>
           <TextField 
+            label={'Name'} 
+            value={name} 
+            onChange={setName} 
+            capitalize='sentences'
+            correct={false}
+          />
+          <TextField 
             label={'Email'} 
             value={email} 
             onChange={setEmail} 
-            type={'email'}
             capitalize='none'
             correct={false}
           />
@@ -36,36 +40,38 @@ const SignInScreen = ({ navigation }) => {
             label={'Password'} 
             value={password} 
             onChange={setPassword} 
-            secureTextEntry={true} 
-            type={'password'}
+            secure={true} 
             capitalize='none'
             correct={false}
           />
-          <Text 
-            style={{
-              textAlign: 'right', fontFamily: 'PoppinsRegular', 
-              fontSize: 13, lineHeight: 19, marginBottom: 30
-            }}
-          >
-            Forgot Password?
-          </Text>
-          <GreenButton text={'Login'} onPress={() => {}} />
+          <TextField 
+            label={'Confirm Password'} 
+            value={passwordConfirm} 
+            onChange={setPasswordConfirm} 
+            secure={true} 
+            capitalize='none'
+            correct={false}
+          />
+          <View style={{marginTop: 30}}>
+            <GreenButton  text={'Login'} onPress={() => {}} />
+          </View>
         </View>
       </View>
         <View style={{position: 'absolute', bottom: '6%', alignSelf: 'center'}}>
           <Text style={common.text}>
-            New to Health Handler? {'\t'}
+            Already a member? {'\t'}
             <Text 
               style={{color: '#5AD710', fontFamily: 'PoppinsBold'}}
-              onPress={() => navigation.navigate('SignUpScreen')}
+              onPress={() => navigation.navigate('SignInScreen')}
             >
-              Sign up
+              Sign in 
             </Text>
           </Text>
         </View>
     </View>
   )
 }
+// todo: for both screens -> validate email and ensure passwords match before django req
 
 const styles = StyleSheet.create({
   screen: {
