@@ -7,11 +7,29 @@ import SmallLogo from '../components/SmallLogo'
 import common from '../common.style'
 
 
-const SignInScreen = ({ navigation }) => {
-  const [name, setName] = useState('')
+const SignUpScreen = ({ navigation }) => {
+  const [username, setUsername] = useState('')
   const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const [passwordConfirm, setPasswordConfirm] = useState('')
+  const [password1, setPassword1] = useState('')
+  const [password2, setPassword2] = useState('')
+
+  const signUp = () => {
+    const loc = 'http://127.0.0.1:8000/'
+    const main = 'https://handler.health/'
+    fetch(loc + 'auth/registration/', {
+      method: 'POST',
+      credentials: 'omit',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      body: JSON.stringify({ username, email, password1, password2 })
+    })
+      .then(r => r.json())
+      .then(r => console.log(r))
+      .catch(err => console.log(err))
+  }
+
   return (
     <View style={styles.screen}>
       <View style={styles.loginContainer}>
@@ -23,10 +41,10 @@ const SignInScreen = ({ navigation }) => {
         </View>
         <View style={{marginTop: 55}}>
           <TextField 
-            label={'Name'} 
-            value={name} 
-            onChange={setName} 
-            capitalize='sentences'
+            label={'Username'} 
+            value={username} 
+            onChange={setUsername} 
+            capitalize='none'
             correct={false}
           />
           <TextField 
@@ -35,25 +53,28 @@ const SignInScreen = ({ navigation }) => {
             onChange={setEmail} 
             capitalize='none'
             correct={false}
+            type={'email'}
           />
           <TextField 
             label={'Password'} 
-            value={password} 
-            onChange={setPassword} 
+            value={password1} 
+            onChange={setPassword1} 
             secure={true} 
-            capitalize='none'
+            capitalize={'none'}
             correct={false}
+            type={'password'}
           />
           <TextField 
             label={'Confirm Password'} 
-            value={passwordConfirm} 
-            onChange={setPasswordConfirm} 
+            value={password2} 
+            onChange={setPassword2} 
             secure={true} 
-            capitalize='none'
+            capitalize={'none'}
             correct={false}
+            type={'password'}
           />
           <View style={{marginTop: 30}}>
-            <GreenButton  text={'Login'} onPress={() => {}} />
+            <GreenButton text={'Sign up'} onPress={signUp} />
           </View>
         </View>
       </View>
@@ -71,7 +92,6 @@ const SignInScreen = ({ navigation }) => {
     </View>
   )
 }
-// todo: for both screens -> validate email and ensure passwords match before django req
 
 const styles = StyleSheet.create({
   screen: {
@@ -80,4 +100,4 @@ const styles = StyleSheet.create({
   },
 })
 
-export default SignInScreen 
+export default SignUpScreen 

@@ -8,8 +8,25 @@ import common from '../common.style'
 
 
 const SignInScreen = ({ navigation }) => {
-  const [email, setEmail] = useState('')
+  const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
+
+  const signIn = () => {
+    const loc = 'http://127.0.0.1:8000/'
+    const main = 'https://handler.health/'
+    fetch(loc + 'auth/login/', {
+      method: 'POST',
+      credentials: 'omit',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      body: JSON.stringify({ username, password })
+    })
+      .then(r => r.json())
+      .then(r => console.log(r))
+      .catch(err => console.log(err))
+  }
 
   return (
     <View style={styles.screen}>
@@ -25,10 +42,9 @@ const SignInScreen = ({ navigation }) => {
         </View>
         <View style={{marginTop: 55}}>
           <TextField 
-            label={'Email'} 
-            value={email} 
-            onChange={setEmail} 
-            type={'email'}
+            label={'Username'} 
+            value={username} 
+            onChange={setUsername} 
             capitalize='none'
             correct={false}
           />
@@ -36,7 +52,7 @@ const SignInScreen = ({ navigation }) => {
             label={'Password'} 
             value={password} 
             onChange={setPassword} 
-            secureTextEntry={true} 
+            secure={true} 
             type={'password'}
             capitalize='none'
             correct={false}
@@ -49,7 +65,7 @@ const SignInScreen = ({ navigation }) => {
           >
             Forgot Password?
           </Text>
-          <GreenButton text={'Login'} onPress={() => {}} />
+          <GreenButton text={'Sign in'} onPress={signIn} />
         </View>
       </View>
         <View style={{position: 'absolute', bottom: '6%', alignSelf: 'center'}}>
