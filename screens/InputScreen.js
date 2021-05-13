@@ -1,166 +1,129 @@
-import React, {useState} from 'react'
-import {View} from 'react-native'
-import {CheckBox} from "react-native-elements"
-import {MainButton} from '../components/Buttons'
-import {Slider} from '../components/Slider'
-import {DropdownSection} from "../components/Dropdowns"
-import {HealthHandlerHeader} from '../components/Headers'
-import {addToUserPlan, getUserPlan} from '../ApiCalls'
-import AsyncStorage from '@react-native-async-storage/async-storage'
-import common, {GREEN} from '../common.style'
-import lodash from 'lodash'
+import React, { useState } from 'react'
+import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native'
+import common from '../common.style'
+import SmallLogo from '../components/SmallLogo'
+import GreenButton from '../components/GreenButton'
 
 
-const InputScreen = ({navigation}) => {
-    // TODO this data has to come from async storage
-    const [userData, setUserData] = useState({
-        vegetarian: false,
-        vegan: false,
-        nutFree: false,
-        halal: false,
-        lactoseFree: false,
-        fishAllergy: false
-    })
-    const [price, setPrice] = useState(10)
-    const [time, setTime] = useState(60)
-    const [calories, setCalories] = useState(2500)
-    const [waiting, setWaiting] = useState(false)
-    const handleClick = async () => {
-        setWaiting(true)
-        try {
-            const userJson = await AsyncStorage.getItem('user1')
-            const user = JSON.parse(userJson)
-            if (user) {
-                const {username, hash} = user
-                getUserPlan(user.username, user.hash)
-                    .then(r => {
-                        if (lodash.some(r.data.days)) {
-                            navigation.navigate("MealPlanScreen", {
-                                data: r.data,
-                                user: user,
-                                userInput: {
-                                    userData: userData,
-                                    price: price,
-                                    time: time,
-                                    calories: calories,
-                                }
-                            })
-                            setWaiting(false)
-                        } else {
-                            addToUserPlan(username, hash)
-                            handleClick()
-                        }
-                    })
-                    .catch(e => console.log(e))
-            }
-        } catch (e) {
-            console.log(e)
-        }
-    }
-    return (
-        <View style={[common.screen, {justifyContent: 'space-around'}]}>
-            <HealthHandlerHeader />
-            <DropdownSection />
-            <View>
-                <View style={{padding: 10}}>
-                    <Slider
-                        value={price}
-                        minValue={1}
-                        maxValue={20}
-                        step={0.05}
-                        onValueChange={(value) => setPrice(value)}
-                        unit={'£/meal'}
-                    />
-                    <Slider
-                        value={time}
-                        minValue={15}
-                        maxValue={100}
-                        step={1}
-                        onValueChange={(value) => setTime(value)}
-                        unit={'minutes'}
-                    />
-                    <Slider
-                        value={calories}
-                        minValue={1500}
-                        maxValue={4000}
-                        step={50}
-                        onValueChange={(value) => setCalories(value)}
-                        unit={'kcal'}
-                    />
-                </View>
-                <View style={common.flexRow}>
-                    <View style={common.column}>
-                        <View>
-                            <CheckBox
-                                checked={userData.vegetarian}
-                                title="Vegetarian"
-                                checkedColor={GREEN}
-                                onPress={() => setUserData({
-                                    ...userData,
-                                    vegetarian: !userData.vegetarian
-                                })}
-                            />
-                            <CheckBox
-                                checked={userData.nutFree}
-                                title="Nut free"
-                                checkedColor={GREEN}
-                                onPress={() => setUserData({
-                                    ...userData,
-                                    nutFree: !userData.nutFree
-                                })}
-                            />
-                            <CheckBox
-                                checked={userData.halal}
-                                title="Halal"
-                                checkedColor={GREEN}
-                                onPress={() => setUserData({
-                                    ...userData,
-                                    halal: !userData.halal
-                                })}
-                            />
-                        </View>
-                    </View>
-                    <View style={common.column}>
-                        <View>
-                            <CheckBox
-                                checked={userData.vegan}
-                                title="Vegan"
-                                checkedColor={GREEN}
-                                onPress={() => setUserData({
-                                    ...userData,
-                                    vegan: !userData.vegan
-                                })}
-                            />
-                            <CheckBox
-                                checked={userData.lactoseFree}
-                                title="No lactose"
-                                checkedColor={GREEN}
-                                onPress={() => setUserData({
-                                    ...userData,
-                                    lactoseFree: !userData.lactoseFree
-                                })}
-                            />
-                            <CheckBox
-                                checked={userData.fishAllergy}
-                                title="No fish"
-                                checkedColor={GREEN}
-                                onPress={() => setUserData({
-                                    ...userData,
-                                    fishAllergy: !userData.fishAllergy
-                                })}
-                            />
-                        </View>
-                    </View>
-                </View>
-                <View style={{alignSelf: 'center', marginBottom: 50}}>
-                    <MainButton
-                        onPress={handleClick}
-                        text={!waiting ? "Create plan" : "Sending..."}
-                    />
-                </View>
-            </View>
-        </View>
-    )
+const InputScreen = ({ navigation }) => {
+  const [requirements, setRequirements] = useState({
+    vegetarian: false,
+    vegan: false,
+    lactoseFree: false,
+    glutenFree: false
+  })
+  return (
+    <View style={[common.screen, {justifyContent: ''}]}>
+      <View style={{marginTop: 100}}>
+        <SmallLogo />
+        <Text style={common.headingMain}>
+          Dietary Requirements
+        </Text>
+        <Text style={[common.text, {marginTop: 5}]}>
+          Do you have any requirements?
+        </Text>
+      </View>
+      <View style={{marginTop: 50}}>
+        <Checkbox 
+          text={'Vegetarian'} 
+          value={requirements.vegetarian} 
+          onPress={() => setRequirements({ 
+            ...requirements, 
+            vegetarian: !requirements.vegetarian 
+          })}
+        />
+        <Checkbox 
+          text={'Vegan'} 
+          value={requirements.vegan} 
+          onPress={() => setRequirements({ 
+            ...requirements, 
+            vegan: !requirements.vegan 
+          })}
+        />
+        <Checkbox 
+          text={'Lactose Free'} 
+          value={requirements.lactoseFree} 
+          onPress={() => setRequirements({ 
+            ...requirements, 
+            lactoseFree: !requirements.lactoseFree 
+          })}
+        />
+        <Checkbox 
+          text={'Gluten Free'} 
+          value={requirements.glutenFree} 
+          onPress={() => setRequirements({ 
+            ...requirements, 
+            glutenFree: !requirements.glutenFree 
+          })}
+        />
+      </View>
+      <View style={{marginTop: 100}}>
+      <GreenButton 
+        text={'Continue'} 
+        onPress={() => navigation.navigate('SwipeInstructionScreen')} 
+      />
+      </View>
+    </View>
+  )
 }
+
+const Checkbox = ({ text, value, onPress }) => {
+  return (
+    <View>
+      {
+        value 
+          ?  
+          <TouchableOpacity style={styles.rowContainer} onPress={onPress}>
+            <View style={styles.checkedBox}>
+              <Image source={require('../assets/check.png')} />
+            </View>
+            <View style={{marginLeft: 30}}>
+              <Text style={common.text}>
+                {text} 
+              </Text>
+            </View>
+          </TouchableOpacity>
+          :
+          <TouchableOpacity style={styles.rowContainer} onPress={onPress}>
+            <View style={styles.box} />
+            <View style={{marginLeft: 30}}>
+              <Text style={common.text}>
+                {text} 
+              </Text>
+            </View>
+          </TouchableOpacity>
+      }
+    </View>
+  )
+}
+
+const styles = StyleSheet.create({
+  rowContainer: {
+    ...common.flexRow,
+    justifyContent: 'flex-start',
+    width: 150,
+    marginTop: 25,
+  },
+  checkedBox: {
+    width: 28,
+    height: 28,
+    borderColor: '#5AD710',
+    borderWidth: 2,
+    borderRadius: 6,
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  box: {
+    width: 28,
+    height: 28,
+    borderColor: '#DCDCDC',
+    borderWidth: 2,
+    borderRadius: 6,
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center'
+  }
+})
 
 export default InputScreen
