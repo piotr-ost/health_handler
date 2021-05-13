@@ -5,7 +5,7 @@ import SmallLogo from '../components/SmallLogo'
 import GreenButton from '../components/GreenButton'
 
 
-const InputScreen = ({ navigation }) => {
+const RequirementsScreen = ({ navigation }) => {
   const [requirements, setRequirements] = useState({
     vegetarian: false,
     vegan: false,
@@ -126,4 +126,4 @@ const styles = StyleSheet.create({
   }
 })
 
-export default InputScreen
+export default RequirementsScreen 

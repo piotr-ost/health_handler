@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native'
+import { View, Text, StyleSheet, Image } from 'react-native'
 import SmallLogo from '../components/SmallLogo'
 import common from '../common.style'
 import GreenButton from '../components/GreenButton'
@@ -25,10 +25,10 @@ const SwipeInstructionScreen = ({ navigation }) => {
         <Text style={styles.descriptionText}>
           Description provided by the creator of the meal plan showed on screen.
         </Text>
-        <TouchableOpacity style={styles.viewContainer} onPress={() => {}}>
+        <View style={styles.viewContainer} onPress={() => {}}>
           <Text style={styles.clickyText}>View full plan</Text>
           <Image source={require('../assets/down.png')} style={{marginLeft: 10}} />
-        </TouchableOpacity>
+        </View>
         <View style={styles.bottomRow}>
           <Image source={require('../assets/dislike.png')} />
           <Image source={require('../assets/report.png')} />

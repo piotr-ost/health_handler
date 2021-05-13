@@ -1,13 +1,15 @@
 import React from 'react'
-import InputScreen from './screens/InputScreen'
 import HomeScreen from './screens/HomeScreen'
-import MealPlanScreen from './screens/MealPlanScreen'
-import ShoppingListScreen from './screens/ShoppingListScreen'
-import RecipeScreen from './screens/RecipeScreen'
-import StartScreen from './screens/StartScreen'
 import SignInScreen from './screens/SignInScreen'
 import SignUpScreen from './screens/SignUpScreen'
+import StartScreen from './screens/StartScreen'
+import RequirementsScreen from './screens/RequirementsScreen'
 import SwipeInstructionScreen from './screens/SwipeInstructionScreen'
+import SwipeScreen from './screens/SwipeScreen'
+import WeeklyPlanScreen from './screens/WeeklyPlanScreen'
+import MealScreen from './screens/MealScreen'
+import ShoppingListScreen from './screens/ShoppingListScreen'
+
 import { createStackNavigator } from '@react-navigation/stack'
 import { NavigationContainer, DefaultTheme } from '@react-navigation/native'
 import { useFonts } from 'expo-font'
@@ -49,8 +51,8 @@ export default function App() {
           options={{headerShown: false, gestureEnabled: false}}
         />
         <Stack.Screen
-          name="InputScreen"
-          component={InputScreen}
+          name="RequirementsScreen"
+          component={RequirementsScreen}
           options={{headerShown: false}}
         />
         <Stack.Screen
@@ -59,13 +61,13 @@ export default function App() {
           options={{headerShown: false}}
         />
         <Stack.Screen
-          name="MealPlanScreen"
-          component={MealPlanScreen}
+          name="SwipeScreen"
+          component={SwipeScreen}
           options={{headerShown: false}}
         />
         <Stack.Screen
-          name="RecipeDetailsScreen"
-          component={RecipeScreen}
+          name="MealScreen"
+          component={MealScreen}
           options={{headerShown: false}}
         />
         <Stack.Screen
