@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { View, Image, StyleSheet, Text } from 'react-native'
+import { View, Image, StyleSheet, Text, Modal } from 'react-native'
 import { Sainsburys } from '../components/SupermarketCards'
 import GreenButton from '../components/GreenButton'
 import TextField from '../components/TextField'
@@ -12,6 +12,11 @@ const SignUpScreen = ({ navigation }) => {
   const [email, setEmail] = useState('')
   const [password1, setPassword1] = useState('')
   const [password2, setPassword2] = useState('')
+  const [resultText, setResultText] = useState(null)
+
+  const capitalize = (string) => {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  }
 
   const signUp = () => {
     const loc = 'http://127.0.0.1:8000/'
@@ -26,7 +31,23 @@ const SignUpScreen = ({ navigation }) => {
       body: JSON.stringify({ username, email, password1, password2 })
     })
       .then(r => r.json())
-      .then(r => console.log(r))
+      .then(r => {
+        console.log(r)
+        if (!r.key) {
+          let res = ''
+          for (let entry of Object.entries(r)) {
+            const [field, [problem]] = entry 
+            console.log(field, problem)
+            res += capitalize(field) + ': ' + problem + '\n'
+          }
+          setResultText(res)
+        } else {
+          navigation.navigate('StartScreen', { 
+            token: r.key, 
+            username: username 
+          })
+        }
+      })
       .catch(err => console.log(err))
   }
 
@@ -38,8 +59,16 @@ const SignUpScreen = ({ navigation }) => {
           <Text style={common.headingMain}>
             Create an account
           </Text>
+              <View>
+          {
+            resultText &&
+            <Text style={[common.text, {marginTop: 5, fontSize: 15, color: 'red'}]}>
+              {resultText}
+            </Text>
+          }
+              </View>
         </View>
-        <View style={{marginTop: 55}}>
+        <View style={!resultText ? {marginTop: 55} : {}}>
           <TextField 
             label={'Username'} 
             value={username} 
@@ -78,6 +107,8 @@ const SignUpScreen = ({ navigation }) => {
           </View>
         </View>
       </View>
+      {
+        !resultText &&
         <View style={{position: 'absolute', bottom: '6%', alignSelf: 'center'}}>
           <Text style={common.text}>
             Already a member? {'\t'}
@@ -89,6 +120,7 @@ const SignUpScreen = ({ navigation }) => {
             </Text>
           </Text>
         </View>
+      }
     </View>
   )
 }
@@ -98,6 +130,11 @@ const styles = StyleSheet.create({
     ...common.screen,
     paddingHorizontal: 40
   },
+  modalView: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  }
 })
 
 export default SignUpScreen 
