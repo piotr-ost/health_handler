@@ -1,0 +1,9 @@
+> add vegan, vegetarian ... to meal-plans
+> add total cost to meal-plans
+> query SELECT * .... to get the meal plan days for the tinder swipe
+
+> get the auth to send to email
+> get the template to show on the page of confirmation
+
+> make the heading font bolder and adjust the fonts (looks better in design)
+> use masked views for gradient text
