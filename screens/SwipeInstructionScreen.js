@@ -43,7 +43,7 @@ const SwipeInstructionScreen = ({ navigation }) => {
         <Instruction source={require('../assets/dislike.png')} text={'Not interested...'} />
       </View>
       <View style={{marginTop: 30}}>
-        <GreenButton text={"Let's go!"} onPress={() => navigation.navigate()} />
+        <GreenButton text={"Let's go!"} onPress={() => navigation.navigate('SwipeScreen')} />
       </View>
     </View>
   )

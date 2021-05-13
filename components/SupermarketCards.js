@@ -6,7 +6,7 @@ export const Sainsburys = ({ navigation }) => {
   return (
     <View style={styles.container} >
       <TouchableOpacity 
-        onPress={() => navigation.push('InputScreen', {
+        onPress={() => navigation.navigate('RequirementsScreen', {
           supermarket: 'sainsburys' 
         })
       }>
