@@ -8,7 +8,7 @@ import GreenButton from '../components/GreenButton'
 const SwipeInstructionScreen = ({ navigation }) => {
   return (
     <View style={[common.screen, {justifyContent: ''}]}>
-      <View style={[common.flexRow, {marginTop: 50}]}>
+      <View style={[common.flexRow, {marginTop: 30}]}>
         <View>
           <Text style={common.headingMain}>
             Select your Meals!
@@ -42,7 +42,7 @@ const SwipeInstructionScreen = ({ navigation }) => {
         <Instruction source={require('../assets/share.png')} text={'Share'} />
         <Instruction source={require('../assets/dislike.png')} text={'Not interested...'} />
       </View>
-      <View style={{marginTop: 30}}>
+      <View style={{marginTop: 20}}>
         <GreenButton text={"Let's go!"} onPress={() => navigation.navigate('SwipeScreen')} />
       </View>
     </View>
@@ -65,7 +65,7 @@ const Instruction = ({ source, text }) => {
 
 const styles = StyleSheet.create({
   card: {
-    marginTop: 35,
+    marginTop: 15,
     borderRadius: 20,
     width: '90%',
     height: 268,
@@ -112,12 +112,6 @@ const styles = StyleSheet.create({
     position: 'absolute',
     marginLeft: 80
   },
-  viewContainer: {
-    alignSelf: 'center', 
-    marginTop: 35,
-    flexDirection: 'row',
-    alignItems: 'center'
-  },
   bottomRow: {
     ...common.flexRow,
     marginTop: 10
@@ -125,9 +119,14 @@ const styles = StyleSheet.create({
   instructionRow: {
     ...common.flexRow,
     justifyContent: 'flex-start',
-    marginTop: 20
+    marginTop: 15
   },
-
+  viewContainer: {
+    alignSelf: 'center', 
+    marginTop: 35, 
+    flexDirection: 'row',
+    alignItems: 'center'
+  }
 })
 
 export default SwipeInstructionScreen

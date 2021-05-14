@@ -7,3 +7,7 @@
 
 > make the heading font bolder and adjust the fonts (looks better in design)
 > use masked views for gradient text
+> finish the last few screens and get placeholder meal plan for launch, then take break 3 days before adding the api integration
+
+> scaling cross device 
+(doesnt have to be beautiful but no severe issues)
