@@ -5,7 +5,8 @@ import common from '../common.style'
 
 
 const MealPlanCard = ({ mealPlan }) => {
-  const urlBase = 'http://localhost:7000/meals/'
+  const urlBase = 'https://handler.health/meals/'
+  const productsUrlBase = 'https://handler.health/products/'
   const [meals, setMeals] = useState({
     breakfast: null,
     dinner: null,
@@ -14,47 +15,62 @@ const MealPlanCard = ({ mealPlan }) => {
     snackTwo: null
   })
   useEffect(() => {
-    fetch(urlBase + mealPlan.breakfast)
-      .then(r => r.json())
-      .then(r => console.log(r))
-      .then(r => setMeals({ ...meals, breakfast: r })) 
-    fetch(urlBase + mealPlan.dinner)
-      .then(r => r.json())
-      .then(r => setMeals({ ...meals, dinner: r }))
-    fetch(urlBase + mealPlan.lunch)
-      .then(r => r.json())
-      .then(r => setMeals({ ...meals, lunch: r }))
-    fetch(urlBase + mealPlan.snack_one)
-      .then(r => r.json())
-      .then(r => setMeals({ ...meals, snackOne: r }))
-    fetch(urlBase + mealPlan.snack_two)
-      .then(r => r.json())
-      .then(r => setMeals({ ...meals, snackTwo: r }))
-      .then(console.log(meals))
+    const breakfast = fetch(urlBase + mealPlan.breakfast)
+    const dinner = fetch(urlBase + mealPlan.dinner)
+    const lunch = fetch(urlBase + mealPlan.lunch)
+    const snackOne = fetch(productsUrlBase + mealPlan.snack_one)
+    const snackTwo = fetch(productsUrlBase + mealPlan.snack_two)
+    Promise.all([breakfast, dinner, lunch, snackOne, snackTwo])
+      .then(
+        async ([breakfast, dinner, lunch, snackOne, snackTwo]) => {
+          setMeals({
+            breakfast: await breakfast.json(),
+            dinner: await dinner.json(),
+            lunch: await lunch.json(),
+            snackOne: await snackOne.json(),
+            snackTwo: await snackTwo.json()
+          })
+        }
+      )
+      .catch(err => console.log(err))
   }, [])
   return (
     <View>
-      <Image 
-        style={styles.snackTwo}
-        source={require('../assets/ribs.png')} 
-      />
-      <Image 
-        style={styles.dinner}
-        source={require('../assets/ribs.png')} 
-      />
-      <Image 
-        style={styles.lunch}
-        source={require('../assets/ribs.png')} 
-      />
-      <Image 
-        source={require('../assets/ribs.png')} 
-        style={styles.snackOne}
-      />
-      <Image 
-        style={styles.breakfast}
-        source={require('../assets/ribs.png')} 
-      />
-        <Text>huj</Text>
+      {
+        meals.snackTwo &&
+        <Image 
+          style={styles.snackTwo}
+          source={{uri: meals.snackTwo.img_url}} 
+        />
+      }
+      {
+        meals.dinner &&
+        <Image 
+          style={styles.dinner}
+          source={{uri: meals.dinner.img}} 
+        />
+      }
+      {
+        meals.lunch &&
+        <Image 
+          style={styles.lunch}
+          source={{uri: meals.lunch.img}} 
+        />
+      }
+      {
+        meals.snackOne &&
+        <Image 
+          source={{uri: meals.snackOne.img_url}} 
+          style={styles.snackOne}
+        />
+      }
+      {
+        meals.breakfast &&
+        <Image 
+          style={styles.breakfast}
+          source={{uri: meals.breakfast.img}} 
+        />
+      }
       <View style={styles.infoCard}>
         <View>
           <Text style={styles.subText}>Jude Cornish's</Text>

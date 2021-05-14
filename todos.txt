@@ -11,3 +11,5 @@
 
 > scaling cross device 
 (doesnt have to be beautiful but no severe issues)
+> add a scrollview for the description if the text is too long or sth
+> fix the 'Strong Password' bug

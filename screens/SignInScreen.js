@@ -64,7 +64,9 @@ const SignInScreen = ({ navigation }) => {
             </Text>
           }
         </View>
-        <View style={{marginTop: 55}}>
+        <View style={
+          resultText ? {marginTop: 0} : {marginTop: 55}
+        }>
           <TextField 
             label={'Username'} 
             value={username} 

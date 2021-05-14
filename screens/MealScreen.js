@@ -25,8 +25,9 @@ const MealScreen = ({ navigation, route }) => {
             horizontal={true}
             showsHorizontalScrollIndicator={false}
           >
-            {ingredients.map()}
+            {/* ingredients.map()*/}
           </ScrollView>
+        </View>
       </View>
     </View>
   )
