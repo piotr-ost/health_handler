@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react'
-import { View, Text, Image, StyleSheet } from 'react-native'
+import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native'
 import ViewFullPlan from '../components/ViewFullPlan'
 import common from '../common.style'
 
 
-const MealPlanCard = ({ mealPlan }) => {
+const MealPlanCard = ({ mealPlan, onPressLeft, onPressRight }) => {
   const urlBase = 'https://handler.health/meals/'
   const productsUrlBase = 'https://handler.health/products/'
   const [meals, setMeals] = useState({
@@ -15,7 +15,6 @@ const MealPlanCard = ({ mealPlan }) => {
     snackTwo: null
   })
   useEffect(() => {
-    console.log(mealPlan)
     const breakfast = fetch(urlBase + mealPlan.breakfast)
     const dinner = fetch(urlBase + mealPlan.dinner)
     const lunch = fetch(urlBase + mealPlan.lunch)
@@ -31,7 +30,6 @@ const MealPlanCard = ({ mealPlan }) => {
             snackOne: await snackOne.json(),
             snackTwo: await snackTwo.json()
           })
-          console.log(meals)
         }
       )
       .catch(err => console.log(err))
@@ -89,10 +87,18 @@ const MealPlanCard = ({ mealPlan }) => {
         </View>
         <ViewFullPlan onPress={() => {}} />
         <View style={styles.bottomRow}>
-          <Image source={require('../assets/dislike.png')} />
+          <TouchableOpacity onPress={onPressRight}>
+            <Image 
+              source={require('../assets/dislike.png')} 
+            />
+          </TouchableOpacity>
           <Image source={require('../assets/report.png')} />
           <Image source={require('../assets/share.png')} />
-          <Image source={require('../assets/like.png')} />
+          <TouchableOpacity onPress={onPressRight}>
+            <Image 
+              source={require('../assets/like.png')} 
+            />
+          </TouchableOpacity>
         </View>
       </View>
     </View>
@@ -158,7 +164,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#FDFDFF',
     top: 445,
     paddingVertical: 36,
-    paddingHorizontal: 37
+    paddingHorizontal: 37,
   },
   subText: {
     ...common.text,
