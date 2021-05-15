@@ -7,7 +7,6 @@ import CardStack, { Card } from 'react-native-card-stack-swiper'
 
 const SwipeScreen = ({ route, navigation }) => {
   const [mealPlans, setMealPlans] = useState([])
-  const [swiper, setSwiper] = useState(null)
   useEffect(() => {
     fetch('https://handler.health/meal-plans')
       .then(r => r.json())
@@ -15,29 +14,36 @@ const SwipeScreen = ({ route, navigation }) => {
       .then(console.log(mealPlans))
   }, [])
   return (
-    <View > 
-      <CardStack
-        loop={true}
-        verticalSwipe={false}
-        renderNoMoreCards={() => null}
-        ref={swiper => setSwiper(swiper)}
-        cardContainerStyle={{width: '100%', height: '100%'}}
-      >
-        {
-          mealPlans.map((mealPlan, index) => (
-            <Card key={index}> 
-              <MealPlanCard 
-                mealPlan={mealPlan} 
-                onPressLeft={() => swiper.swipeLeft()}
-                onPressRight={() => swiper.swipeRight()}
-              />
-            </Card>
-          ))
-        }
-      </CardStack>
+    <View> 
+      { mealPlans.length
+          ? <SwipeBit mealPlans={mealPlans} />
+          : <Text>Chuj</Text>
+      }
     </View>
   )
 }
 
+const SwipeBit = ({ mealPlans }) => {
+  return (
+    <View >
+      <CardStack
+        loop={true}
+        verticalSwipe={false}
+        renderNoMoreCards={() => null}
+        cardContainerStyle={{width: '100%', height: '100%'}}
+      >
+      {
+        mealPlans.map((mealPlan, index) => (
+          <Card key={index}> 
+            <MealPlanCard 
+              mealPlan={mealPlan} 
+            />
+          </Card>
+        ))
+      }
+      </CardStack>
+    </View>
+  )
+}
 export default SwipeScreen
 
