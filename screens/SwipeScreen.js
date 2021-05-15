@@ -5,22 +5,12 @@ import common from '../common.style'
 
 
 const SwipeScreen = ({ route, navigation }) => {
-  const [mealPlans, setMealPlans] = useState([
-    {
-      "breakfast": 12,
-      "creator_address": "1",
-      "dinner": 5,
-      "lunch": 1,
-      "meal_plan_id": 1,
-      "snack_one": 4,
-      "snack_two": 11,
-    },
-  ])
-  //useEffect(() => {
-  //  fetch('https://handler.health/meal-plans')
-  //    .then(r => r.json())
-  //    .then(r => console.log(r))
-  //}, [])
+  const [mealPlans, setMealPlans] = useState([])
+  useEffect(() => {
+    fetch('https://handler.health/meal-plans')
+      .then(r => r.json())
+      .then(r => setMealPlans(r))
+  }, [])
   return (
     <View> 
       <MealPlanCard mealPlan={mealPlans.length && mealPlans[0]} />

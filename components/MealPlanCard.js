@@ -15,6 +15,7 @@ const MealPlanCard = ({ mealPlan }) => {
     snackTwo: null
   })
   useEffect(() => {
+    console.log(mealPlan)
     const breakfast = fetch(urlBase + mealPlan.breakfast)
     const dinner = fetch(urlBase + mealPlan.dinner)
     const lunch = fetch(urlBase + mealPlan.lunch)
@@ -30,6 +31,7 @@ const MealPlanCard = ({ mealPlan }) => {
             snackOne: await snackOne.json(),
             snackTwo: await snackTwo.json()
           })
+          console.log(meals)
         }
       )
       .catch(err => console.log(err))
@@ -73,16 +75,15 @@ const MealPlanCard = ({ mealPlan }) => {
       }
       <View style={styles.infoCard}>
         <View>
-          <Text style={styles.subText}>Jude Cornish's</Text>
+          <Text style={styles.subText}>
+            {mealPlan.creator_name}
+          </Text>
           <Text style={styles.headingText}>
-            High Protein Cheat Day
+            {mealPlan.title}
           </Text>
           <View style={{marginTop: 20}}>
             <Text style={styles.descriptionText}>
-              Cheat days are necessary - we’ve created the perfect 
-              high-protein cheat day meal plan for you. 
-              Keep in line with your goals while enjoying some 
-              great food.
+              {mealPlan.description}
             </Text>
           </View>
         </View>
