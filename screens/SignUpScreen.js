@@ -71,7 +71,7 @@ const SignUpScreen = ({ navigation }) => {
           {
             resultText &&
           <SafeAreaView>
-            <ScrollView style={{height: 48, marginBottom: 25, marginTop: 8}}>
+            <ScrollView style={styles.scrollView}>
               <Text style={styles.resultText}>
                 {resultText}
               </Text>
@@ -151,6 +151,11 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
+  },
+  scrollView: {
+    height: 48, 
+    marginBottom: 25, 
+    marginTop: 8
   }
 })
 

@@ -1,24 +1,49 @@
 import React, { useEffect, useState, Component } from 'react'
-import { View, Text, ScrollView } from 'react-native'
+import { View, Text, ScrollView, StyleSheet } from 'react-native'
 import MealPlanCard from '../components/MealPlanCard'
 import common from '../common.style'
 import CardStack, { Card } from 'react-native-card-stack-swiper'
+import { LinearGradient } from 'expo-linear-gradient'
 
 
 const SwipeScreen = ({ route, navigation }) => {
   const [mealPlans, setMealPlans] = useState([])
+  const [selectedMealPlans, setSelectedMealPlans] = useState([])
+  
   useEffect(() => {
     fetch('https://handler.health/meal-plans')
       .then(r => r.json())
       .then(r => setMealPlans(r))
       .then(console.log(mealPlans))
   }, [])
+
+  useEffect(() => {
+    if (selectedMealPlans.length == 7) 
+      navigation.navigate('WeeklyPlanScreen', {
+        selectedMealPlans: selectedMealPlans
+      })
+  }, [selectedMealPlans])
+
   return (
     <View> 
       { mealPlans.length
-          ? <SwipeBit mealPlans={mealPlans} />
-          : <View />
+          ? 
+          <SwipeBit 
+            mealPlans={mealPlans} 
+            selectedMealPlans={selectedMealPlans}
+            setSelectedMealPlans={setSelectedMealPlans}
+          />
+          : 
+          <View />
       }
+      <LinearGradient 
+        style={styles.counter} 
+        colors={['#5AD710', '#22E4CD']}
+      >
+        <Text style={styles.counterText}>
+          {selectedMealPlans.length} / 7
+        </Text>
+      </LinearGradient>
     </View>
   )
 }
@@ -43,7 +68,13 @@ class SwipeBit extends Component {
               <MealPlanCard 
                 mealPlan={mealPlan} 
                 onPressLeft={() => this.swiper.swipeLeft()}
-                onPressRight={() => this.swiper.swipeRight()}
+                onPressRight={() => {
+                  this.swiper.swipeRight()
+                  this.props.setSelectedMealPlans([
+                    ...this.props.selectedMealPlans,
+                    mealPlan
+                  ])
+                }}
               />
             </Card>
           ))
@@ -53,5 +84,28 @@ class SwipeBit extends Component {
     )
   }
 }
+const styles = StyleSheet.create({
+  counter: {
+    width: 84,
+    height: 64,
+    borderWidth: 3,
+    borderColor: '#FFFFFF',
+    position: 'absolute',
+    alignSelf: 'center',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 50,
+  },
+  counterText: {
+    ...common.headingMain,
+    fontSize: 20,
+    lineHeight: 30,
+    letterSpacing: 0.125,
+    color: '#FFFFFF',
+    position: 'absolute'
+  }
+})
+
 export default SwipeScreen
 
