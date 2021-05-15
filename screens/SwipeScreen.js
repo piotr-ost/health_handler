@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, Component } from 'react'
 import { View, Text, ScrollView } from 'react-native'
 import MealPlanCard from '../components/MealPlanCard'
 import common from '../common.style'
@@ -17,33 +17,41 @@ const SwipeScreen = ({ route, navigation }) => {
     <View> 
       { mealPlans.length
           ? <SwipeBit mealPlans={mealPlans} />
-          : <Text>Chuj</Text>
+          : <View />
       }
     </View>
   )
 }
 
-const SwipeBit = ({ mealPlans }) => {
-  return (
-    <View >
-      <CardStack
-        loop={true}
-        verticalSwipe={false}
-        renderNoMoreCards={() => null}
-        cardContainerStyle={{width: '100%', height: '100%'}}
-      >
-      {
-        mealPlans.map((mealPlan, index) => (
-          <Card key={index}> 
-            <MealPlanCard 
-              mealPlan={mealPlan} 
-            />
-          </Card>
-        ))
-      }
-      </CardStack>
-    </View>
-  )
+class SwipeBit extends Component {
+  constructor(props) {
+    super(props)
+  }
+  render() {
+    return (
+      <View >
+        <CardStack
+          loop={true}
+          verticalSwipe={false}
+          renderNoMoreCards={() => null}
+          cardContainerStyle={{width: '100%', height: '100%'}}
+          ref={swiper => { this.swiper = swiper }}
+        >
+        {
+          this.props.mealPlans.map((mealPlan, index) => (
+            <Card key={index}> 
+              <MealPlanCard 
+                mealPlan={mealPlan} 
+                onPressLeft={() => this.swiper.swipeLeft()}
+                onPressRight={() => this.swiper.swipeRight()}
+              />
+            </Card>
+          ))
+        }
+        </CardStack>
+      </View>
+    )
+  }
 }
 export default SwipeScreen
 

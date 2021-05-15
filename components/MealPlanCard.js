@@ -1,7 +1,16 @@
 import React, { useState, useEffect } from 'react'
-import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native'
+import { 
+  View, 
+  Text, 
+  Image, 
+  StyleSheet, 
+  TouchableOpacity, 
+  ScrollView,
+  SafeAreaView
+} from 'react-native'
 import ViewFullPlan from '../components/ViewFullPlan'
 import common from '../common.style'
+import Icon from 'react-native-vector-icons/FontAwesome'
 
 
 const MealPlanCard = ({ mealPlan, onPressLeft, onPressRight }) => {
@@ -79,24 +88,30 @@ const MealPlanCard = ({ mealPlan, onPressLeft, onPressRight }) => {
           <Text style={styles.headingText}>
             {mealPlan.title}
           </Text>
-          <View style={{marginTop: 20}}>
-            <Text style={styles.descriptionText}>
-              {mealPlan.description}
-            </Text>
-          </View>
+          <SafeAreaView style={{marginTop: 20}}>
+            <ScrollView style={{height: 95}}>
+              <Text style={styles.descriptionText}>
+                {mealPlan.description}
+              </Text>
+            </ScrollView>
+          </SafeAreaView>
         </View>
-        <ViewFullPlan onPress={() => {}} />
         <View style={styles.bottomRow}>
-          <TouchableOpacity onPress={onPressRight}>
-            <Image 
-              source={require('../assets/dislike.png')} 
+          <TouchableOpacity onPress={onPressLeft}>
+            <Icon 
+              name={'arrow-left'} 
+              size={40} 
+              color={'red'}
             />
           </TouchableOpacity>
-          <Image source={require('../assets/report.png')} />
-          <Image source={require('../assets/share.png')} />
+          <View style={{marginBottom: 30}}>
+            <ViewFullPlan onPress={() => {}} />
+          </View>
           <TouchableOpacity onPress={onPressRight}>
-            <Image 
-              source={require('../assets/like.png')} 
+            <Icon 
+              name={'arrow-right'} 
+              size={40} 
+              color={'green'}
             />
           </TouchableOpacity>
         </View>
@@ -185,8 +200,12 @@ const styles = StyleSheet.create({
   },
   bottomRow: {
     ...common.flexRow,
-    marginTop: 10,
-    marginHorizontal: 20,
+    marginHorizontal: 30,
+    height: 80,
+    position: 'absolute',
+    bottom: 130,
+    alignSelf: 'center',
+    width: '90%'
   }
 })
 

@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, Image } from 'react-native'
 import SmallLogo from '../components/SmallLogo'
 import common from '../common.style'
 import GreenButton from '../components/GreenButton'
+import Icon from 'react-native-vector-icons/FontAwesome'
 
 
 const SwipeInstructionScreen = ({ navigation }) => {
@@ -30,35 +31,46 @@ const SwipeInstructionScreen = ({ navigation }) => {
           <Image source={require('../assets/down.png')} style={{marginLeft: 10}} />
         </View>
         <View style={styles.bottomRow}>
-          <Image source={require('../assets/dislike.png')} />
-          <Image source={require('../assets/report.png')} />
-          <Image source={require('../assets/share.png')} />
-          <Image source={require('../assets/like.png')} />
+          <Icon 
+            name={'arrow-left'} 
+            size={40} 
+            color={'red'}
+          />
+          <Icon 
+            name={'arrow-right'} 
+            size={40} 
+            color={'green'}
+          />
         </View>
       </View>
       <View style={{marginTop: 25}}>
-        <Instruction source={require('../assets/like.png')} text={'Add to my week!'} />
-        <Instruction source={require('../assets/report.png')} text={'Report'} />
-        <Instruction source={require('../assets/share.png')} text={'Share'} />
-        <Instruction source={require('../assets/dislike.png')} text={'Not interested...'} />
+        <Text style={styles.instructionText}>
+          <Text>
+            You are now going to be presented with daily meal 
+            plans suited to your requirements. 
+            {'\n'}
+            {'\n'}
+          </Text>
+          <Text>
+            Please swipe or click the arrows to choose your meals.
+            {'\n'}
+            {'\n'}
+          </Text>
+          <Text>
+            To see the meal-plan details please click on 
+            <Text style={{color: 'green'}}>
+              {''} View full plan
+            </Text>
+            .
+          </Text>
+        </Text>
       </View>
-      <View style={{marginTop: 20}}>
-        <GreenButton text={"Let's go!"} onPress={() => navigation.navigate('SwipeScreen')} />
+      <View style={{marginTop: 35}}>
+        <GreenButton 
+          text={"Let's go!"} 
+          onPress={() => navigation.navigate('SwipeScreen')} 
+        />
       </View>
-    </View>
-  )
-}
-
-const Instruction = ({ source, text }) => {
-  return (
-    <View style={styles.instructionRow}>
-      <Image 
-        source={source} 
-      style={[
-        text === 'Report' || text === 'Share' ? { marginLeft: 15 } : {}
-      ]} 
-      />
-      <Text style={styles.instructionText}>{text}</Text>
     </View>
   )
 }
@@ -102,30 +114,46 @@ const styles = StyleSheet.create({
     ...common.text,
     fontSize: 12,
     lineHeight: 17,
-    color: 'green'
+    color: 'green',
   },
   instructionText: {
     ...common.headingMain,
     fontSize: 15,
     lineHeight: 22,
-    marginTop: 0,
-    position: 'absolute',
-    marginLeft: 80
+    marginTop: 15,
+    flexShrink: 1,
+    width: '88%',
+    textAlign: 'justify',
+    alignSelf: 'center'
   },
   bottomRow: {
     ...common.flexRow,
-    marginTop: 10
+    marginTop: 10,
+    width: '85%',
+    alignSelf: 'center'
   },
   instructionRow: {
     ...common.flexRow,
     justifyContent: 'flex-start',
-    marginTop: 15
+    flexDirection: 'row',
+    marginVertical: 15,
+    width: 0,
+    flexGrow: 1,
+    flex: 1,
   },
   viewContainer: {
     alignSelf: 'center', 
-    marginTop: 35, 
+    marginTop: 30, 
     flexDirection: 'row',
-    alignItems: 'center'
+    alignItems: 'center',
+    marginBottom: 10
+  },
+  dot: {
+    width: 15,
+    height: 15,
+    borderRadius: 50,
+    backgroundColor: 'green',
+    marginHorizontal: 25
   }
 })
 

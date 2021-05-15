@@ -1,5 +1,12 @@
 import React, { useState } from 'react'
-import { View, Image, StyleSheet, Text, Modal } from 'react-native'
+import { 
+  View, 
+  Image, 
+  StyleSheet, 
+  Text, 
+  ScrollView, 
+  SafeAreaView
+} from 'react-native'
 import { Sainsburys } from '../components/SupermarketCards'
 import GreenButton from '../components/GreenButton'
 import TextField from '../components/TextField'
@@ -19,9 +26,8 @@ const SignUpScreen = ({ navigation }) => {
   }
 
   const signUp = () => {
-    const loc = 'http://127.0.0.1:8000/'
-    const main = 'https://handler.health/'
-    fetch(loc + 'auth/registration/', {
+    const urlBase = 'https://handler.health/'
+    fetch(urlBase + 'auth/registration/', {
       method: 'POST',
       credentials: 'omit',
       headers: {
@@ -54,7 +60,9 @@ const SignUpScreen = ({ navigation }) => {
   return (
     <View style={styles.screen}>
       <View style={styles.loginContainer}>
-        <View style={{marginTop: 100}}>
+        <View style={
+          resultText ? {marginTop: 50} : {marginTop: 100}
+        }>
           <SmallLogo />
           <Text style={common.headingMain}>
             Create an account
@@ -62,9 +70,13 @@ const SignUpScreen = ({ navigation }) => {
               <View>
           {
             resultText &&
-            <Text style={[common.text, {marginTop: 5, fontSize: 15, color: 'red'}]}>
-              {resultText}
-            </Text>
+          <SafeAreaView>
+            <ScrollView style={{height: 48, marginBottom: 25, marginTop: 8}}>
+              <Text style={styles.resultText}>
+                {resultText}
+              </Text>
+            </ScrollView>
+          </SafeAreaView>
           }
               </View>
         </View>
@@ -107,20 +119,19 @@ const SignUpScreen = ({ navigation }) => {
           </View>
         </View>
       </View>
-      {
-        !resultText &&
-        <View style={{position: 'absolute', bottom: '6%', alignSelf: 'center'}}>
-          <Text style={common.text}>
-            Already a member? {'\t'}
-            <Text 
-              style={{color: '#5AD710', fontFamily: 'PoppinsBold'}}
-              onPress={() => navigation.navigate('SignInScreen')}
-            >
-              Sign in 
-            </Text>
+      <View style={{
+        position: 'absolute', bottom: '8%', alignSelf: 'center'
+      }}>
+        <Text style={common.text}>
+          Already a member? {'\t'}
+          <Text 
+            style={{color: '#5AD710', fontFamily: 'PoppinsBold'}}
+            onPress={() => navigation.navigate('SignInScreen')}
+          >
+            Sign in 
           </Text>
-        </View>
-      }
+        </Text>
+      </View>
     </View>
   )
 }
@@ -129,6 +140,12 @@ const styles = StyleSheet.create({
   screen: {
     ...common.screen,
     paddingHorizontal: 40
+  },
+  resultText: {
+    ...common.text, 
+    marginTop: 5,
+    fontSize: 15,
+    color: 'red'
   },
   modalView: {
     flex: 1,

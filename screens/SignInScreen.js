@@ -16,9 +16,8 @@ const SignInScreen = ({ navigation }) => {
   }
 
   const signIn = () => {
-    const loc = 'http://127.0.0.1:8000/'
-    const main = 'https://handler.health/'
-    fetch(loc + 'auth/login/', {
+    const urlBase = 'https://handler.health/'
+    fetch(urlBase + 'auth/login/', {
       method: 'POST',
       credentials: 'omit',
       headers: {
