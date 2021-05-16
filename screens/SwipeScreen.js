@@ -64,7 +64,15 @@ class SwipeBit extends Component {
         >
         {
           this.props.mealPlans.map((mealPlan, index) => (
-            <Card key={index}> 
+            <Card 
+              key={index} 
+              onSwipedRight={() => 
+                  this.props.setSelectedMealPlans([
+                      ...this.props.selectedMealPlans,
+                      mealPlan
+                  ])
+              }
+            > 
               <MealPlanCard 
                 mealPlan={mealPlan} 
                 onPressLeft={() => this.swiper.swipeLeft()}

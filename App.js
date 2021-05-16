@@ -66,6 +66,11 @@ export default function App() {
           options={{headerShown: false}}
         />
         <Stack.Screen
+          name="WeeklyPlanScreen"
+          component={WeeklyPlanScreen}
+          options={{headerShown: false, gestureEnabled: false}}
+        />
+        <Stack.Screen
           name="MealScreen"
           component={MealScreen}
           options={{headerShown: false}}
