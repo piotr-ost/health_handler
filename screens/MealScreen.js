@@ -4,7 +4,7 @@ import common from '../common.style'
 
 const MealScreen = ({ navigation, route }) => {
   const [ingredients, setIngredients] = useState([])
-  const { meal } = route  // todo kurwa jakos tak nie pamietam
+  // const { meal } = route  // todo kurwa jakos tak nie pamietam
   useEffect(() => {}, [])  // todo get the ingredients here
   return (
     <View style={common.screen}>

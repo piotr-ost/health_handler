@@ -12,6 +12,7 @@ import ShoppingListScreen from './screens/ShoppingListScreen'
 
 import { createStackNavigator } from '@react-navigation/stack'
 import { NavigationContainer, DefaultTheme } from '@react-navigation/native'
+import AppLoading from 'expo-app-loading'
 import { useFonts } from 'expo-font'
 
 const Stack = createStackNavigator()
@@ -22,14 +23,32 @@ const Theme = {
 }
 
 export default function App() {
-  useFonts({
+  let [fontsLoaded] = useFonts({
     PoppinsRegular: require('./assets/fonts/Poppins-Regular.ttf'),
     PoppinsLight: require('./assets/fonts/Poppins-Light.ttf'),
     PoppinsBold: require('./assets/fonts/Poppins-Bold.ttf')
   })
+  if (!fontsLoaded) 
+    return <AppLoading />
   return (
     <NavigationContainer theme={Theme}>
       <Stack.Navigator>
+        <Stack.Screen
+          name="WeeklyPlanScreen"
+          component={WeeklyPlanScreen}
+          options={{headerShown: false, gestureEnabled: false}}
+        />
+        <Stack.Screen
+          name="MealScreen"
+          component={MealScreen}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="ShoppingListScreen"
+          component={ShoppingListScreen}
+          options={{headerShown: false}}
+        />
+          {/* 
         <Stack.Screen
           name="HomeScreen"
           component={HomeScreen}
@@ -65,21 +84,7 @@ export default function App() {
           component={SwipeScreen}
           options={{headerShown: false}}
         />
-        <Stack.Screen
-          name="WeeklyPlanScreen"
-          component={WeeklyPlanScreen}
-          options={{headerShown: false, gestureEnabled: false}}
-        />
-        <Stack.Screen
-          name="MealScreen"
-          component={MealScreen}
-          options={{headerShown: false}}
-        />
-        <Stack.Screen
-          name="ShoppingListScreen"
-          component={ShoppingListScreen}
-          options={{headerShown: false}}
-        />
+        */}
       </Stack.Navigator>
     </NavigationContainer>
   )

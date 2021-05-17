@@ -12,7 +12,7 @@ const MealTile = ({ navigation, meal, mealType }) => {
         <View style={styles.blank}>
           <View style={common.center}>
             <Text style={[common.text, {fontSize: 13}]}>
-              {mealType}
+              {mealType && mealType}
             </Text>
           </View>
         </View>

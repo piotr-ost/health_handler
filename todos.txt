@@ -13,3 +13,8 @@
 (doesnt have to be beautiful but no severe issues)
 > add a scrollview for the description if the text is too long or sth
 > fix the 'Strong Password' bug
+> add password reset
+> get the state dict to be passed on through routing between screens and maintain the important variables
+> add async storage so that people can have their token saved and re-use the app without relogging 
+
+> only enable get requests to the read only pages
