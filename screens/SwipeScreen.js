@@ -4,38 +4,18 @@ import MealPlanCard from '../components/MealPlanCard'
 import common from '../common.style'
 import CardStack, { Card } from 'react-native-card-stack-swiper'
 import { LinearGradient } from 'expo-linear-gradient'
+import axios from 'axios'
 
-const fillMealPlan = (mealPlan) => {
-    const breakfast = fetch(urlBase + mealPlan.breakfast)
-    const dinner = fetch(urlBase + mealPlan.dinner)
-    const lunch = fetch(urlBase + mealPlan.lunch)
-    const snackOne = fetch(productsUrlBase + mealPlan.snack_one)
-    const snackTwo = fetch(productsUrlBase + mealPlan.snack_two)
-    Promise.all([breakfast, dinner, lunch, snackOne, snackTwo])
-      .then(
-        async ([breakfast, dinner, lunch, snackOne, snackTwo]) => {
-          return {
-            ...mealPlan,
-            breakfast: await breakfast.json(),
-            dinner: await dinner.json(),
-            lunch: await lunch.json(),
-            snackOne: await snackOne.json(),
-            snackTwo: await snackTwo.json()
-          }
-        }
-      )
-      .catch(err => console.log(err))
-  }
-
-const SwipeScreen = ({ route, navigation }) => {
+const SwipeScreen = ({ navigation }) => {
   const [mealPlans, setMealPlans] = useState([])
   const [selectedMealPlans, setSelectedMealPlans] = useState([])
 
   useEffect(() => {
     const url = 'https://handler.health/meal-plans'
-    fetch(url)
+    fetch(url, { method: 'GET' })
       .then(r => r.json())
       .then(r => setMealPlans(r))
+      .catch(err => console.log(err))
   }, [])
 
   useEffect(() => {
@@ -47,8 +27,8 @@ const SwipeScreen = ({ route, navigation }) => {
 
   return (
     <View> 
-      { mealPlans.length
-          ? 
+      { 
+        mealPlans.length ? 
           <SwipeBit 
             mealPlans={mealPlans} 
             selectedMealPlans={selectedMealPlans}
@@ -74,14 +54,11 @@ class SwipeBit extends Component {
     super(props)
   }
 
-  onSwipeRight(mealPlan) => {
-    fillMealPlan(mealPlan)
-      .then(filledMealPlan => {
-        this.props.setSelectedMealPlans([
-          ...this.props.selectedMealPlans,
-          filledMealPlan
-        ])
-      })
+  onSwipeRight(mealPlan) {
+    this.props.setSelectedMealPlans([
+      ...this.props.selectedMealPlans,
+      mealPlan
+    ])
   }
 
   render() {

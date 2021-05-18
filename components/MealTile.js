@@ -4,19 +4,28 @@ import common from '../common.style'
 
 const MealTile = ({ navigation, meal, mealType }) => {
   return (
-    <View style={styles.container} >
-      <TouchableOpacity onPress={() => {
-        navigation.navigate('MealScreen', { meal: meal })
-      }}>
-        <Image source={{uri: meal.img}} />
-        <View style={styles.blank}>
-          <View style={common.center}>
-            <Text style={[common.text, {fontSize: 13}]}>
-              {mealType && mealType}
-            </Text>
+    <View>
+      { meal.img && 
+      <View style={styles.container} >
+        <TouchableOpacity onPress={() => {
+          navigation.navigate('MealScreen', { meal: meal })
+        }}>
+          <View style={{width: '100%', height: '100%'}}>
+            <Image 
+              style={{width: 110, height: 90}} 
+              source={{uri: meal.img}} 
+            />
           </View>
-        </View>
-      </TouchableOpacity>
+          <View style={styles.blank}>
+            <View style={common.center}>
+              <Text style={[common.text, {fontSize: 13}]}>
+                {mealType && mealType}
+              </Text>
+            </View>
+          </View>
+        </TouchableOpacity>
+      </View>
+      }
     </View>
   )
 }

@@ -1,22 +1,19 @@
 import React, { useEffect, useState } from 'react'
-import { View, StyleSheet, Text, Image } from 'react-native'
+import { View, StyleSheet, Text, Image, ScrollView } from 'react-native'
 import common from '../common.style'
 
-const MealScreen = ({ navigation, route }) => {
+const MealScreen = ({ route, navigation }) => {
   const [ingredients, setIngredients] = useState([])
-  // const { meal } = route  // todo kurwa jakos tak nie pamietam
+  const { meal } = route.params
   useEffect(() => {}, [])  // todo get the ingredients here
   return (
     <View style={common.screen}>
       <Image source={{uri: meal.img}} style={styles.image} />
       <View style={styles.infoCard}> 
-        <Text>Jude Cornish's</Text>
-        <Text>Student Butter Chicken</Text>
+        <Text>{meal.creator_address}</Text>
+        <Text>{meal.name}</Text>
         <Text>
-          The classic, quick and easy Butter Chicken curry.
-          This has been my go-to high-protein meal throughout 
-          my time as a student and I can easily do 5 portions in 
-          one go, prepared for lunches throughout the week.
+          {meal.description}
         </Text>
         <Text>Ingredients</Text>
         <View style={{height: 300, width: '100%'}}>
@@ -25,7 +22,7 @@ const MealScreen = ({ navigation, route }) => {
             horizontal={true}
             showsHorizontalScrollIndicator={false}
           >
-            {/* ingredients.map()*/}
+            <Text>Ingredients</Text>
           </ScrollView>
         </View>
       </View>

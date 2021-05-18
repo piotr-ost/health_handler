@@ -34,6 +34,11 @@ export default function App() {
     <NavigationContainer theme={Theme}>
       <Stack.Navigator>
         <Stack.Screen
+          name="SwipeScreen"
+          component={SwipeScreen}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
           name="WeeklyPlanScreen"
           component={WeeklyPlanScreen}
           options={{headerShown: false, gestureEnabled: false}}
@@ -77,11 +82,6 @@ export default function App() {
         <Stack.Screen
           name="SwipeInstructionScreen"
           component={SwipeInstructionScreen}
-          options={{headerShown: false}}
-        />
-        <Stack.Screen
-          name="SwipeScreen"
-          component={SwipeScreen}
           options={{headerShown: false}}
         />
         */}
