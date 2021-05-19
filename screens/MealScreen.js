@@ -35,7 +35,7 @@ const MealScreen = ({ route, navigation }) => {
             position: 'absolute', 
             left: '10.77%',
             right: '84.04%',
-            top: '7.3%',
+            top: '13.3%',
             bottom: '91.87%'
           }}
           onPress={() => navigation.goBack()}
@@ -48,7 +48,7 @@ const MealScreen = ({ route, navigation }) => {
           <Text style={styles.headingText}>
             {meal.name}
           </Text>
-          <ScrollView style={{height: '15%', marginTop: 10}}>
+          <ScrollView style={{height: '25%', marginTop: 10}}>
             <Text style={styles.descriptionText}>
               {meal.description}
             </Text>
@@ -57,7 +57,6 @@ const MealScreen = ({ route, navigation }) => {
           <View style={{
             height: 210,
             width: '100%', 
-            marginBottom: 15
           }}>
             <ScrollView 
               style={{flex: 1, flexDirection: 'row'}}
@@ -148,16 +147,19 @@ const styles = StyleSheet.create({
   },
   image: {
     width: '100%',
-    height: '45%',
+    height: 400,
   },
   infoCard: {
     width: '100%',
-    height: 450,
+    height: 500,
     borderTopLeftRadius: 50,
     borderTopRightRadius: 50,
     backgroundColor: '#FDFDFF',
     paddingVertical: 36,
     paddingHorizontal: 37,
+    position: 'absolute',
+    top: '80%',
+    left: 0
   },
   container: {
     marginTop: 25,

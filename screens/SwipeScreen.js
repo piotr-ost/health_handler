@@ -104,6 +104,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     marginTop: 50,
+    borderRadius: 10
   },
   counterText: {
     ...common.headingMain,
