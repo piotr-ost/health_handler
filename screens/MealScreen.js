@@ -88,7 +88,7 @@ const MealScreen = ({ route, navigation }) => {
           position: 'absolute', 
           left: '10.77%',
           right: '84.04%',
-          top: '7.3%',
+          top: '13.3%',
           bottom: '91.87%'
         }}
         onPress={() => navigation.goBack()}

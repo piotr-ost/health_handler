@@ -16,8 +16,7 @@ const SignInScreen = ({ navigation }) => {
   }
 
   const signIn = () => {
-    // const urlBase = 'https://handler.health/'
-    const urlBase = 'http://localhost:8000/'
+    const urlBase = 'https://handler.health/'
     fetch(urlBase + 'auth/login/', {
       method: 'POST',
       credentials: 'omit',

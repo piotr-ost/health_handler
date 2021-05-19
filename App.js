@@ -34,27 +34,6 @@ export default function App() {
     <NavigationContainer theme={Theme}>
       <Stack.Navigator>
         <Stack.Screen
-          name="SwipeScreen"
-          component={SwipeScreen}
-          options={{headerShown: false}}
-        />
-        <Stack.Screen
-          name="WeeklyPlanScreen"
-          component={WeeklyPlanScreen}
-          options={{headerShown: false, gestureEnabled: false}}
-        />
-        <Stack.Screen
-          name="MealScreen"
-          component={MealScreen}
-          options={{headerShown: false}}
-        />
-        <Stack.Screen
-          name="ShoppingListScreen"
-          component={ShoppingListScreen}
-          options={{headerShown: false}}
-        />
-          {/* 
-        <Stack.Screen
           name="HomeScreen"
           component={HomeScreen}
           options={{headerShown: false}}
@@ -84,7 +63,26 @@ export default function App() {
           component={SwipeInstructionScreen}
           options={{headerShown: false}}
         />
-        */}
+        <Stack.Screen
+          name="SwipeScreen"
+          component={SwipeScreen}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="WeeklyPlanScreen"
+          component={WeeklyPlanScreen}
+          options={{headerShown: false, gestureEnabled: false}}
+        />
+        <Stack.Screen
+          name="MealScreen"
+          component={MealScreen}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="ShoppingListScreen"
+          component={ShoppingListScreen}
+          options={{headerShown: false}}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   )

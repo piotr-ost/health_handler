@@ -4,20 +4,20 @@ import MealPlanCard from '../components/MealPlanCard'
 import common from '../common.style'
 import CardStack, { Card } from 'react-native-card-stack-swiper'
 import { LinearGradient } from 'expo-linear-gradient'
-import mealPlans_ from '../mealPlans.json'
 
 const SwipeScreen = ({ navigation }) => {
-  const [mealPlans, setMealPlans] = useState([...mealPlans_])
+  const [mealPlans, setMealPlans] = useState([])
   const [selectedMealPlans, setSelectedMealPlans] = useState([])
 
   useEffect(() => {
     const fetchStuff = () => {
       const url = 'https://handler.health/meal-plans'
-      fetch(url, { method: 'GET' })
+      fetch(url)
         .then(r => r.json())
         .then(r => setMealPlans(r))
         .catch(err => console.log(err))
     }
+    fetchStuff()
   }, [])
 
   useEffect(() => {

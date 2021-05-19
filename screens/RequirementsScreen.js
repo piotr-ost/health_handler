@@ -103,6 +103,7 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     width: 150,
     marginTop: 25,
+    marginLeft: 15
   },
   checkedBox: {
     width: 28,
