@@ -15,6 +15,7 @@ import common from '../common.style'
 
 const WeeklyPlanScreen = ({ route, navigation }) => {
   const { selectedMealPlans } = route.params
+  const [shoppingList, setShoppingList] = useState({})
   /*
   let d = new Date()
   const arrangedDays = [
@@ -22,6 +23,8 @@ const WeeklyPlanScreen = ({ route, navigation }) => {
     ...days.slice(0, d.getDay())
   ] 
   */
+  const goToShoppingListScreen = () => {
+  }
   const days = [
     'Monday', 'Tuesday', 'Wednesday', 
     'Thursday', 'Friday', 'Saturday', 'Sunday'
@@ -38,10 +41,16 @@ const WeeklyPlanScreen = ({ route, navigation }) => {
         ]}>
           Weekly Plan
         </Text>
-        <Image 
-          style={{marginTop: 30}}
-          source={require('../assets/cart.png')} 
-        />
+        <TouchableOpacity onPress={() => {
+          navigation.navigate('ShoppingListScreen', {
+            shoppingList: shoppingList
+          }) 
+        }}>
+          <Image 
+            style={{marginTop: 30}}
+            source={require('../assets/cart.png')} 
+          />
+        </TouchableOpacity>
       </View>
       <SafeAreaView>
         <ScrollView showsVerticalScrollIndicator={false}>
@@ -53,6 +62,7 @@ const WeeklyPlanScreen = ({ route, navigation }) => {
                   key={index} 
                   navigation={navigation} 
                   mealPlan={mealPlan}
+                  setShoppingList={setShoppingList}
                 />
               )
           }
@@ -63,7 +73,12 @@ const WeeklyPlanScreen = ({ route, navigation }) => {
   )
 }
 
-const MealPlanRow =({ day, navigation, mealPlan }) => {
+const MealPlanRow =({ 
+  day,
+  navigation, 
+  mealPlan, 
+  setShoppingList 
+}) => {
   const urlBase = 'https://handler.health/meals/'
   const productsUrlBase = 'https://handler.health/products/'
   const [meals, setMeals] = useState({
@@ -82,14 +97,42 @@ const MealPlanRow =({ day, navigation, mealPlan }) => {
     const snackTwo = fetch(productsUrlBase + mealPlan.snack_two)
     Promise.all([breakfast, dinner, lunch, snackOne, snackTwo])
       .then(
-        async ([breakfast, dinner, lunch, snackOne, snackTwo]) => {
+        async (
+          [_breakfast, _dinner, _lunch, _snackOne, _snackTwo]
+        ) => {
+          let breakfast = await _breakfast.json()
+          let dinner = await _dinner.json()
+          let lunch = await _lunch.json()
+          let snackOne = await _snackOne.json()
+          let snackTwo = await _snackTwo.json()
           setMeals({
-            breakfast: await breakfast.json(),
-            dinner: await dinner.json(),
-            lunch: await lunch.json(),
-            snackOne: await snackOne.json(),
-            snackTwo: await snackTwo.json()
+            breakfast: breakfast,
+            dinner: dinner,
+            lunch: lunch,
+            snackOne: snackOne,
+            snackTwo: snackTwo
           })
+          let products = {};
+          let courses = [breakfast, dinner, lunch]
+          let snacks = [snackOne.product_id, snackTwo.product_id]
+          courses.forEach(meal => { 
+            meal.products.split(',').forEach(id => { 
+              if (!products.id)
+                products[id] = 1
+              else
+                products.id += 1
+            })
+          })
+          snacks.forEach(id => {
+            if (!products.id)
+              products[id] = 1
+            else
+              products.id += 1
+          })
+          setShoppingList(shoppingList => ({ 
+            ...shoppingList,
+            ...products
+          }))
         }
       )
       .catch(err => console.log(err))

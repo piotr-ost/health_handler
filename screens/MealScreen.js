@@ -23,8 +23,6 @@ const MealScreen = ({ route, navigation }) => {
             ingredients => [...ingredients, r])
           )
       )
-      console.log(productsList)
-      console.log(ingredients)
     }
   }, [])
   return (
@@ -68,12 +66,14 @@ const MealScreen = ({ route, navigation }) => {
             >
               {
                 ingredients.map((product, index) => 
-                  <View style={
-                    index === 0 
+                  <View 
+                    style={index === 0 
                       ? {marginLeft: 10}
                       : {marginLeft: 25}
-                  }>
-                    <Ingredient key={index} product={product} />
+                    }
+                    key={index}
+                  >
+                    <Ingredient product={product} />
                   </View>
                 )
               }
