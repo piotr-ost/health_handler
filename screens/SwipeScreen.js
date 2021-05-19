@@ -4,18 +4,20 @@ import MealPlanCard from '../components/MealPlanCard'
 import common from '../common.style'
 import CardStack, { Card } from 'react-native-card-stack-swiper'
 import { LinearGradient } from 'expo-linear-gradient'
-import axios from 'axios'
+import mealPlans_ from '../mealPlans.json'
 
 const SwipeScreen = ({ navigation }) => {
-  const [mealPlans, setMealPlans] = useState([])
+  const [mealPlans, setMealPlans] = useState([...mealPlans_])
   const [selectedMealPlans, setSelectedMealPlans] = useState([])
 
   useEffect(() => {
-    const url = 'https://handler.health/meal-plans'
-    fetch(url, { method: 'GET' })
-      .then(r => r.json())
-      .then(r => setMealPlans(r))
-      .catch(err => console.log(err))
+    const fetchStuff = () => {
+      const url = 'https://handler.health/meal-plans'
+      fetch(url, { method: 'GET' })
+        .then(r => r.json())
+        .then(r => setMealPlans(r))
+        .catch(err => console.log(err))
+    }
   }, [])
 
   useEffect(() => {
@@ -80,7 +82,7 @@ class SwipeBit extends Component {
               <MealPlanCard 
                 mealPlan={mealPlan} 
                 onPressLeft={() => this.swiper.swipeLeft()}
-                onPressRight={() => this.onSwipeRight(mealPlan)}
+                onPressRight={() => this.swiper.swipeRight()}
               />
             </Card>
           ))

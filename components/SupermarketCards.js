@@ -13,7 +13,9 @@ export const Sainsburys = ({ navigation }) => {
         <Image source={require('../assets/sainsburys.png')}/>
         <View style={styles.blank}>
           <View style={common.center}>
-            <Text style={[common.text, {fontSize: 13}]}>Sainsbury's</Text>
+            <Text style={[common.text, {fontSize: 13}]}>
+              Sainsbury's
+            </Text>
           </View>
         </View>
       </TouchableOpacity>
@@ -24,14 +26,19 @@ export const Sainsburys = ({ navigation }) => {
 export const ASDA = ({ navigation }) => {
   return (
     <View style={styles.container} >
-      <Image source={require('../assets/asda.png')} style={{tintColor: 'gray'}} />
+      <Image 
+        source={require('../assets/asda.png')} 
+        style={{tintColor: 'gray'}} 
+      />
       <Image 
         source={require('../assets/asda.png')} 
         style={{position: 'absolute', opacity: 0.10}} 
       />
       <View style={styles.blank}>
         <View style={common.center}>
-          <Text style={[common.text, {fontSize: 13}]}>ASDA</Text>
+          <Text style={[common.text, {fontSize: 13}]}>
+            ASDA
+          </Text>
         </View>
       </View>
     </View>
@@ -41,14 +48,19 @@ export const ASDA = ({ navigation }) => {
 export const Tesco = ({ navigation }) => {
   return (
     <View style={styles.container} >
-      <Image source={require('../assets/tesco.png')} style={{tintColor: 'gray'}} />
+      <Image 
+        source={require('../assets/tesco.png')} 
+        style={{tintColor: 'gray'}} 
+      />
       <Image 
         source={require('../assets/tesco.png')} 
         style={{position: 'absolute', opacity: 0.10}} 
       />
       <View style={styles.blank}>
         <View style={common.center}>
-          <Text style={[common.text, {fontSize: 13}]}>Tesco</Text>
+          <Text style={[common.text, {fontSize: 13}]}>
+            Tesco
+          </Text>
         </View>
       </View>
     </View>

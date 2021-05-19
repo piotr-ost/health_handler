@@ -1,5 +1,12 @@
 import React, { useState, useEffect } from 'react'
-import { View, Text, Image, TouchableOpacity, ScrollView } from 'react-native'
+import { 
+  View, 
+  Text, 
+  Image, 
+  TouchableOpacity, 
+  ScrollView, 
+  SafeAreaView 
+} from 'react-native'
 import SmallLogo from '../components/SmallLogo'
 import MealTile from '../components/MealTile'
 import Meal from '../components/Meal'
@@ -8,41 +15,56 @@ import common from '../common.style'
 
 const WeeklyPlanScreen = ({ route, navigation }) => {
   const { selectedMealPlans } = route.params
+  /*
+  let d = new Date()
+  const days = [
+    ...week.slice(d.getDay()),
+    ...week.slice(0, d.getDay())
+  ] 
+  TODO use days instead
+  */
+  const days = [
+    'Monday', 'Tuesday', 'Wednesday', 
+    'Thursday', 'Friday', 'Saturday', 'Sunday'
+  ]
   return (
-    <View sytle={common.screen}>
-      <View style={[common.flexRow, { marginTop: 50 }]}>
-        <TouchableOpacity onPress={() => null}>
-          <Image source={require('../assets/return.png')} />
-        </TouchableOpacity>
-        <SmallLogo />
-      </View>
-      <View style={common.flexRow}>
+    <View style={common.screen}>
+      <View style={[
+        common.flexRow, 
+        {marginTop: 50}
+      ]}>
         <Text style={[
           common.headingMain, 
           { fontSize: 25, lineHeight: 37.5 }
         ]}>
           Weekly Plan
         </Text>
-        <Image source={require('../assets/cart.png')} />
+        <Image 
+          style={{marginTop: 30}}
+          source={require('../assets/cart.png')} 
+        />
       </View>
-      <View>
-        {
-          selectedMealPlans.length ?
-            selectedMealPlans.map((mealPlan, index) => 
-              <MealPlanRow 
-                key={index} 
-                navigation={navigation} 
-                mealPlan={mealPlan}
-              />
-            )
-            : <Text> Laduje sie tera </Text>
-        }
-      </View>
+      <SafeAreaView>
+        <ScrollView showsVerticalScrollIndicator={false}>
+          {
+            selectedMealPlans.length && 
+              selectedMealPlans.map((mealPlan, index) => 
+                <MealPlanRow 
+                  day={days[index]}
+                  key={index} 
+                  navigation={navigation} 
+                  mealPlan={mealPlan}
+                />
+              )
+          }
+          <View style={{height: 150}} />
+        </ScrollView>
+      </SafeAreaView>
     </View>
   )
 }
 
-const MealPlanRow =({ navigation, mealPlan }) => {
+const MealPlanRow =({ day, navigation, mealPlan }) => {
   const urlBase = 'https://handler.health/meals/'
   const productsUrlBase = 'https://handler.health/products/'
   const [meals, setMeals] = useState({
@@ -75,52 +97,65 @@ const MealPlanRow =({ navigation, mealPlan }) => {
   }, [])
 
   return (
-      <View style={{height: 300, width: '100%'}}>
+      <View style={{height: 200, width: '100%'}}>
+        <View style={{marginLeft: 10}}>
+          <Text style={common.text}>{day}</Text>
+        </View>
         <ScrollView 
           style={{flex: 1, flexDirection: 'row'}}
           horizontal={true}
           showsHorizontalScrollIndicator={false}
         >
-      {
-        meals.breakfast &&
-        <MealTile
-          navigation={navigation} 
-          meal={meals.breakfast} 
-          mealType={'Breakfast'}
-        />
-      }
-      {
-        meals.snackOne &&
-        <MealTile 
-          navigation={navigation} 
-          meal={meals.snackOne} 
-          mealType={'First Snack'}
-        />
-      }
-      {
-        meals.lunch && 
-        <MealTile 
-          navigation={navigation} 
-          meal={meals.lunch} 
-          mealType={'Lunch'}
-        />
-      }
-      {
-        meals.snackTwo &&
-        <MealTile 
-          navigation={navigation} 
-          meal={meals.snackTwo} 
-          mealType={'Second Snack'}
-        />
-      }
-      {
-        meals.dinner && 
-        <MealTile
-          navigation={navigation} 
-          meal={meals.dinner} 
-          mealType={'Dinner'}
-        />
-      }
+          {
+            meals.breakfast &&
+            <View style={{marginLeft: 10}}>
+              <MealTile
+                navigation={navigation} 
+                meal={meals.breakfast} 
+                mealType={'Breakfast'}
+              />
+            </View>
+          }
+          {
+            meals.snackOne &&
+            <View style={{marginLeft: 25}}>
+              <MealTile 
+                navigation={navigation} 
+                meal={meals.snackOne} 
+                mealType={'First Snack'}
+              />
+            </View>
+          }
+          {
+            meals.lunch && 
+            <View style={{marginLeft: 25}}>
+              <MealTile 
+                navigation={navigation} 
+                meal={meals.lunch} 
+                mealType={'Lunch'}
+              />
+            </View>
+          }
+          {
+            meals.snackTwo &&
+            <View style={{marginLeft: 25}}>
+              <MealTile 
+                navigation={navigation} 
+                meal={meals.snackTwo} 
+                mealType={'Second Snack'}
+              />
+            </View>
+          }
+          {
+            meals.dinner && 
+            <View style={{marginLeft: 25}}>
+              <MealTile
+                navigation={navigation} 
+                meal={meals.dinner} 
+                mealType={'Dinner'}
+              />
+            </View>
+          }
         </ScrollView>
       </View>
   )
