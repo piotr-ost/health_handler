@@ -17,11 +17,10 @@ const WeeklyPlanScreen = ({ route, navigation }) => {
   const { selectedMealPlans } = route.params
   /*
   let d = new Date()
-  const days = [
-    ...week.slice(d.getDay()),
-    ...week.slice(0, d.getDay())
+  const arrangedDays = [
+    ...days.slice(d.getDay()),
+    ...days.slice(0, d.getDay())
   ] 
-  TODO use days instead
   */
   const days = [
     'Monday', 'Tuesday', 'Wednesday', 
@@ -31,7 +30,7 @@ const WeeklyPlanScreen = ({ route, navigation }) => {
     <View style={common.screen}>
       <View style={[
         common.flexRow, 
-        {marginTop: 50}
+        {marginTop: 30, marginBottom: 10, }
       ]}>
         <Text style={[
           common.headingMain, 
