@@ -8,7 +8,7 @@ import { LinearGradient } from 'expo-linear-gradient'
 const SwipeScreen = ({ route, navigation }) => {
   const [mealPlans, setMealPlans] = useState([])
   const [selectedMealPlans, setSelectedMealPlans] = useState([])
-  const { requirements } = route.params
+  const { requirements, redo } = route.params
   const fitsTheRequirements = (mealPlan) => {
     if (
       requirements.vegan === mealPlan.vegan && 

@@ -1,20 +1,20 @@
-import React, { useRef, useEffect } from 'react'
+import React, { useRef, useEffect, useState } from 'react'
 import { Animated, View, Image } from 'react-native'
 import common from '../common.style'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 
 const HomeScreen = ({ navigation }) => {
   const fadeAnimation = useRef(new Animated.Value(1)).current
+  const [selectedMealPlans, setSelectedMealPlans] = useState([])
   const fetchPlan = async () => {
     try {
       await AsyncStorage.getItem('@selectedMealPlans')
         .then(selectedMealPlans => {
-          console.log('selectedMealPlans', selectedMealPlans)
-          if (selectedMealPlans !== null)
+          if (selectedMealPlans !== null) {
             navigation.navigate('WeeklyPlanScreen', {
               selectedMealPlans: JSON.parse(selectedMealPlans)
             })
-          else 
+          } else 
             navigation.navigate('SignInScreen')
         })
     } catch (err) {
@@ -38,9 +38,14 @@ const HomeScreen = ({ navigation }) => {
   return (
     <View style={[
       common.screen, 
-      {display: 'flex', justifyContent: 'center', alignItems: 'center'}
+      {
+        display: 'flex', justifyContent: 'center', 
+        alignItems: 'center'
+      }
     ]}>
-      <Animated.View style={{opacity: fadeAnimation, marginBottom: 50}}>
+      <Animated.View 
+        style={{opacity: fadeAnimation, marginBottom: 50}}
+      >
         <Image source={require('../assets/logo.png')} />
       </Animated.View>
     </View>

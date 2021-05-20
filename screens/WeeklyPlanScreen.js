@@ -12,10 +12,11 @@ import MealTile from '../components/MealTile'
 import Meal from '../components/Meal'
 import common from '../common.style'
 import AsyncStorage from '@react-native-async-storage/async-storage'
+import Icon from 'react-native-vector-icons/FontAwesome'
 
 
 const WeeklyPlanScreen = ({ route, navigation }) => {
-  const { selectedMealPlans } = route.params
+  const { selectedMealPlans, setSelectedMealPlans } = route.params
   const [shoppingList, setShoppingList] = useState({})
   /*
   let d = new Date()
@@ -43,11 +44,18 @@ const WeeklyPlanScreen = ({ route, navigation }) => {
     <View style={common.screen}>
       <View style={[
         common.flexRow, 
-        {marginTop: 30, marginBottom: 10, }
+        {marginTop: 30, marginBottom: 10, justifyContent: 'space-between', alignItems: 'center'}
       ]}>
+      <TouchableOpacity 
+      style={{marginTop: 25, marginLeft: 15}}
+        onPress={() => {
+          navigation.navigate('StartScreen')
+        }}>
+          <Icon name={'repeat'} color={'green'} size={40} />
+        </TouchableOpacity>
         <Text style={[
           common.headingMain, 
-          { fontSize: 25, lineHeight: 37.5 }
+          { fontSize: 25, lineHeight: 37.5, marginLeft: 12 }
         ]}>
           Weekly Plan
         </Text>
