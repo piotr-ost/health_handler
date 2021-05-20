@@ -1,10 +1,10 @@
 {
   "expo": {
-    "name": "health_handler",
-    "slug": "snack-279ec919-ceec-4ba8-a6b0-4b172669d030",
-    "version": "1.0.0",
+    "name": "Health Handler",
+    "slug": "health-handler",
+    "version": "1.1.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/logo_.png",
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
@@ -14,14 +14,16 @@
       "fallbackToCacheTimeout": 0
     },
     "assetBundlePatterns": [
-      "**/*"
+      "assets/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": false,
+      "bundleIdentifier": "com.health-token.health-handler",
+      "buildNumber": "1.0.0"
     },
     "web": {
       "favicon": "./assets/favicon.png"
     },
-    "description": "asdf"
+    "description": "The go-to app for quick & easy meal plans and seamless shopping."
   }
 }
