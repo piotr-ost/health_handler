@@ -55,7 +55,7 @@ const MealScreen = ({ route, navigation }) => {
           </ScrollView>
           <Text style={styles.headingText}>Ingredients</Text>
           <View style={{
-            height: 210,
+            height: 245,
             width: '100%', 
           }}>
             <ScrollView 
@@ -147,7 +147,7 @@ const styles = StyleSheet.create({
   },
   image: {
     width: '100%',
-    height: 400,
+    height: 450,
   },
   infoCard: {
     width: '100%',

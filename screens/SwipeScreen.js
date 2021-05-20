@@ -5,16 +5,32 @@ import common from '../common.style'
 import CardStack, { Card } from 'react-native-card-stack-swiper'
 import { LinearGradient } from 'expo-linear-gradient'
 
-const SwipeScreen = ({ navigation }) => {
+const SwipeScreen = ({ route, navigation }) => {
   const [mealPlans, setMealPlans] = useState([])
   const [selectedMealPlans, setSelectedMealPlans] = useState([])
-
+  const { requirements } = route.params
+  const fitsTheRequirements = (mealPlan) => {
+    if (
+      requirements.vegan === mealPlan.vegan && 
+      requirements.vegetarian === mealPlan.vegetarian && 
+      requirements.glutenFree === mealPlan.glutenFree && 
+      requirements.lactoseFree === mealPlan.lactoseFree
+    )
+      return true
+    else
+      return false
+  }
   useEffect(() => {
     const fetchStuff = () => {
       const url = 'https://handler.health/meal-plans'
       fetch(url)
         .then(r => r.json())
-        .then(r => setMealPlans(r))
+        .then(r => {
+          const filtered = r.filter( 
+            mealPlan => fitsTheRequirements(mealPlan)
+          )
+          setMealPlans(filtered)
+        })
         .catch(err => console.log(err))
     }
     fetchStuff()

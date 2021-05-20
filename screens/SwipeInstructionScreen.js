@@ -6,7 +6,8 @@ import GreenButton from '../components/GreenButton'
 import Icon from 'react-native-vector-icons/FontAwesome'
 
 
-const SwipeInstructionScreen = ({ navigation }) => {
+const SwipeInstructionScreen = ({ route, navigation }) => {
+  const { requirements } = route.params
   return (
     <View style={[common.screen, {justifyContent: ''}]}>
       <View style={[common.flexRow, {marginTop: 30}]}>
@@ -68,7 +69,9 @@ const SwipeInstructionScreen = ({ navigation }) => {
       <View style={{marginTop: 35}}>
         <GreenButton 
           text={"Let's go!"} 
-          onPress={() => navigation.navigate('SwipeScreen')} 
+          onPress={() => navigation.navigate('SwipeScreen', {
+            requirements: requirements
+        })} 
         />
       </View>
     </View>

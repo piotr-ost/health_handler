@@ -5,6 +5,7 @@ import SmallLogo from '../components/SmallLogo'
 import GreenButton from '../components/GreenButton'
 
 
+
 const RequirementsScreen = ({ navigation }) => {
   const [requirements, setRequirements] = useState({
     vegetarian: false,
@@ -12,6 +13,11 @@ const RequirementsScreen = ({ navigation }) => {
     lactoseFree: false,
     glutenFree: false
   })
+  const go = () => {
+    navigation.navigate('SwipeInstructionScreen', {
+      requirements: requirements
+    })
+  }
   return (
     <View style={[common.screen, {justifyContent: ''}]}>
       <View style={{marginTop: 100}}>
@@ -60,7 +66,7 @@ const RequirementsScreen = ({ navigation }) => {
       <View style={{marginTop: 100}}>
       <GreenButton 
         text={'Continue'} 
-        onPress={() => navigation.navigate('SwipeInstructionScreen')} 
+        onPress={go} 
       />
       </View>
     </View>
