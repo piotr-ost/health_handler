@@ -11,6 +11,7 @@ import SmallLogo from '../components/SmallLogo'
 import MealTile from '../components/MealTile'
 import Meal from '../components/Meal'
 import common from '../common.style'
+import AsyncStorage from '@react-native-async-storage/async-storage'
 
 
 const WeeklyPlanScreen = ({ route, navigation }) => {
@@ -23,8 +24,17 @@ const WeeklyPlanScreen = ({ route, navigation }) => {
     ...days.slice(0, d.getDay())
   ] 
   */
-  const goToShoppingListScreen = () => {
-  }
+  useEffect(() => {
+    const saveSelectedMealPlans = async (selectedMealPlans) => {
+      try {
+        const jsonVal = JSON.stringify(selectedMealPlans)
+        await AsyncStorage.setItem('@selectedMealPlans', jsonVal)
+      } catch (err) {
+        console.log(err)
+      }
+    } 
+    saveSelectedMealPlans(selectedMealPlans)
+  }, [])
   const days = [
     'Monday', 'Tuesday', 'Wednesday', 
     'Thursday', 'Friday', 'Saturday', 'Sunday'

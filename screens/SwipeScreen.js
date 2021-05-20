@@ -39,7 +39,7 @@ const SwipeScreen = ({ route, navigation }) => {
   useEffect(() => {
     if (selectedMealPlans.length == 7) 
       navigation.navigate('WeeklyPlanScreen', {
-        selectedMealPlans: selectedMealPlans
+        selectedMealPlans: selectedMealPlans,
       })
   }, [selectedMealPlans])
 
