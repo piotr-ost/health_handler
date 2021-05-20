@@ -1,5 +1,3 @@
-> query SELECT * .... to get the meal plan days for the tinder swipe
-
 > get the auth to send to email
 > get the template to show on the page of confirmation
 
@@ -10,7 +8,5 @@
 > fix the 'Strong Password' bug
 > add password reset
 
-> only enable get requests to the read only pages
-> add storage for the meals and not require login from someone that has a plan ready
+> change the colors to gradient stuff
 
-> fix fonts

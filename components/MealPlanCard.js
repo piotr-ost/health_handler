@@ -2,11 +2,11 @@ import React, { useState, useEffect } from 'react'
 import { 
   View, 
   Text, 
-  Image, 
   StyleSheet, 
   TouchableOpacity, 
   ScrollView,
-  SafeAreaView
+  SafeAreaView,
+  Image
 } from 'react-native'
 import ViewFullPlan from '../components/ViewFullPlan'
 import common from '../common.style'
@@ -49,27 +49,39 @@ const MealPlanCard = ({ mealPlan, onPressLeft, onPressRight }) => {
         meals.snackTwo &&
         <Image 
           style={styles.snackTwo}
-          source={{uri: meals.snackTwo.img_url}} 
+          source={{
+            cache: 'force-cache', 
+            uri: meals.snackTwo.img_url
+          }} 
         />
       }
       {
         meals.dinner &&
         <Image 
           style={styles.dinner}
-          source={{uri: meals.dinner.img}} 
+          source={{
+            cache: 'force-cache', 
+            uri: meals.dinner.img
+          }} 
         />
       }
       {
         meals.lunch &&
         <Image 
           style={styles.lunch}
-          source={{uri: meals.lunch.img}} 
+          source={{
+            cache: 'force-cache', 
+            uri: meals.lunch.img
+          }} 
         />
       }
       {
         meals.snackOne &&
         <Image 
-          source={{uri: meals.snackOne.img_url}} 
+        source={{
+          uri: meals.snackOne.img_url,
+          cache: 'force-cache', 
+        }} 
           style={styles.snackOne}
         />
       }
@@ -77,7 +89,10 @@ const MealPlanCard = ({ mealPlan, onPressLeft, onPressRight }) => {
         meals.breakfast &&
         <Image 
           style={styles.breakfast}
-          source={{uri: meals.breakfast.img}} 
+          source={{
+            uri: meals.breakfast.img,
+            cache: 'force-cache'
+          }} 
         />
       }
       <View style={styles.infoCard}>

@@ -9,11 +9,14 @@ const MealTile = ({ navigation, meal, mealType }) => {
         navigation.navigate('MealScreen', { meal: meal })
       }}>
         <Image 
-        style={{
-          width: 110, height: 90,
-          borderTopLeftRadius: 10, borderTopRightRadius: 10
-        }} 
-          source={{uri: meal.img ?? meal.img_url}} 
+          style={{
+            width: 110, height: 90,
+            borderTopLeftRadius: 10, borderTopRightRadius: 10
+          }} 
+          source={{
+            uri: meal.img ?? meal.img_url,
+            cache: 'force-cache'
+          }} 
         />
         <View style={styles.blank}>
           <View style={common.center}>
