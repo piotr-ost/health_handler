@@ -10,7 +10,10 @@ import {
 } from 'react-native'
 import ViewFullPlan from '../components/ViewFullPlan'
 import common from '../common.style'
-import Icon from 'react-native-vector-icons/FontAwesome'
+import { 
+  GradientSwipeLeft,
+  GradientSwipeRight 
+} from '../screens/SwipeInstructionScreen'
 
 
 const MealPlanCard = ({ mealPlan, onPressLeft, onPressRight }) => {
@@ -113,21 +116,13 @@ const MealPlanCard = ({ mealPlan, onPressLeft, onPressRight }) => {
         </View>
         <View style={styles.bottomRow}>
           <TouchableOpacity onPress={onPressLeft}>
-            <Icon 
-              name={'arrow-left'} 
-              size={40} 
-              color={'red'}
-            />
+            <GradientSwipeLeft />
           </TouchableOpacity>
           <View style={{marginBottom: 30}}>
             <ViewFullPlan onPress={() => {}} />
           </View>
           <TouchableOpacity onPress={onPressRight}>
-            <Icon 
-              name={'arrow-right'} 
-              size={40} 
-              color={'green'}
-            />
+            <GradientSwipeRight />
           </TouchableOpacity>
         </View>
       </View>

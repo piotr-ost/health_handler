@@ -8,6 +8,8 @@ import {
   TouchableOpacity 
 } from 'react-native'
 import common from '../common.style'
+import MaskedView from '@react-native-masked-view/masked-view'
+import { LinearGradient } from 'expo-linear-gradient'
 
 const MealScreen = ({ route, navigation }) => {
   const [ingredients, setIngredients] = useState([])
@@ -101,12 +103,23 @@ const MealScreen = ({ route, navigation }) => {
         <Text style={styles.headingText}>
           {meal.name}
         </Text>
-        <Text style={styles.headingText}>
-          Cost: 
-          <Text style={{color: 'green'}}>
-            {' '} {meal.price} {meal.currency}
+        <MaskedView maskElement={
+          <Text style={styles.headingText}>
+            <Text style={styles.text}>Cost: </Text>
+            <Text>
+              {' '} {meal.price} {meal.currency}
+            </Text>
           </Text>
-        </Text>
+        }>
+          <LinearGradient colors={['#5AD710', '#22E4CD']}>
+            <Text style={styles.headingText}>
+              Cost: 
+              <Text style={{opacity: 0}}>
+                {' '} {meal.price} {meal.currency}
+              </Text>
+            </Text>
+          </LinearGradient>
+        </MaskedView>
       </View>
     </View>
     }

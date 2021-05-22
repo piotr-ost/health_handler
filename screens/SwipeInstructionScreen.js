@@ -4,7 +4,45 @@ import SmallLogo from '../components/SmallLogo'
 import common from '../common.style'
 import GreenButton from '../components/GreenButton'
 import Icon from 'react-native-vector-icons/FontAwesome'
+import MaskedView from '@react-native-masked-view/masked-view'
+import { LinearGradient } from 'expo-linear-gradient'
+import { ViewFullPlan } from '../components/ViewFullPlan'
 
+export const GradientSwipeRight = () => {
+  return (
+    <View>
+      <MaskedView maskElement={
+        <Icon name={'arrow-right'} size={40} />
+      }>
+        <LinearGradient colors={['#5AD710', '#22E4CD']}>
+          <Icon 
+            name={'arrow-right'} 
+            style={{opacity: 0}}
+            size={40} 
+          />
+        </LinearGradient>
+      </MaskedView>
+    </View>
+  )
+}
+
+export const GradientSwipeLeft = () => {
+  return (
+    <View>
+      <MaskedView maskElement={
+        <Icon name={'arrow-left'} size={40} />
+      }>
+        <LinearGradient colors={['#FF9191', '#FF4343']}>
+          <Icon 
+            name={'arrow-left'} 
+            style={{opacity: 0}}
+            size={40} 
+          />
+        </LinearGradient>
+      </MaskedView>
+    </View>
+  )
+}
 
 const SwipeInstructionScreen = ({ route, navigation }) => {
   const { requirements } = route.params
@@ -16,7 +54,7 @@ const SwipeInstructionScreen = ({ route, navigation }) => {
             Select your Meals!
           </Text>
           <Text style={[common.text, {fontSize: 14}]}>
-            Welcome to Health Handler, <Text style={{color: 'green'}}>username</Text>
+            Welcome to Health Handler          
           </Text>
         </View>
         <SmallLogo width={39} height={33} />
@@ -27,21 +65,14 @@ const SwipeInstructionScreen = ({ route, navigation }) => {
         <Text style={styles.descriptionText}>
           Description provided by the creator of the meal plan showed on screen.
         </Text>
-        <View style={styles.viewContainer} onPress={() => {}}>
-          <Text style={styles.clickyText}>View full plan</Text>
-          <Image source={require('../assets/down.png')} style={{marginLeft: 10}} />
-        </View>
+        <ViewFullPlan onPress={() => null} />
         <View style={styles.bottomRow}>
           <Icon 
             name={'arrow-left'} 
             size={40} 
             color={'red'}
           />
-          <Icon 
-            name={'arrow-right'} 
-            size={40} 
-            color={'green'}
-          />
+          <GradientSwipeRight />
         </View>
       </View>
       <View style={{marginTop: 25}}>
@@ -53,16 +84,9 @@ const SwipeInstructionScreen = ({ route, navigation }) => {
             {'\n'}
           </Text>
           <Text>
-            Please swipe or click the arrows to choose your meals.
+            Please swipe right or left or click the arrows to choose your meals.
             {'\n'}
             {'\n'}
-          </Text>
-          <Text>
-            To see the meal-plan details please click on 
-            <Text style={{color: 'green'}}>
-              {''} View full plan
-            </Text>
-            .
           </Text>
         </Text>
       </View>
@@ -117,7 +141,6 @@ const styles = StyleSheet.create({
     ...common.text,
     fontSize: 12,
     lineHeight: 17,
-    color: 'green',
   },
   instructionText: {
     ...common.headingMain,
