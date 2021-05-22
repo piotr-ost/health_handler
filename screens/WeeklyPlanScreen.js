@@ -12,8 +12,24 @@ import MealTile from '../components/MealTile'
 import Meal from '../components/Meal'
 import common from '../common.style'
 import AsyncStorage from '@react-native-async-storage/async-storage'
+import MaskedView from '@react-native-masked-view/masked-view'
 import Icon from 'react-native-vector-icons/FontAwesome'
+import { LinearGradient } from 'expo-linear-gradient'
 
+
+const GradientRepeat = () => {
+  return (
+    <View>
+      <MaskedView maskElement={
+        <Icon name={'repeat'} size={40} />
+      }>
+        <LinearGradient colors={['#5AD710', '#22E4CD']}>
+          <Icon name={'repeat'} style={{opacity: 0}} size={40} />
+        </LinearGradient>
+      </MaskedView>
+    </View>
+  )
+}
 
 const WeeklyPlanScreen = ({ route, navigation }) => {
   const { selectedMealPlans, setSelectedMealPlans } = route.params
@@ -46,12 +62,13 @@ const WeeklyPlanScreen = ({ route, navigation }) => {
         common.flexRow, 
         {marginTop: 30, marginBottom: 10, justifyContent: 'space-between', alignItems: 'center'}
       ]}>
-      <TouchableOpacity 
-      style={{marginTop: 25, marginLeft: 15}}
-        onPress={() => {
-          navigation.navigate('StartScreen')
-        }}>
-          <Icon name={'repeat'} color={'green'} size={40} />
+        <TouchableOpacity 
+          style={{marginTop: 25, marginLeft: 15}}
+          onPress={() => {
+            navigation.navigate('StartScreen')
+          }}
+        >
+            <GradientRepeat />
         </TouchableOpacity>
         <Text style={[
           common.headingMain, 
